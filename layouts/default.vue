@@ -1,32 +1,70 @@
 <template>
   <div>
-    <div class="head"></div>
+    <nav-bar :fixed="true" @searchClick="searchClick"></nav-bar>
     <div class="main">
       <nuxt />
     </div>
     <div class="footer">
       <van-tabbar v-model="active" route>
-        <van-tabbar-item icon="home-o" to="/">首页</van-tabbar-item>
-        <van-tabbar-item icon="search" to="/gameCenter">游戏中心</van-tabbar-item>
-        <van-tabbar-item icon="friends-o" to="/forum">论坛</van-tabbar-item>
-        <van-tabbar-item icon="setting-o" to="/my">我的</van-tabbar-item>
+        <van-tabbar-item icon="home-o" to="/">
+          <span>首页</span>
+          <template slot="icon">
+            <i class="iconfont iconhome"></i>
+          </template>
+        </van-tabbar-item>
+        <van-tabbar-item to="/gameCenter">
+          <span>游戏中心</span>
+          <template slot="icon">
+            <i class="iconfont icon94"></i>
+          </template>
+        </van-tabbar-item>
+        <van-tabbar-item to="/forum">
+          <span>论坛</span>
+          <template slot="icon">
+            <i class="iconfont iconluntan"></i>
+          </template>
+        </van-tabbar-item>
+        <van-tabbar-item to="/my">
+          <span>我的</span>
+          <template slot="icon">
+            <i class="iconfont iconwo"></i>
+          </template>
+        </van-tabbar-item>
       </van-tabbar>
     </div>
   </div>
 </template>
 <script lang="ts">
-import { Vue, Component, Provide } from 'vue-property-decorator'
-
-@Component
+import { Vue, Component } from "vue-property-decorator"
+import NavBar from "~/components/NavBar.vue";
+@Component({
+  components:{
+    NavBar
+  }
+})
 export default class Default extends Vue{
   active:number = 0;
+  searchClick (value: string) {
+    console.log("****", value);
+  }
 }
 </script>
+<style lang="scss" scoped>
+.head {
+  height: 40px;
+  line-height: 40px;
+  font-size: 12px;
+  background-color: #ffffff;
+}
+.main {
+  padding-top: 56px;
+}
+</style>
 <style>
 html {
   font-family: 'Source Sans Pro', -apple-system, BlinkMacSystemFont, 'Segoe UI',
     Roboto, 'Helvetica Neue', Arial, sans-serif;
-  font-size: 16px;
+  font-size: 12px;
   word-spacing: 1px;
   -ms-text-size-adjust: 100%;
   -webkit-text-size-adjust: 100%;

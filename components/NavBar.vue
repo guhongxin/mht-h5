@@ -1,0 +1,76 @@
+<template>
+  <div class="nav-bar" :class="{fixed: fixed}">
+    <img src="/img/logo.png" class="logo" />
+    <div class="search">
+      <input :value="value" type="text" class="input-text" @change="searchText"/>
+      <van-icon name="search" class="search-icon"/>
+    </div>
+    <img src="/img/user.png" class="user-img"/>
+  </div>
+</template>
+<script lang="ts">
+import { Vue, Component, Prop, Emit } from "vue-property-decorator"
+@Component 
+export default class NavBar extends Vue{
+  @Prop({ default: false }) fixed!: boolean;
+  @Emit('searchClick') searchClick(msg: string){}
+  value:string = ""
+  searchText(e: any) {
+    let doc:HTMLInputElement  = e.target;
+    this.value = doc.value;
+    this.searchClick(this.value)
+  }
+}
+</script>
+<style lang="scss" scoped>
+@import "~/assets/style/nuxt.scss";
+.nav-bar {
+  width: 100vw;
+  height: 56px;
+  background: $nuxt-bg-color;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 14px;
+  z-index: 100;
+}
+.fixed {
+  position: fixed;
+  left: 0px;
+  top: 0px;
+}
+.logo {
+  width: 103px;
+}
+.search {
+  width:175px;
+  height:27px;
+  background:#BFBFBF;
+  border:1px solid rgba(191, 191, 191, 1);
+  border-radius:27px;
+  display: flex;
+  align-items: center;
+  padding: 2px 27px;
+  position: relative;
+  .input-text {
+    height: 100%;
+    width: 100%;
+    border: 0;
+    background-color: rgba(0, 0, 0, 0);
+    outline: none;
+    font-size: $nuxt-font-size-sm;
+  }
+  .search-icon {
+    position: absolute;
+    font-size: 24px;
+    left: 0px;
+  }
+}
+
+.user-img {
+  height: 27px;
+  width: 27px;
+  border-radius: 50%;
+}
+
+</style>
