@@ -1,9 +1,27 @@
 <template>
   <div>
-    <nuxt />
+    <div class="head"></div>
+    <div class="main">
+      <nuxt />
+    </div>
+    <div class="footer">
+      <van-tabbar v-model="active" route>
+        <van-tabbar-item icon="home-o" to="/">首页</van-tabbar-item>
+        <van-tabbar-item icon="search" to="/gameCenter">游戏中心</van-tabbar-item>
+        <van-tabbar-item icon="friends-o" to="/forum">论坛</van-tabbar-item>
+        <van-tabbar-item icon="setting-o" to="/my">我的</van-tabbar-item>
+      </van-tabbar>
+    </div>
   </div>
 </template>
+<script lang="ts">
+import { Vue, Component, Provide } from 'vue-property-decorator'
 
+@Component
+export default class Default extends Vue{
+  active:number = 0;
+}
+</script>
 <style>
 html {
   font-family: 'Source Sans Pro', -apple-system, BlinkMacSystemFont, 'Segoe UI',

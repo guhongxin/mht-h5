@@ -1,15 +1,13 @@
 <template>
-  <div class="container">
-    <van-button type="primary">主要按钮</van-button>
-  </div>
+  <div class="home">首页</div>
 </template>
 
 <script lang="ts">
-import Vue from 'vue'
-
-export default Vue.extend({
-  components: {}
-})
+import { Vue, Component, Prop } from "vue-property-decorator";
+@Component
+export default class Home extends Vue {
+  
+}
 </script>
 
 <style lang="scss" scoped>
