@@ -1,0 +1,5 @@
+// px 转化rem 设计稿尺寸 750 1rem=75px
+$remUnit: 75; // 
+@function px2rem($px) {
+  @return ($px / $remUnit)*1rem;
+}
