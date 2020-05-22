@@ -56,8 +56,11 @@ export default class Default extends Vue{
   font-size: 12px;
   background-color: #ffffff;
 }
+.footer {
+  height: 50px;
+}
 .main {
-  padding-top: 56px;
+  padding: 56px 0px 50px 0px;
 }
 </style>
 <style>

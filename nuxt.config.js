@@ -23,14 +23,16 @@ module.exports = {
   ** Global CSS
   */
   css: [
-    '@/assets/style/index.scss'
+    '@/assets/style/index.scss',
+    '@/assets/style/swiper-3.4.2.min.css'
   ],
   /*
   ** Plugins to load before mounting the App
   */
   plugins: [
     '@/plugins/vant.js',
-    { src:'@/plugins/amfe-flexible.js', ssr: false }
+    { src:'@/plugins/amfe-flexible.js', ssr: false },
+    { src:'@/assets/js/swiper-3.4.2.min.js', ssr: false }
   ],
   /*
   ** Nuxt.js dev-modules

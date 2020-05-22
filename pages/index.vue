@@ -24,7 +24,7 @@
     </Floor>
     <Floor :floorTitle="'热门游戏'">
       <div class="hot-game-list">
-        <hot-game-item class="hot-game-list-item" v-for="(item, index) in hotgameOptions" :key="index" :gameIfor="item"></hot-game-item>
+        <Hot-game-item class="hot-game-list-item" v-for="(item, index) in hotgameOptions" :key="index" :gameIfor="item"></Hot-game-item>
       </div>
     </Floor>
     <Floor :floorTitle="'特色活动'"></Floor>
@@ -80,12 +80,22 @@ export default class Home extends Vue {
     src: "/img/hlsp.png"
   }]
   private hotgameOptions: Array<any> = [{
-    src: "/img/hlsp.png",
+    src: "/img/rmgame.png",
     name: "末日血战",
     size: "200M",
     tag: "末日废土"
   }, {
-    src: "/img/hlsp.png",
+    src: "/img/rmgame.png",
+    name: "塔防纪元",
+    size: "200M",
+    tag: "策略塔防"
+  }, {
+    src: "/img/rmgame.png",
+    name: "末日血战",
+    size: "200M",
+    tag: "末日废土"
+  }, {
+    src: "/img/rmgame.png",
     name: "塔防纪元",
     size: "200M",
     tag: "策略塔防"
@@ -95,9 +105,6 @@ export default class Home extends Vue {
 
 <style lang="scss" scoped>
 @import "@/assets/style/nuxt.scss";
-.home {
-  height: 1000px;
-}
 .my-swipe .van-swipe-item {
   height: 220px;
   background-color: #39a9ed;
@@ -129,6 +136,7 @@ export default class Home extends Vue {
   display: flex;
   justify-content: center;
   align-items: center;
+  padding: 15px;
   .hot-game-list-item {
     flex: 1;
   }

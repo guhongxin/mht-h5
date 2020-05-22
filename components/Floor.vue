@@ -22,7 +22,7 @@ export default class Floor extends Vue {
   .Floor-head {
     height: 18px;
     border-left: 4px solid #97C252;
-    padding-left: 4px;
+    padding: 2px 0px 2px 4px;
     box-sizing: border-box;
     display: flex;
     justify-content: space-between;
@@ -30,7 +30,7 @@ export default class Floor extends Vue {
     .Floor-head-title, .more {
       font-weight: bold;
       font-size:14px;
-      line-height: 18px;
+      line-height: normal;
       display: inline-block;
       color: rgba(89,89,89,1);
     }
