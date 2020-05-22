@@ -27,7 +27,16 @@
         <Hot-game-item class="hot-game-list-item" v-for="(item, index) in hotgameOptions" :key="index" :gameIfor="item"></Hot-game-item>
       </div>
     </Floor>
-    <Floor :floorTitle="'特色活动'"></Floor>
+    <Floor :floorTitle="'特色活动'">
+      
+    </Floor>
+    <div class="swiper-container">
+      <div class="swiper-wrapper">
+        <div class="swiper-slide" v-for="(item, index) in featActivOptions" :key="index">
+          <img :src="item.src" />
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -100,6 +109,25 @@ export default class Home extends Vue {
     size: "200M",
     tag: "策略塔防"
   }]
+  private featActivOptions: Array<any> = [{
+    src: "/img/1.png"
+  }, {
+    src: "/img/2.png"
+  }, {
+    src: "/img/1.png"
+  }]
+  private mounted() {
+    console.log("mounted")
+    // @ts-ignore
+    var mySwiper:any = new Swiper('.swiper-container', {
+      direction: 'horizontal',
+      initialSlide: 1,
+      autoplay: 5000,
+      parallax : true,
+      width: 210,
+      autoHeight: true
+    })        
+  }
 }
 </script>
 
@@ -141,4 +169,5 @@ export default class Home extends Vue {
     flex: 1;
   }
 }
+.swiper-container {}  
 </style>>

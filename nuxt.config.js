@@ -13,7 +13,11 @@ module.exports = {
     ],
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
+    ],
+    script: [
+      { src: '/js/swiper-3.4.2.min.js' }
     ]
+
   },
   /*
   ** Customize the progress-bar color
@@ -31,8 +35,7 @@ module.exports = {
   */
   plugins: [
     '@/plugins/vant.js',
-    { src:'@/plugins/amfe-flexible.js', ssr: false },
-    { src:'@/assets/js/swiper-3.4.2.min.js', ssr: false }
+    { src:'@/plugins/amfe-flexible.js', ssr: false }
   ],
   /*
   ** Nuxt.js dev-modules
@@ -59,7 +62,7 @@ module.exports = {
       }),
       require('autoprefixer')({
         browsers: ['Android >= 4.0', 'iOS >= 7']
-      }),
+      })
     ],
     extend (config, ctx) {
     }
