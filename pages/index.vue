@@ -109,7 +109,7 @@ export default class Home extends Vue {
     size: "200M",
     tag: "策略塔防"
   }]
-  private featActivOptions: Array<any> = [{
+  private featActivOptions: Array<any> = [ {
     src: "/img/1.png"
   }, {
     src: "/img/2.png"
@@ -121,11 +121,21 @@ export default class Home extends Vue {
     // @ts-ignore
     var mySwiper:any = new Swiper('.swiper-container', {
       direction: 'horizontal',
+      effect : 'coverflow',
       initialSlide: 1,
-      autoplay: 5000,
-      parallax : true,
+      slidesPerView: 3,
       width: 210,
-      autoHeight: true
+      height: 110,
+      centeredSlides: true,
+      autoplay: 1000,
+      loop: true,
+      coverflow: {
+        rotate: 0,
+        stretch: 0,
+        depth: 60,
+        modifier: 2,
+        slideShadows : false
+      }
     })        
   }
 }
@@ -169,5 +179,19 @@ export default class Home extends Vue {
     flex: 1;
   }
 }
-.swiper-container {}  
+.swiper-container {
+  width: 100%;
+}
+.swiper-slide-active {
+  img {
+    width: 210px;
+    height: 110px;
+  }
+}
+.swiper-slide {
+  img {
+    width: 210px;
+    height: 110px;
+  }
+}
 </style>>
