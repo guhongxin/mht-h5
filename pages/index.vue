@@ -8,32 +8,45 @@
     <van-grid square :border="false">
       <van-grid-item v-for="(item, index) in gridOptions" :key="index">
         <template #icon>
-          <img :src="item.src" class="van-grid-icon"/>
+          <img :src="item.src" class="van-grid-icon" />
         </template>
         <template #text>
-          <span class="van-grid-text">{{item.text}}</span>
+          <span class="van-grid-text">{{ item.text }}</span>
         </template>
       </van-grid-item>
     </van-grid>
     <Floor :floorTitle="'欢乐视频'">
       <div class="happy-videos-box">
-        <div v-for="(item, index) in happyVideos" :key="index" class="happy-videos">
-          <img :src="item.src">
+        <div
+          v-for="(item, index) in happyVideos"
+          :key="index"
+          class="happy-videos"
+        >
+          <img :src="item.src" />
         </div>
       </div>
     </Floor>
     <Floor :floorTitle="'热门游戏'">
       <div class="hot-game-list">
-        <Hot-game-item class="hot-game-list-item" v-for="(item, index) in hotgameOptions" :key="index" :gameIfor="item"></Hot-game-item>
+        <Hot-game-item
+          class="hot-game-list-item"
+          v-for="(item, index) in hotgameOptions"
+          :key="index"
+          :gameIfor="item"
+        ></Hot-game-item>
       </div>
     </Floor>
-    <Floor :floorTitle="'特色活动'">
-      
-    </Floor>
-    <div class="swiper-container">
-      <div class="swiper-wrapper">
-        <div class="swiper-slide" v-for="(item, index) in featActivOptions" :key="index">
-          <img :src="item.src" />
+    <Floor :floorTitle="'特色活动'"> </Floor>
+    <div class="swiper-box">
+      <div class="swiper-container">
+        <div class="swiper-wrapper">
+          <div
+            class="swiper-slide"
+            v-for="(item, index) in featActivOptions"
+            :key="index"
+          >
+            <img :src="item.src" />
+          </div>
         </div>
       </div>
     </div>
@@ -42,8 +55,8 @@
 
 <script lang="ts">
 import { Vue, Component, Prop } from "vue-property-decorator";
-import Floor from "~/components/Floor.vue"
-import HotGameItem from "~/components/HotGameItem.vue"
+import Floor from "~/components/Floor.vue";
+import HotGameItem from "~/components/HotGameItem.vue";
 @Component({
   components: {
     Floor,
@@ -51,92 +64,115 @@ import HotGameItem from "~/components/HotGameItem.vue"
   }
 })
 export default class Home extends Vue {
-  private swipeOptions: Array<any> = [{
-    src: "/img/1.png"
-  }, {
-    src: "/img/1.png"
-  }]
-  private gridOptions:Array<any> = [{
-    src: "/img/game.png",
-    text: "游戏中心"
-  }, {
-    src: "/img/giftbox.png",
-    text: "礼包"
-  }, {
-    src: "/img/news.png",
-    text: "新闻资讯"
-  }, {
-    src: "/img/my.png",
-    text: "我的"
-  }, {
-    src: "/img/kbshop.png",
-    text: "K币商城"
-  }, {
-    src: "/img/forum.png",
-    text: "论坛"
-  }, {
-    src: "/img/service.png",
-    text: "服务"
-  }, {
-    src: "/img/about.png",
-    text: "关于我们"
-  }]
-  private happyVideos: Array<any> = [{
-    src: "/img/hlsp.png"
-  }, {
-    src: "/img/hlsp.png"
-  }, {
-    src: "/img/hlsp.png"
-  }]
-  private hotgameOptions: Array<any> = [{
-    src: "/img/rmgame.png",
-    name: "末日血战",
-    size: "200M",
-    tag: "末日废土"
-  }, {
-    src: "/img/rmgame.png",
-    name: "塔防纪元",
-    size: "200M",
-    tag: "策略塔防"
-  }, {
-    src: "/img/rmgame.png",
-    name: "末日血战",
-    size: "200M",
-    tag: "末日废土"
-  }, {
-    src: "/img/rmgame.png",
-    name: "塔防纪元",
-    size: "200M",
-    tag: "策略塔防"
-  }]
-  private featActivOptions: Array<any> = [ {
-    src: "/img/1.png"
-  }, {
-    src: "/img/2.png"
-  }, {
-    src: "/img/1.png"
-  }]
+  private swipeOptions: Array<any> = [
+    {
+      src: "/img/1.png"
+    },
+    {
+      src: "/img/1.png"
+    }
+  ];
+  private gridOptions: Array<any> = [
+    {
+      src: "/img/game.png",
+      text: "游戏中心"
+    },
+    {
+      src: "/img/giftbox.png",
+      text: "礼包"
+    },
+    {
+      src: "/img/news.png",
+      text: "新闻资讯"
+    },
+    {
+      src: "/img/my.png",
+      text: "我的"
+    },
+    {
+      src: "/img/kbshop.png",
+      text: "K币商城"
+    },
+    {
+      src: "/img/forum.png",
+      text: "论坛"
+    },
+    {
+      src: "/img/service.png",
+      text: "服务"
+    },
+    {
+      src: "/img/about.png",
+      text: "关于我们"
+    }
+  ];
+  private happyVideos: Array<any> = [
+    {
+      src: "/img/hlsp.png"
+    },
+    {
+      src: "/img/hlsp.png"
+    },
+    {
+      src: "/img/hlsp.png"
+    }
+  ];
+  private hotgameOptions: Array<any> = [
+    {
+      src: "/img/rmgame.png",
+      name: "末日血战",
+      size: "200M",
+      tag: "末日废土"
+    },
+    {
+      src: "/img/rmgame.png",
+      name: "塔防纪元",
+      size: "200M",
+      tag: "策略塔防"
+    },
+    {
+      src: "/img/rmgame.png",
+      name: "末日血战",
+      size: "200M",
+      tag: "末日废土"
+    },
+    {
+      src: "/img/rmgame.png",
+      name: "塔防纪元",
+      size: "200M",
+      tag: "策略塔防"
+    }
+  ];
+  private featActivOptions: Array<any> = [
+    {
+      src: "/img/1.png"
+    },
+    {
+      src: "/img/2.png"
+    },
+    {
+      src: "/img/1.png"
+    }
+  ];
   private mounted() {
-    console.log("mounted")
+    console.log("mounted");
     // @ts-ignore
-    var mySwiper:any = new Swiper('.swiper-container', {
-      direction: 'horizontal',
-      effect : 'coverflow',
+    var mySwiper: any = new Swiper(".swiper-container", {
+      direction: "horizontal",
       initialSlide: 1,
       slidesPerView: 3,
-      width: 210,
-      height: 110,
       centeredSlides: true,
-      autoplay: 1000,
       loop: true,
+      effect: "coverflow",
+      loopAdditionaSlider: 0,
       coverflow: {
         rotate: 0,
         stretch: 0,
         depth: 60,
-        modifier: 2,
-        slideShadows : false
+        modifier: 4,
+        slideShadows: false
       }
-    })        
+    });
   }
 }
 </script>
@@ -166,7 +202,7 @@ export default class Home extends Vue {
       height: 100%;
     }
   }
-  &>.happy-videos:not(:last-child) {
+  & > .happy-videos:not(:last-child) {
     margin-right: 8px;
   }
 }
@@ -179,8 +215,13 @@ export default class Home extends Vue {
     flex: 1;
   }
 }
+.swiper-box {
+  border: 1px solid red;
+  overflow: hidden;
+  margin: 0px auto;
+}
 .swiper-container {
-  width: 100%;
+  justify-content: center;
 }
 .swiper-slide-active {
   img {
@@ -194,4 +235,5 @@ export default class Home extends Vue {
     height: 110px;
   }
 }
-</style>>
+</style>
+
