@@ -2,7 +2,7 @@
   <div class="Floor">
     <div class="Floor-head">
       <span class="Floor-head-title">{{ floorTitle }}</span>
-      <span class="more">查看更多<van-icon name="arrow" class="more-icon"/></span>
+      <span class="more" v-if="isMore">查看更多<van-icon name="arrow" class="more-icon"/></span>
     </div>
     <div class="Floor-content">
       <slot></slot>
@@ -13,7 +13,8 @@
 import { Vue, Component, Prop} from "vue-property-decorator"
 @Component
 export default class Floor extends Vue {
-  @Prop({ default: "" }) floorTitle!: string; 
+  @Prop({ default: "" }) floorTitle!: string;
+  @Prop({ default: true }) isMore!: boolean;
 }
 </script>
 <style lang="scss" scoped>
@@ -27,15 +28,22 @@ export default class Floor extends Vue {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    .Floor-head-title, .more {
+    .Floor-head-title {
       font-weight: bold;
-      font-size:14px;
+      font-size:13px;
       line-height: normal;
       display: inline-block;
-      color: rgba(89,89,89,1);
+      color: #595959;
+    }
+    .more {
+      font-weight: bold;
+      font-size:11px;
+      line-height: normal;
+      display: inline-block;
+      color: #999999;
     }
     .more-icon {
-      font-size:14px;
+      font-size: 11px;
     }
   }
 }

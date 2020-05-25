@@ -8,7 +8,9 @@ import {
   Swipe,
   SwipeItem,
   Grid,
-  GridItem
+  GridItem,
+  List,
+  PullRefresh 
 } from 'vant';
 
 Vue.use(Tabbar);
@@ -19,3 +21,5 @@ Vue.use(Swipe);
 Vue.use(SwipeItem);
 Vue.use(Grid);
 Vue.use(GridItem);
+Vue.use(List);
+Vue.use(PullRefresh);

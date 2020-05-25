@@ -5,8 +5,8 @@
         <img :src="item.src" />
       </van-swipe-item>
     </van-swipe>
-    <van-grid square :border="false">
-      <van-grid-item v-for="(item, index) in gridOptions" :key="index">
+    <van-grid square :border="false" :icon-size="14">
+      <van-grid-item v-for="(item, index) in gridOptions" :key="index" >
         <template #icon>
           <img :src="item.src" class="van-grid-icon" />
         </template>
@@ -36,20 +36,21 @@
         ></Hot-game-item>
       </div>
     </Floor>
-    <Floor :floorTitle="'特色活动'"> </Floor>
-    <div class="swiper-box">
-      <div class="swiper-container">
-        <div class="swiper-wrapper">
-          <div
-            class="swiper-slide"
-            v-for="(item, index) in featActivOptions"
-            :key="index"
-          >
-            <img :src="item.src" />
+    <Floor :floorTitle="'特色活动'">
+      <div class="featActiv-box">
+        <div class="swiper-container">
+          <div class="swiper-wrapper">
+            <div
+              class="swiper-slide"
+              v-for="(item, index) in featActivOptions"
+              :key="index"
+            >
+              <div><img :src="item.src" /></div>
+            </div>
           </div>
         </div>
       </div>
-    </div>
+    </Floor>
   </div>
 </template>
 
@@ -157,17 +158,15 @@ export default class Home extends Vue {
   private mounted() {
     console.log("mounted");
     // @ts-ignore
-    var mySwiper: any = new Swiper(".swiper-container", {
-      direction: "horizontal",
-      initialSlide: 1,
-      slidesPerView: 3,
+    let swiper = new Swiper(".swiper-container", {
+      effect : 'coverflow',
+      slidesPerView: "auto",
       centeredSlides: true,
-      loop: true,
-      effect: "coverflow",
-      loopAdditionaSlider: 0,
+      autoplay: 3000,
+      loop : true,
       coverflow: {
         rotate: 0,
-        stretch: 0,
+        stretch: 10,
         depth: 60,
         modifier: 4,
         slideShadows: false
@@ -182,10 +181,16 @@ export default class Home extends Vue {
 .my-swipe .van-swipe-item {
   height: 220px;
   background-color: #39a9ed;
+  img {
+    height: 220px;
+  }
 }
 .van-grid-icon {
   height: 34px;
   width: 34px;
+  img {
+    height: 34px;
+  }
 }
 .van-grid-text {
   font-size: 12px;
@@ -196,10 +201,11 @@ export default class Home extends Vue {
   justify-content: center;
   align-items: center;
   .happy-videos {
+    flex: 1;
+    height: 170px;
     img {
-      width: 86px;
+      width: 100%;
       height: 170px;
-      height: 100%;
     }
   }
   & > .happy-videos:not(:last-child) {
@@ -215,10 +221,8 @@ export default class Home extends Vue {
     flex: 1;
   }
 }
-.swiper-box {
-  border: 1px solid red;
-  overflow: hidden;
-  margin: 0px auto;
+.featActiv-box {
+  padding: 15px;
 }
 .swiper-container {
   justify-content: center;
@@ -235,5 +239,14 @@ export default class Home extends Vue {
     height: 110px;
   }
 }
-</style>
 
+.swiper-container .swiper-wrapper .swiper-slide {
+  width: 210px;
+  height: 110px;
+}
+.swiper-container .swiper-wrapper .swiper-slide img {
+  width: 210px;
+  height: 110px;
+}
+
+</style>

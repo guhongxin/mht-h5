@@ -45,8 +45,8 @@ export default class NavBar extends Vue{
 .search {
   width:175px;
   height:27px;
-  background:#BFBFBF;
-  border:1px solid rgba(191, 191, 191, 1);
+  background:#EBEBEB;
+  border:1px solid #EBEBEB;
   border-radius:27px;
   display: flex;
   align-items: center;
@@ -56,13 +56,13 @@ export default class NavBar extends Vue{
     height: 100%;
     width: 100%;
     border: 0;
-    background-color: rgba(0, 0, 0, 0);
+    background-color: #EBEBEB;
     outline: none;
     font-size: $nuxt-font-size-sm;
   }
   .search-icon {
     position: absolute;
-    font-size: 24px;
+    font-size: 18px;
     left: 0px;
   }
 }

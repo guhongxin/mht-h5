@@ -1,11 +1,20 @@
 <template>
-  <div>
+  <div class="layout">
     <nav-bar :fixed="true" @searchClick="searchClick"></nav-bar>
     <div class="main">
       <nuxt />
     </div>
+    <!-- <div class="company-copywrit">
+      <p>
+        公司：武汉灵动在线科技有限公司
+        备案号：工信部备案号：鄂ICP备15004704号-3：公安机关备案号：42018502000448     
+      </p>
+      <p>网络文化经营许可证：鄂网文〔2016〕2305-065号：电信增值许可证号：鄂B2-20160108。</p>
+    </div> -->
     <div class="footer">
-      <van-tabbar v-model="active" route>
+      <van-tabbar v-model="active" route
+        :active-color="'#459743'"
+        :inactive-color="'#999999'">
         <van-tabbar-item icon="home-o" to="/">
           <span>首页</span>
           <template slot="icon">
@@ -35,16 +44,16 @@
   </div>
 </template>
 <script lang="ts">
-import { Vue, Component } from "vue-property-decorator"
+import { Vue, Component } from "vue-property-decorator";
 import NavBar from "~/components/NavBar.vue";
 @Component({
-  components:{
+  components: {
     NavBar
   }
 })
-export default class Default extends Vue{
-  active:number = 0;
-  searchClick (value: string) {
+export default class Default extends Vue {
+  active: number = 0;
+  searchClick(value: string) {
     console.log("****", value);
   }
 }
@@ -60,13 +69,20 @@ export default class Default extends Vue{
   height: 50px;
 }
 .main {
-  padding: 56px 0px 50px 0px;
+  padding: 56px 0px 0px 0px;
+}
+.company-copywrit {
+  p {
+    font-size: 12px;
+    color: #595959;
+    text-align: center;
+  }
 }
 </style>
 <style>
 html {
-  font-family: 'Source Sans Pro', -apple-system, BlinkMacSystemFont, 'Segoe UI',
-    Roboto, 'Helvetica Neue', Arial, sans-serif;
+  font-family: "Source Sans Pro", -apple-system, BlinkMacSystemFont, "Segoe UI",
+    Roboto, "Helvetica Neue", Arial, sans-serif;
   font-size: 12px;
   word-spacing: 1px;
   -ms-text-size-adjust: 100%;
