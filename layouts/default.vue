@@ -4,43 +4,34 @@
     <div class="main">
       <nuxt />
     </div>
-    <!-- <div class="company-copywrit">
-      <p>
-        公司：武汉灵动在线科技有限公司
-        备案号：工信部备案号：鄂ICP备15004704号-3：公安机关备案号：42018502000448     
-      </p>
-      <p>网络文化经营许可证：鄂网文〔2016〕2305-065号：电信增值许可证号：鄂B2-20160108。</p>
-    </div> -->
-    <div class="footer">
-      <van-tabbar v-model="active" route
-        :active-color="'#459743'"
-        :inactive-color="'#999999'">
-        <van-tabbar-item icon="home-o" to="/">
-          <span>首页</span>
-          <template slot="icon">
-            <i class="iconfont iconhome"></i>
-          </template>
-        </van-tabbar-item>
-        <van-tabbar-item to="/gameCenter">
-          <span>游戏中心</span>
-          <template slot="icon">
-            <i class="iconfont icon94"></i>
-          </template>
-        </van-tabbar-item>
-        <van-tabbar-item to="/forum">
-          <span>论坛</span>
-          <template slot="icon">
-            <i class="iconfont iconluntan"></i>
-          </template>
-        </van-tabbar-item>
-        <van-tabbar-item to="/my">
-          <span>我的</span>
-          <template slot="icon">
-            <i class="iconfont iconwo"></i>
-          </template>
-        </van-tabbar-item>
-      </van-tabbar>
-    </div>
+    <van-tabbar v-model="active" route
+      :active-color="'#459743'"
+      :inactive-color="'#999999'">
+      <van-tabbar-item icon="home-o" to="/">
+        <span>首页</span>
+        <template slot="icon">
+          <i class="iconfont iconhome"></i>
+        </template>
+      </van-tabbar-item>
+      <van-tabbar-item to="/gameCenter">
+        <span>游戏中心</span>
+        <template slot="icon">
+          <i class="iconfont icon94"></i>
+        </template>
+      </van-tabbar-item>
+      <van-tabbar-item to="/forum">
+        <span>论坛</span>
+        <template slot="icon">
+          <i class="iconfont iconluntan"></i>
+        </template>
+      </van-tabbar-item>
+      <van-tabbar-item to="/my">
+        <span>我的</span>
+        <template slot="icon">
+          <i class="iconfont iconwo"></i>
+        </template>
+      </van-tabbar-item>
+    </van-tabbar>
   </div>
 </template>
 <script lang="ts">
@@ -59,24 +50,17 @@ export default class Default extends Vue {
 }
 </script>
 <style lang="scss" scoped>
+.layout {
+  position: relative;
+}
 .head {
   height: 40px;
   line-height: 40px;
   font-size: 12px;
   background-color: #ffffff;
 }
-.footer {
-  height: 50px;
-}
 .main {
-  padding: 56px 0px 0px 0px;
-}
-.company-copywrit {
-  p {
-    font-size: 12px;
-    color: #595959;
-    text-align: center;
-  }
+  padding: 56px 0px 50px 0px;
 }
 </style>
 <style>
