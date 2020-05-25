@@ -63,6 +63,14 @@
         </div>
       </div>
     </div>
+    <div class="tq">
+      <div class="tq-left">
+        <img src="/img/servicetq.png" />
+      </div>
+      <div class="tq-right">
+        <img src="/img/welfaretq.png" />
+      </div>
+    </div>
     <div class="company-copywrit">
       <p>
         武汉灵动在线科技有限公司
@@ -193,10 +201,21 @@ export default class My extends Vue {
     border-bottom: 1px solid #F3F3F3;
   }
 }
+.tq {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0px 23px 10px;
+  .tq-left, .tq-right {
+    width: 156px;
+    height: 85px;
+    img {
+      width: 100%;
+      height: 100%;
+    }
+  }
+}
 .company-copywrit {
-  width: 100%;
-  position: absolute;
-  bottom: 0px;
   p {
     font-size: 8px;
     color: #595959;
