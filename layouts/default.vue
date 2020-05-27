@@ -1,6 +1,6 @@
 <template>
   <div class="layout">
-    <nav-bar :fixed="true" @searchClick="searchClick"></nav-bar>
+    <nav-bar :fixed="true" @searchClick="searchClick" :back="back"></nav-bar>
     <div class="main">
       <nuxt />
     </div>
@@ -44,7 +44,8 @@ import NavBar from "~/components/NavBar.vue";
   }
 })
 export default class Default extends Vue {
-  private active: number = 0;
+  private active: number = 0
+  private back:boolean = false
   searchClick(value: string) {}
   private mounted() {
     let route:any = this.$route
@@ -58,6 +59,7 @@ export default class Default extends Vue {
   private getActive(route: any): number {
     let _name:string = route.name
     let nameArr:Array<string> =  _name.split("-")
+    this.back = nameArr.length > 1
     let indexObj:any = {
       index: 0,
       gameCenter: 1,

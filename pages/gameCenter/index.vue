@@ -14,11 +14,11 @@
           >
           <template #default>
             <GameItem class="list-item" @goDetailClick="goDetail" @downHandClick="downHandClick"></GameItem>
-            <GameItem class="list-item"></GameItem>
-            <GameItem class="list-item"></GameItem>
-            <GameItem class="list-item"></GameItem>
-            <GameItem class="list-item"></GameItem>
-            <GameItem class="list-item"></GameItem>
+            <GameItem class="list-item" @goDetailClick="goDetail"></GameItem>
+            <GameItem class="list-item" @goDetailClick="goDetail"></GameItem>
+            <GameItem class="list-item" @goDetailClick="goDetail"></GameItem>
+            <GameItem class="list-item" @goDetailClick="goDetail"></GameItem>
+            <GameItem class="list-item" @goDetailClick="goDetail"></GameItem>
           </template>
           </van-list>
         </van-pull-refresh>

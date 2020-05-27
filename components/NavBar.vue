@@ -1,6 +1,9 @@
 <template>
   <div class="nav-bar" :class="{fixed: fixed}">
-    <img src="/img/logo.png" class="logo" />
+    <div style="font-size:0">
+      <van-icon name="arrow-left" v-if="back" @click="goBack" class="backStyle"/>
+      <img src="/img/logo.png" class="logo" />
+    </div>
     <div class="search">
       <input :value="value" type="text" class="input-text" @change="searchText"/>
       <van-icon name="search" class="search-icon"/>
@@ -13,12 +16,16 @@ import { Vue, Component, Prop, Emit } from "vue-property-decorator"
 @Component 
 export default class NavBar extends Vue{
   @Prop({ default: false }) fixed!: boolean;
+  @Prop({ default: false }) back!: boolean;
   @Emit('searchClick') searchClick(msg: string){}
   value:string = ""
   searchText(e: any) {
     let doc:HTMLInputElement  = e.target;
     this.value = doc.value;
     this.searchClick(this.value)
+  }
+  private goBack() {
+    this.$router.go(-1)
   }
 }
 </script>
@@ -42,6 +49,7 @@ export default class NavBar extends Vue{
 }
 .logo {
   width: 103px;
+  vertical-align: middle;
 }
 .search {
   width:175px;
@@ -73,5 +81,9 @@ export default class NavBar extends Vue{
   width: 27px;
   border-radius: 50%;
 }
-
+.backStyle {
+  font-size: 24px;
+  vertical-align: middle;
+  text-align: center;
+}
 </style>
