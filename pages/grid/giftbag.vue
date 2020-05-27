@@ -48,7 +48,6 @@ export default class gridgiftbag extends Vue {
   box-sizing: border-box;
 }
 .tab-menu {
-  height: calc(100vh - 129px);
   /deep/ .van-tabs__line {
     background-color: #7DB349;
   }
