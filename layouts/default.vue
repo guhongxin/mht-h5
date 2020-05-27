@@ -46,20 +46,27 @@ import NavBar from "~/components/NavBar.vue";
 export default class Default extends Vue {
   private active: number = 0;
   searchClick(value: string) {}
+  private mounted() {
+    let route:any = this.$route
+    this.active = this.getActive(route)
+  }
   @Watch("$route")
   routerChange (val: any) {
-    console.log("---", val);
-    let _name:string = val.name
+    this.active = this.getActive(val)
+  }
+  // 获取当前的tab
+  private getActive(route: any): number {
+    let _name:string = route.name
     let nameArr:Array<string> =  _name.split("-")
     let indexObj:any = {
       index: 0,
       gameCenter: 1,
       forum: 2,
-      my: 3
+      my: 3,
+      grid: 0
     }
-    this.active = indexObj[nameArr[0]]
-  }
-
+    return indexObj[nameArr[0]]
+  } 
 }
 </script>
 <style lang="scss" scoped>

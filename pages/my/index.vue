@@ -46,7 +46,7 @@
           <van-icon name="arrow" class="more-icon"/>
         </div>
       </div>
-      <div class="list-item">
+      <div class="list-item" @click="goMyGiftBag">
         <div class="list-item-left">
           <i class="iconfont iconlibao"></i>
           <span>我的礼包</span>
@@ -83,13 +83,16 @@ import CompanyCopyWrit from "~/components/CompanyCopyWrit.vue"
   }
 })
 export default class My extends Vue {
-  
+  private goMyGiftBag():void {
+    this.$router.push({
+      name: "my-giftbag"
+    })
+  }
 }
 </script>
 <style lang="scss" scoped>
 .my {
-  min-height: calc(100vh - 106px);
-  position: relative;
+  margin-top: 10px;
 }
 .user-infor {
   display: flex;

@@ -1,0 +1,88 @@
+<template>
+  <div class="my-giftbag-item">
+    <div class="my-giftbag-item-left">
+      <img src="/img/rmgame.png" />
+    </div>
+    <div class="my-gittbag-item-middle">
+      <div class="gittbag-name"> 
+        末日血战 <span class="jp-name">新手礼包</span>                    
+      </div>
+      <div class="termofvalidity">有效期至:<span>2020.5.31 24:00</span></div>
+      <div class="code">礼包码:<span>joj32u4398uf</span></div>
+    </div>
+    <div class="my-gittbag-item-right">
+      <div class="copyCodeBtn"
+        :class="[ disabled ? 'disableBtn' : 'enableBtn']">复制兑换码</div>
+    </div>
+  </div>
+</template>
+<script lang="ts">
+import { Vue, Component, Prop} from "vue-property-decorator"
+@Component
+export default class MygiftbagItem extends Vue {
+  @Prop({default: false }) disabled!:boolean
+}
+</script>
+<style lang="scss" scoped>
+.my-giftbag-item {
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  .my-giftbag-item-left {
+    width: 68px;
+    margin-right: 15px;
+    img {
+      height: 68px;
+      width: 68px;
+      vertical-align: middle;
+    }
+  }
+  .my-gittbag-item-middle {
+    flex: 2;
+    .gittbag-name {
+      font-size: 16px;
+      color: #595959;
+      font-weight: bold;
+      .jp-name {
+        font-size: 12px;
+      }
+    }
+    .termofvalidity {
+      font-size: 12px;
+      font-weight:400;
+      margin-top: 3px;
+      color:#808080;
+    }
+    .code {
+      font-size: 12px;
+      font-weight:400;
+      color:#808080;
+      margin-top: 3px;
+    }
+  }
+  .my-gittbag-item-right {
+    flex: 1;
+    height: 68px;
+    position: relative;
+    .copyCodeBtn {
+      width: 100%;
+      font-size: 14px;
+      font-weight:bold;
+      color:#ffffff;
+      line-height: normal;
+      padding: 5px 0px;
+      box-sizing: border-box;
+      text-align: center;
+      border-radius:24px;
+      position: absolute;
+      bottom: 0px;
+    }
+    .enableBtn {
+      background:linear-gradient(0deg,rgba(69,151,67,1),rgba(125,179,73,1));
+    }
+    .disableBtn {
+      background-color: #727272;
+    }
+  }
+}
+</style>

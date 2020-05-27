@@ -6,7 +6,7 @@
       </van-swipe-item>
     </van-swipe>
     <van-grid square :border="false" :icon-size="14">
-      <van-grid-item v-for="(item, index) in gridOptions" :key="index" >
+      <van-grid-item v-for="(item, index) in gridOptions" :key="index" @click="gridItemClick(item)">
         <template #icon>
           <img :src="item.src" class="van-grid-icon" />
         </template>
@@ -83,6 +83,7 @@ export default class Home extends Vue {
     },
     {
       src: "/img/giftbox.png",
+      path: "/grid/giftbag",
       text: "礼包"
     },
     {
@@ -175,6 +176,9 @@ export default class Home extends Vue {
         slideShadows: false
       }
     });
+  }
+  private gridItemClick(param: any) {
+    this.$router.push({ path: param.path })
   }
 }
 </script>

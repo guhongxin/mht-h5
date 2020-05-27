@@ -10,7 +10,9 @@ import {
   Grid,
   GridItem,
   List,
-  PullRefresh 
+  PullRefresh,
+  Tab,
+  Tabs
 } from 'vant';
 
 Vue.use(Tabbar);
@@ -23,3 +25,5 @@ Vue.use(Grid);
 Vue.use(GridItem);
 Vue.use(List);
 Vue.use(PullRefresh);
+Vue.use(Tab);
+Vue.use(Tabs);

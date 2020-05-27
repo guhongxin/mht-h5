@@ -1,6 +1,6 @@
 <template>
   <div class="game-center">
-    <Floor :floorTitle="'热门游戏'" :isMore="false">
+    <Floor :floorTitle="'热门游戏'" :isMore="false" class="game-center-floor">
       <div class="game-List">
         <van-pull-refresh v-model="refreshing"
           @refresh="onRefresh"
@@ -15,12 +15,16 @@
           <template #default>
             <GameItem class="list-item" @goDetailClick="goDetail" @downHandClick="downHandClick"></GameItem>
             <GameItem class="list-item"></GameItem>
+            <GameItem class="list-item"></GameItem>
+            <GameItem class="list-item"></GameItem>
+            <GameItem class="list-item"></GameItem>
+            <GameItem class="list-item"></GameItem>
           </template>
           </van-list>
         </van-pull-refresh>
       </div>
     </Floor>
-    <CompanyCopyWrit></CompanyCopyWrit>
+    <!-- <CompanyCopyWrit></CompanyCopyWrit> -->
   </div>
 </template>
 <script lang="ts">
@@ -61,11 +65,19 @@ export default class GameCenter extends Vue {
 }
 </script>
 <style lang="scss" scoped>
+.game-center-floor {
+  // position: fixed;
+  // top: 61px;
+  // left: 0px;
+}
+.game-center {
+  margin-top: 10px;
+}
 .game-List {
   padding: 15px;
 }
 .pull-refresh {
-  height: calc(100vh - 96px - 52px);
+  max-height: calc(100vh - 148px);
   overflow: hidden;
   overflow-y: auto;
   position: relative;

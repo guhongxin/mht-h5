@@ -36,7 +36,19 @@
       </div>
     </div>
     <Floor :floorTitle="'游戏礼包'" :isMore="false" class="detail-floor">
-
+      <div class="game-gift-bag">
+        <div class="swiper-container">
+          <div class="swiper-wrapper">
+            <div
+              class="swiper-slide"
+              v-for="(item, index) in giftBagOptions"
+              :key="index"
+            >
+              <img :src="item.src" />
+            </div>
+          </div>
+        </div>
+      </div>
     </Floor>
     <Floor :floorTitle="'欢乐视频'" :isMore="false" class="detail-floor">
       <div class="hl-video">
@@ -44,18 +56,35 @@
         <img src="/img/game-detail-1.png">
       </div>
     </Floor>
+    <CompanyCopyWrit></CompanyCopyWrit>
   </div>
 </template>
 <script lang="ts">
 import { Vue, Component } from "vue-property-decorator"
 import Floor from "~/components/Floor.vue";
+import CompanyCopyWrit from "~/components/CompanyCopyWrit.vue";
 @Component({
   components: {
-    Floor
+    Floor,
+    CompanyCopyWrit
   }
 })
 export default class GameDetails extends Vue {
-  
+  private giftBagOptions:Array<any> = [
+    {
+      src: "/img/game-detail-2.png"
+    },
+    {
+      src: "/img/game-detail-1.png"
+    }
+  ];
+  private mounted() {
+    // @ts-ignore
+    let mySwiper = new Swiper('.swiper-container', {
+      slidesPerView: "auto",
+      spaceBetween: -14
+    })
+  }
 }
 </script>
 <style lang="scss" scoped>
@@ -158,5 +187,20 @@ export default class GameDetails extends Vue {
 }
 .detail-floor {
   padding: 0px;
+}
+.game-gift-bag {
+  margin-right: -16px;
+  padding: 15px 0px;
+  box-sizing: border-box;
+  .swiper-container {
+    width: 100%;
+  }
+  .swiper-slide {
+    img {
+      width: 330px;
+      height: 150px;
+      vertical-align: middle;
+    }
+}
 }
 </style>
