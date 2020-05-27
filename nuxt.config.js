@@ -17,7 +17,6 @@ module.exports = {
     script: [
       { src: '/js/swiper-3.4.2.min.js' }
     ]
-
   },
   /*
   ** Customize the progress-bar color

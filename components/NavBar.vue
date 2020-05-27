@@ -33,6 +33,7 @@ export default class NavBar extends Vue{
   align-items: center;
   padding: 14px;
   z-index: 100;
+  box-shadow: 2px 2px 5px #cccccc;
 }
 .fixed {
   position: fixed;

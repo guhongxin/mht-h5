@@ -13,31 +13,26 @@
             class="list-view"
           >
           <template #default>
-            <GameItem class="list-item"></GameItem>
+            <GameItem class="list-item" @goDetailClick="goDetail" @downHandClick="downHandClick"></GameItem>
             <GameItem class="list-item"></GameItem>
           </template>
           </van-list>
         </van-pull-refresh>
       </div>
     </Floor>
-    <div class="company-copywrit">
-      <p>
-        武汉灵动在线科技有限公司
-      </p>
-      <p>鄂ICP备15004704号-3</p>
-      <p>公安机关备案号：42018502000448</p>
-      <p>网络文化经营许可证：鄂网文〔2016〕2305-065号：电信增值许可证号：鄂B2-20160108。</p>
-    </div>
+    <CompanyCopyWrit></CompanyCopyWrit>
   </div>
 </template>
 <script lang="ts">
 import { Vue, Component } from "vue-property-decorator"
-import Floor from "~/components/Floor.vue";
+import Floor from "~/components/Floor.vue"
 import GameItem from "~/components/GameItem.vue"
+import CompanyCopyWrit from "~/components/CompanyCopyWrit.vue"
 @Component({
   components: {
     Floor,
-    GameItem
+    GameItem,
+    CompanyCopyWrit
   }
 })
 export default class GameCenter extends Vue {
@@ -56,6 +51,12 @@ export default class GameCenter extends Vue {
     this.refreshing = false;
     this.finished = false
     this.loading = false;
+  }
+  private goDetail() {
+    this.$router.push({ name: 'gameCenter-gameDetails'})
+  }
+  private downHandClick() {
+    console.log("下载")
   }
 }
 </script>

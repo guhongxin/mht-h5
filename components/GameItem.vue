@@ -1,5 +1,5 @@
 <template>
-  <div class="game-item">
+  <div class="game-item" @click="goDetails">
     <div class="game-item-left">
       <img src="/img/rmgame.png" />
     </div>
@@ -16,15 +16,23 @@
       </div>
     </div>
     <div class="game-item-right">
-      <div class="down-btn">下载</div>
+      <div class="down-btn" @click.stop="downClick">下载</div>
     </div>
   </div>
 </template>
 <script lang="ts">
-import { Vue, Component, Prop } from "vue-property-decorator"
+import { Vue, Component, Prop, Emit } from "vue-property-decorator"
 @Component
 export default class GameItem extends Vue {
   // @Prop({ default: {} }) private gameIfor!:Object;
+  @Emit("goDetailClick") goDetailClick() {}
+  @Emit("downHandClick") downHandClick() {}
+  private goDetails() {
+    this.goDetailClick();
+  }
+  private downClick() {
+    this.downHandClick()
+  }
 }
 </script>
 <style lang="scss" scoped>

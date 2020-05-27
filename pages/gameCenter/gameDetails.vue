@@ -1,0 +1,162 @@
+<template>
+  <div class="game-details">
+    <div class="game-detail-head">
+      <div class="game-detail-left">
+        <img src="/img/rmgame.png" />
+      </div>
+      <div class="game-detail-right">
+        <div class="game-name">末日血战</div>
+        <div class="game-tag">
+          <span>策略</span>
+          <span>塔防</span>
+        </div>
+        <div class="game-size">200M</div>
+        <div class="button-group">
+          <div class="down-btn">下载</div>
+          <div class="giftbag-btn">礼包</div>
+        </div>
+      </div>
+    </div>
+    <div class="game-detail-grid">
+      <div class="grid-item">
+        <img src="/img/hd.png" class="grid-item-icon" />
+        <div class="grid-item-title">活动</div>
+      </div>
+      <div class="grid-item">
+        <img src="/img/gy.png" class="grid-item-icon" />
+        <div class="grid-item-title">攻略</div>
+      </div>
+      <div class="grid-item">
+        <img src="/img/lt.png" class="grid-item-icon" />
+        <div class="grid-item-title">论坛</div>
+      </div>
+      <div class="grid-item">
+        <img src="/img/gw.png" class="grid-item-icon" />
+        <div class="grid-item-title">官网</div>
+      </div>
+    </div>
+    <Floor :floorTitle="'游戏礼包'" :isMore="false" class="detail-floor">
+
+    </Floor>
+    <Floor :floorTitle="'欢乐视频'" :isMore="false" class="detail-floor">
+      <div class="hl-video">
+        <img src="/img/game-detail-2.png">
+        <img src="/img/game-detail-1.png">
+      </div>
+    </Floor>
+  </div>
+</template>
+<script lang="ts">
+import { Vue, Component } from "vue-property-decorator"
+import Floor from "~/components/Floor.vue";
+@Component({
+  components: {
+    Floor
+  }
+})
+export default class GameDetails extends Vue {
+  
+}
+</script>
+<style lang="scss" scoped>
+.game-details {
+  padding: 5px 16px 0px;
+  box-sizing: border-box;
+  .game-detail-head {
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    border-bottom: 1px solid #CCCCCC;
+    padding-bottom: 24px;
+    .game-detail-left {
+      width: 106px;
+      img {
+        height: 106px;
+        width: 106px;
+        vertical-align: middle;
+      }
+    }
+    .game-detail-right {
+      flex: 1;
+      box-sizing: border-box;
+      padding-left: 12px;
+      .game-name {
+        font-size: 20px;
+        font-weight: bold;
+        color:#1A1A1A;
+      }
+      .game-tag {
+        font-size: 12px;
+        line-height: 16px;
+        font-weight:400;
+        color:#595959;
+      }
+      .game-size {
+        font-size: 12px;
+        font-weight:400;
+        line-height: 16px;
+        color:#595959;
+      }
+      .button-group {
+        margin-top: 12px;
+        display: flex;
+        justify-content: start;
+        align-content: center;
+        .down-btn, .giftbag-btn {
+          font-size: 12px;
+          padding: 5px 0px;
+          width: 62px;
+          text-align: center;
+          background:linear-gradient(0deg,rgba(69,151,67,1),rgba(125,179,73,1));
+          border-radius: 22px;
+          line-height: normal;
+          font-weight:bold;
+          color:rgba(255,255,255,1);
+        }
+        .down-btn {
+          margin-right: 18px;
+        }
+      }
+    }
+  }
+}
+.game-detail-grid {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  margin: 20px 0px;
+  .grid-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    .grid-item-icon {
+      height: 40px;
+      width: 40px;
+    }
+    .grid-item-title {
+      line-height: normal;
+      margin-top: 5px;
+      font-size: 12px;
+      font-weight: #5A5A5A;
+      font-weight: bold;
+    }
+  }
+}
+.hl-video {
+  padding: 15px 0px;
+  box-sizing: border-box;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  img {
+    flex: 1;
+    height: 84px;
+  }
+  & > img:first-child {
+    margin-right: 5px;
+  }
+}
+.detail-floor {
+  padding: 0px;
+}
+</style>

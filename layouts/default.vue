@@ -4,7 +4,8 @@
     <div class="main">
       <nuxt />
     </div>
-    <van-tabbar v-model="active" route
+    
+    <van-tabbar v-model="active"
       :active-color="'#459743'"
       :inactive-color="'#999999'">
       <van-tabbar-item icon="home-o" to="/">
@@ -35,7 +36,7 @@
   </div>
 </template>
 <script lang="ts">
-import { Vue, Component } from "vue-property-decorator";
+import { Vue, Component, Watch } from "vue-property-decorator";
 import NavBar from "~/components/NavBar.vue";
 @Component({
   components: {
@@ -43,10 +44,22 @@ import NavBar from "~/components/NavBar.vue";
   }
 })
 export default class Default extends Vue {
-  active: number = 0;
-  searchClick(value: string) {
-    console.log("****", value);
+  private active: number = 0;
+  searchClick(value: string) {}
+  @Watch("$route")
+  routerChange (val: any) {
+    console.log("---", val);
+    let _name:string = val.name
+    let nameArr:Array<string> =  _name.split("-")
+    let indexObj:any = {
+      index: 0,
+      gameCenter: 1,
+      forum: 2,
+      my: 3
+    }
+    this.active = indexObj[nameArr[0]]
   }
+
 }
 </script>
 <style lang="scss" scoped>
