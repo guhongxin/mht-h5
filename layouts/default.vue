@@ -36,8 +36,8 @@
   </div>
 </template>
 <script lang="ts">
-import { Vue, Component, Watch } from "vue-property-decorator";
-import NavBar from "~/components/NavBar.vue";
+import { Vue, Component, Watch } from "vue-property-decorator"
+import NavBar from "~/components/NavBar.vue"
 @Component({
   components: {
     NavBar

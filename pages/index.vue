@@ -5,7 +5,7 @@
         <img :src="item.src" />
       </van-swipe-item>
     </van-swipe>
-    <van-grid square :border="false" :icon-size="14">
+    <!-- <van-grid square :border="false" :icon-size="14">
       <van-grid-item v-for="(item, index) in gridOptions" :key="index" @click="gridItemClick(item)">
         <template #icon>
           <img :src="item.src" class="van-grid-icon" />
@@ -14,15 +14,26 @@
           <span class="van-grid-text">{{ item.text }}</span>
         </template>
       </van-grid-item>
-    </van-grid>
+    </van-grid> -->
+    <WGrid :itemOption="gridOptions" @gridClick="gridItemClick"></WGrid>
     <Floor :floorTitle="'欢乐视频'">
-      <div class="happy-videos-box">
+      <!-- <div class="happy-videos-box">
         <div
           v-for="(item, index) in happyVideos"
           :key="index"
           class="happy-videos"
         >
           <img :src="item.src" />
+        </div>
+      </div> -->
+      <div class="happy-videos-box">
+        <div class="swiper-container1">
+          <div class="swiper-wrapper">
+            <div class="swiper-slide" v-for="(item, index) in happyVideos"
+              :key="index">
+              <img :src="item.src" />
+            </div>
+          </div>
         </div>
       </div>
     </Floor>
@@ -51,6 +62,7 @@
         </div>
       </div>
     </Floor>
+    <div>{{ip}}</div>
     <CompanyCopyWrit></CompanyCopyWrit>
   </div>
 </template>
@@ -60,11 +72,19 @@ import { Vue, Component, Prop } from "vue-property-decorator";
 import Floor from "~/components/Floor.vue";
 import HotGameItem from "~/components/HotGameItem.vue";
 import CompanyCopyWrit from "~/components/CompanyCopyWrit.vue";
+import WGrid from "~/components/WGrid.vue"
 @Component({
+   async asyncData({ app }) {
+    const ip = await app.$axios.$get('http://icanhazip.com')
+    return {
+      ip
+    }
+  },
   components: {
     Floor,
     HotGameItem,
-    CompanyCopyWrit
+    CompanyCopyWrit,
+    WGrid
   }
 })
 export default class Home extends Vue {
@@ -120,6 +140,12 @@ export default class Home extends Vue {
     },
     {
       src: "/img/hlsp.png"
+    },
+    {
+      src: "/img/hlsp.png"
+    },
+    {
+      src: "/img/hlsp.png"
     }
   ];
   private hotgameOptions: Array<any> = [
@@ -159,8 +185,8 @@ export default class Home extends Vue {
       src: "/img/1.png"
     }
   ];
+  private ip:string = ""
   private mounted() {
-    console.log("mounted");
     // @ts-ignore
     let swiper = new Swiper(".swiper-container", {
       effect : 'coverflow',
@@ -176,8 +202,13 @@ export default class Home extends Vue {
         slideShadows: false
       }
     });
+    // @ts-ignore
+    let swiper1 = new Swiper(".swiper-container1", {
+      slidesPerView: "auto",
+      spaceBetween: 6
+    });
   }
-  private gridItemClick(param: any) {
+  private gridItemClick(param: any, index: number) {
     this.$router.push({ path: param.path })
   }
 }
@@ -254,5 +285,16 @@ export default class Home extends Vue {
 .swiper-container .swiper-wrapper .swiper-slide img {
   width: 210px;
   height: 110px;
+}
+.swiper-container1 {
+  height: 170px;
+  overflow: hidden;
+  .swiper-slide {
+    width: 30%;
+    img {
+      width: 100%;
+      height: 170px;
+    }
+  }
 }
 </style>
