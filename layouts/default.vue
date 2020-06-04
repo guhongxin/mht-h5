@@ -4,7 +4,6 @@
     <div class="main">
       <nuxt />
     </div>
-    
     <van-tabbar v-model="active"
       :active-color="'#459743'"
       :inactive-color="'#999999'">
@@ -58,6 +57,8 @@ export default class Default extends Vue {
   // 获取当前的tab
   private getActive(route: any): number {
     let _name:string = route.name
+    // @ts-ignore
+    var vConsole = new VConsole();
     let nameArr:Array<string> =  _name.split("-")
     this.back = nameArr.length > 1
     let indexObj:any = {
@@ -67,6 +68,7 @@ export default class Default extends Vue {
       my: 3,
       grid: 0
     }
+    console.log("indexObj[nameArr[0]]", indexObj[nameArr[0]]);
     return indexObj[nameArr[0]]
   } 
 }

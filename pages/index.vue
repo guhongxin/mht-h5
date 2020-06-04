@@ -20,8 +20,11 @@
       <div class="happy-videos-box">
         <div class="swiper-container1">
           <div class="swiper-wrapper">
-            <div class="swiper-slide" v-for="(item, index) in hotVideos"
-              :key="index">
+            <div
+              class="swiper-slide"
+              v-for="(item, index) in hotVideos"
+              :key="index"
+            >
               <img :src="item.coverUrl" />
             </div>
           </div>
@@ -44,10 +47,10 @@
           <div class="swiper-wrapper">
             <div
               class="swiper-slide"
-              v-for="(item, index) in featActivOptions"
+              v-for="(item, index) in hotActivities"
               :key="index"
             >
-              <div><img :src="item.src" /></div>
+              <div><img :src="item.imageUrl" /></div>
             </div>
           </div>
         </div>
@@ -69,11 +72,26 @@ import WGrid from "~/components/WGrid.vue"
     HotGameItem,
     CompanyCopyWrit,
     WGrid
+  },
+  async asyncData(context) {
+    let res = await (context as any).$axios({
+      method: "POST",
+      url: "/usr/index/hotActivities"
+    })
+    let hotActivities = res.data.activities
+    let res1 = await (context as any).$axios({
+      method: "POST",
+      url: "/usr/index/hotVideos"
+    })
+    let hotVideos = res1.data.videos
+    return {
+      hotActivities: hotActivities,
+      hotVideos: hotVideos
+    }
   }
 })
 export default class Home extends Vue {
   private carousels:Array<any> = [];
-  private hotVideos:Array<any> = [];
   private games:Array<any> = [];
   private gridOptions: Array<any> = [
     {
@@ -138,32 +156,40 @@ export default class Home extends Vue {
   ];
   private featActivOptions: Array<any> = [
     {
-      src: "/img/1.png"
+      imageUrl: "/img/1.png"
     },
     {
-      src: "/img/2.png"
+      imageUrl: "/img/2.png"
     },
     {
-      src: "/img/1.png"
+      imageUrl: "/img/1.png"
+    },
+    {
+      imageUrl: "/img/1.png"
+    },
+    {
+      imageUrl: "/img/1.png"
     }
   ];
-  private ip:string = ""
   private mounted() {
     // @ts-ignore
+    let swiper1 = new Swiper(".swiper-container1", {
+      slidesPerView: "auto",
+      centeredSlides: false,
+      spaceBetween: 6,
+      observer: true,
+      observeParents:true
+    });
     this.$nextTick(() => {
       // @ts-ignore
-      let swiper1 = new Swiper(".swiper-container1", {
-        slidesPerView: "auto",
-        spaceBetween: 6
-      });
-      // @ts-ignore
       let swiper = new Swiper(".swiper-container", {
-        effect : 'coverflow',
+        effect: 'coverflow',
         slidesPerView: "auto",
         centeredSlides: true,
-        autoplay: 3000,
-        loop : true,
-        coverflow: {
+        loop: true,
+        observer: true,
+        observeParents:true,
+        coverflowEffect: {
           rotate: 0,
           stretch: 10,
           depth: 60,
@@ -172,10 +198,9 @@ export default class Home extends Vue {
         }
       });
     })
-    this.carouselList()
-    this.hotVideoList()
-    this.hotGameList()
-    console.log("this.userAgent", (this as any).userAgent);
+    this.carouselList();
+    // this.hotVideoList();
+    this.hotGameList();
   }
   private gridItemClick(param: any, index: number) {
     this.$router.push({ path: param.path })
@@ -188,14 +213,14 @@ export default class Home extends Vue {
     })
     this.carousels = res.data.carousels
   }
-   private async hotVideoList() {
-    // 视频
-    let res = await (this as any).$axios({
-      method: "POST",
-      url: "/usr/index/hotVideos"
-    })
-    this.hotVideos = res.data.videos
-  }
+  // private async hotVideoList() {
+  //   // 视频
+  //   let res = await (this as any).$axios({
+  //     method: "POST",
+  //     url: "/usr/index/hotVideos"
+  //   })
+  //   this.hotVideos = res.data.videos
+  // }
   private async hotGameList() {
     // 游戏
     let res = await (this as any).$axios({

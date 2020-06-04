@@ -15,7 +15,8 @@ module.exports = {
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
     ],
     script: [
-      { src: '/js/swiper-3.4.2.min.js' }
+      { src: '/js/swiper.min.js' },
+      { src: '/js/vconsole.min.js' }
     ]
   },
   /*
@@ -27,7 +28,7 @@ module.exports = {
   */
   css: [
     '@/assets/style/index.scss',
-    '@/assets/style/swiper-3.4.2.min.css'
+    '@/assets/style/swiper.min.css'
   ],
   /*
   ** Plugins to load before mounting the App
