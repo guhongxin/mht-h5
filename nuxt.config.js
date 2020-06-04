@@ -34,7 +34,8 @@ module.exports = {
   */
   plugins: [
     '@/plugins/vant.js',
-    { src:'@/plugins/amfe-flexible.js', ssr: false }
+    { src:'@/plugins/amfe-flexible.js', ssr: false },
+    '@/plugins/request.js',
   ],
   /*
   ** Nuxt.js dev-modules
@@ -66,5 +67,8 @@ module.exports = {
     ],
     extend (config, ctx) {
     }
+  },
+  env: {
+    BASE_URL: "http://192.168.1.16:8080"
   }
 }

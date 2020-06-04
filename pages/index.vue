@@ -1,8 +1,8 @@
 <template>
   <div class="home">
     <van-swipe class="my-swipe" :autoplay="3000" indicator-color="white">
-      <van-swipe-item v-for="(item, index) in swipeOptions" :key="index">
-        <img :src="item.src" />
+      <van-swipe-item v-for="(item, index) in carousels" :key="index">
+        <img :src="item.imageUrl" />
       </van-swipe-item>
     </van-swipe>
     <!-- <van-grid square :border="false" :icon-size="14">
@@ -17,21 +17,12 @@
     </van-grid> -->
     <WGrid :itemOption="gridOptions" @gridClick="gridItemClick"></WGrid>
     <Floor :floorTitle="'欢乐视频'">
-      <!-- <div class="happy-videos-box">
-        <div
-          v-for="(item, index) in happyVideos"
-          :key="index"
-          class="happy-videos"
-        >
-          <img :src="item.src" />
-        </div>
-      </div> -->
       <div class="happy-videos-box">
         <div class="swiper-container1">
           <div class="swiper-wrapper">
-            <div class="swiper-slide" v-for="(item, index) in happyVideos"
+            <div class="swiper-slide" v-for="(item, index) in hotVideos"
               :key="index">
-              <img :src="item.src" />
+              <img :src="item.coverUrl" />
             </div>
           </div>
         </div>
@@ -41,7 +32,7 @@
       <div class="hot-game-list">
         <Hot-game-item
           class="hot-game-list-item"
-          v-for="(item, index) in hotgameOptions"
+          v-for="(item, index) in games"
           :key="index"
           :gameIfor="item"
         ></Hot-game-item>
@@ -81,14 +72,9 @@ import WGrid from "~/components/WGrid.vue"
   }
 })
 export default class Home extends Vue {
-  private swipeOptions: Array<any> = [
-    {
-      src: "/img/1.png"
-    },
-    {
-      src: "/img/1.png"
-    }
-  ];
+  private carousels:Array<any> = [];
+  private hotVideos:Array<any> = [];
+  private games:Array<any> = [];
   private gridOptions: Array<any> = [
     {
       src: "/img/game.png",
@@ -122,23 +108,6 @@ export default class Home extends Vue {
     {
       src: "/img/about.png",
       text: "关于我们"
-    }
-  ];
-  private happyVideos: Array<any> = [
-    {
-      src: "/img/hlsp.png"
-    },
-    {
-      src: "/img/hlsp.png"
-    },
-    {
-      src: "/img/hlsp.png"
-    },
-    {
-      src: "/img/hlsp.png"
-    },
-    {
-      src: "/img/hlsp.png"
     }
   ];
   private hotgameOptions: Array<any> = [
@@ -181,28 +150,81 @@ export default class Home extends Vue {
   private ip:string = ""
   private mounted() {
     // @ts-ignore
-    let swiper = new Swiper(".swiper-container", {
-      effect : 'coverflow',
-      slidesPerView: "auto",
-      centeredSlides: true,
-      autoplay: 3000,
-      loop : true,
-      coverflow: {
-        rotate: 0,
-        stretch: 10,
-        depth: 60,
-        modifier: 4,
-        slideShadows: false
-      }
-    });
-    // @ts-ignore
-    let swiper1 = new Swiper(".swiper-container1", {
-      slidesPerView: "auto",
-      spaceBetween: 6
-    });
+    this.$nextTick(() => {
+      // @ts-ignore
+      let swiper1 = new Swiper(".swiper-container1", {
+        slidesPerView: "auto",
+        spaceBetween: 6
+      });
+      // @ts-ignore
+      let swiper = new Swiper(".swiper-container", {
+        effect : 'coverflow',
+        slidesPerView: "auto",
+        centeredSlides: true,
+        autoplay: 3000,
+        loop : true,
+        coverflow: {
+          rotate: 0,
+          stretch: 10,
+          depth: 60,
+          modifier: 4,
+          slideShadows: false
+        }
+      });
+    })
+    this.carouselList()
+    this.hotVideoList()
+    this.hotGameList()
+    console.log("this.userAgent", (this as any).userAgent);
   }
   private gridItemClick(param: any, index: number) {
     this.$router.push({ path: param.path })
+  }
+  private async carouselList() {
+    // 轮播
+    let res = await (this as any).$axios({
+      method: "POST",
+      url: "/usr/index/carousels"
+    })
+    this.carousels = res.data.carousels
+  }
+   private async hotVideoList() {
+    // 视频
+    let res = await (this as any).$axios({
+      method: "POST",
+      url: "/usr/index/hotVideos"
+    })
+    this.hotVideos = res.data.videos
+  }
+  private async hotGameList() {
+    // 游戏
+    let res = await (this as any).$axios({
+      method: "POST",
+      url: "/usr/index/hotGames"
+    })
+    this.games = res.data.games
+    let deviceType:number = this.device()
+    this.games = res.data.games.reduce((total:Array<any>, item:any) => {
+      let obj = {
+        id: item.id,
+        name: item.name,
+        iconUrl: item.iconUrl,
+        downUrl: item.downloads[deviceType].url,
+        size: (item.downloads[deviceType].size / 1024 / 1024).toFixed(2)
+      }
+      total.push(obj)
+      return total
+    }, [])
+    console.log('---', res)
+  }
+  private device():number {
+    let userAgentInfo: string = navigator.userAgent;
+    if (/Android/.test(userAgentInfo)) {
+      return 1
+    } else if (/iPhone/.test(userAgentInfo)) {
+      return 0
+    }
+    return 0
   }
 }
 </script>
@@ -280,6 +302,7 @@ export default class Home extends Vue {
   height: 110px;
 }
 .swiper-container1 {
+  width: 100%;
   height: 170px;
   overflow: hidden;
   .swiper-slide {

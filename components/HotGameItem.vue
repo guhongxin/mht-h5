@@ -1,8 +1,8 @@
 <template>
   <div class="hot-game-item">
-    <img class="game-icon" :src="gameIfor.src" />
+    <img class="game-icon" :src="gameIfor.iconUrl" />
     <p class="game-name">{{ gameIfor.name }}</p>
-    <p class="game-size">{{ gameIfor.size }}</p>
+    <p class="game-size">{{ gameIfor.size }}M</p>
     <p class="game-tag">{{ gameIfor.tag }}</p>
     <div class="down-btn">下载</div>
   </div>
