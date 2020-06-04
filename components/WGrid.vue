@@ -23,7 +23,7 @@ export default class WGrid extends Vue {
 <style lang="scss" scoped>
 .w-grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(5, 1fr);
   justify-items: center;
   align-items: center;
   .w-grid-item {

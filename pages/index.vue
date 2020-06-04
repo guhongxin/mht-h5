@@ -62,7 +62,6 @@
         </div>
       </div>
     </Floor>
-    <div>{{ip}}</div>
     <CompanyCopyWrit></CompanyCopyWrit>
   </div>
 </template>
@@ -74,12 +73,6 @@ import HotGameItem from "~/components/HotGameItem.vue";
 import CompanyCopyWrit from "~/components/CompanyCopyWrit.vue";
 import WGrid from "~/components/WGrid.vue"
 @Component({
-   async asyncData({ app }) {
-    const ip = await app.$axios.$get('http://icanhazip.com')
-    return {
-      ip
-    }
-  },
   components: {
     Floor,
     HotGameItem,
