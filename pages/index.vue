@@ -5,16 +5,6 @@
         <img :src="item.imageUrl" />
       </van-swipe-item>
     </van-swipe>
-    <!-- <van-grid square :border="false" :icon-size="14">
-      <van-grid-item v-for="(item, index) in gridOptions" :key="index" @click="gridItemClick(item)">
-        <template #icon>
-          <img :src="item.src" class="van-grid-icon" />
-        </template>
-        <template #text>
-          <span class="van-grid-text">{{ item.text }}</span>
-        </template>
-      </van-grid-item>
-    </van-grid> -->
     <WGrid :itemOption="gridOptions" @gridClick="gridItemClick"></WGrid>
     <Floor :floorTitle="'欢乐视频'">
       <div class="happy-videos-box">
@@ -66,6 +56,7 @@ import Floor from "~/components/Floor.vue";
 import HotGameItem from "~/components/HotGameItem.vue";
 import CompanyCopyWrit from "~/components/CompanyCopyWrit.vue";
 import WGrid from "~/components/WGrid.vue"
+import { device } from "~/assets/utils/comm.ts"
 @Component({
   components: {
     Floor,
@@ -96,6 +87,7 @@ export default class Home extends Vue {
   private gridOptions: Array<any> = [
     {
       src: "/img/game.png",
+      path:"/gameCenter/gameCenter",
       text: "游戏中心"
     },
     {
@@ -107,22 +99,22 @@ export default class Home extends Vue {
       src: "/img/news.png",
       text: "新闻资讯"
     },
-    {
-      src: "/img/my.png",
-      text: "我的"
-    },
+    // {
+    //   src: "/img/my.png",
+    //   text: "我的"
+    // },
     {
       src: "/img/kbshop.png",
       text: "K币商城"
     },
-    {
-      src: "/img/forum.png",
-      text: "论坛"
-    },
-    {
-      src: "/img/service.png",
-      text: "服务"
-    },
+    // {
+    //   src: "/img/forum.png",
+    //   text: "论坛"
+    // },
+    // {
+    //   src: "/img/service.png",
+    //   text: "服务"
+    // },
     {
       src: "/img/about.png",
       text: "关于我们"
@@ -203,6 +195,11 @@ export default class Home extends Vue {
     this.hotGameList();
   }
   private gridItemClick(param: any, index: number) {
+    if (!param.path) {
+      (this as any).$dialog.alert({
+        message: '该功能暂未开启'
+      })
+    }
     this.$router.push({ path: param.path })
   }
   private async carouselList() {
@@ -213,14 +210,6 @@ export default class Home extends Vue {
     })
     this.carousels = res.data.carousels
   }
-  // private async hotVideoList() {
-  //   // 视频
-  //   let res = await (this as any).$axios({
-  //     method: "POST",
-  //     url: "/usr/index/hotVideos"
-  //   })
-  //   this.hotVideos = res.data.videos
-  // }
   private async hotGameList() {
     // 游戏
     let res = await (this as any).$axios({
@@ -228,7 +217,7 @@ export default class Home extends Vue {
       url: "/usr/index/hotGames"
     })
     this.games = res.data.games
-    let deviceType:number = this.device()
+    let deviceType:number = device()
     this.games = res.data.games.reduce((total:Array<any>, item:any) => {
       let obj = {
         id: item.id,
@@ -240,16 +229,6 @@ export default class Home extends Vue {
       total.push(obj)
       return total
     }, [])
-    console.log('---', res)
-  }
-  private device():number {
-    let userAgentInfo: string = navigator.userAgent;
-    if (/Android/.test(userAgentInfo)) {
-      return 1
-    } else if (/iPhone/.test(userAgentInfo)) {
-      return 0
-    }
-    return 0
   }
 }
 </script>

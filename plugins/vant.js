@@ -12,7 +12,9 @@ import {
   List,
   PullRefresh,
   Tab,
-  Tabs
+  Tabs,
+  Dialog,
+  Toast
 } from 'vant';
 
 Vue.use(Tabbar);
@@ -27,3 +29,6 @@ Vue.use(List);
 Vue.use(PullRefresh);
 Vue.use(Tab);
 Vue.use(Tabs);
+Vue.use(Dialog);
+Vue.use(Toast);
+

@@ -2,17 +2,17 @@
   <div class="game-details">
     <div class="game-detail-head">
       <div class="game-detail-left">
-        <img src="/img/rmgame.png" />
+        <img :src="gameInfor.iconUrl" />
       </div>
       <div class="game-detail-right">
-        <div class="game-name">末日血战</div>
+        <div class="game-name">{{gameInfor.name}}</div>
         <div class="game-tag">
-          <span>策略</span>
-          <span>塔防</span>
+          <span v-for="(item, index) in gameInfor.tags"
+            :key="index">{{item}}</span>
         </div>
-        <div class="game-size">200M</div>
+        <div class="game-size">{{gameInfor.size}}M</div>
         <div class="button-group">
-          <div class="down-btn">下载</div>
+          <div class="down-btn" @click="downHandClick(gameInfor)">下载</div>
           <div class="giftbag-btn">礼包</div>
         </div>
       </div>
@@ -35,7 +35,7 @@
         <div class="grid-item-title">官网</div>
       </div>
     </div>
-    <Floor :floorTitle="'游戏礼包'" :isMore="false" class="detail-floor">
+    <Floor :floorTitle="'游戏截图'" :isMore="false" class="detail-floor">
       <div class="game-gift-bag">
         <div class="swiper-container">
           <div class="swiper-wrapper">
@@ -63,6 +63,13 @@
 import { Vue, Component } from "vue-property-decorator"
 import Floor from "~/components/Floor.vue";
 import CompanyCopyWrit from "~/components/CompanyCopyWrit.vue";
+import { device } from "~/assets/utils/comm.ts"
+interface GameInfor {
+  iconUrl: string;
+  name: string;
+  tags: Array<string>;
+  size: string;
+}
 @Component({
   components: {
     Floor,
@@ -70,6 +77,12 @@ import CompanyCopyWrit from "~/components/CompanyCopyWrit.vue";
   }
 })
 export default class GameDetails extends Vue {
+  private gameInfor:GameInfor = {
+    iconUrl: "",
+    name: "",
+    tags: [],
+    size: ""
+  };
   private giftBagOptions:Array<any> = [
     {
       src: "/img/game-detail-2.png"
@@ -78,18 +91,50 @@ export default class GameDetails extends Vue {
       src: "/img/game-detail-1.png"
     }
   ];
+  // 详情id
+  private id:number = 0;
   private mounted() {
+    // 生命周期
     // @ts-ignore
     let mySwiper = new Swiper('.swiper-container', {
       slidesPerView: "auto",
       spaceBetween: -14
     })
+    // 获取id
+    let route:any = this.$route
+    this.id = route.query.id
+    this.gameDetail();
+  }
+  private async gameDetail() {
+    // 游戏详情
+    let res:any = await (this as any).$axios({
+      method: "POST",
+      url: "/usr/game/getGame",
+      data: {
+        gameId: this.id
+      }
+    })
+    let deviceType:number = device();
+    console.log(res);
+    let obj = Object.assign({}, res.data);
+    obj.downUrl = res.data.downloads[deviceType].url;
+    obj.size = (res.data.downloads[deviceType].size / 1024 / 1024).toFixed(2);
+    this.gameInfor = obj;
+    console.log(this.gameInfor);
+  }
+  private downHandClick(param:any) {
+    // 下载
+    console.log("下载", param)
+  }
+  private destroyed() {
+    // 卸载
+    this.id = 0;
   }
 }
 </script>
 <style lang="scss" scoped>
 .game-details {
-  padding: 5px 16px 0px;
+  padding: 10px 16px 0px;
   box-sizing: border-box;
   .game-detail-head {
     display: flex;
@@ -116,9 +161,12 @@ export default class GameDetails extends Vue {
       }
       .game-tag {
         font-size: 12px;
-        line-height: 16px;
         font-weight:400;
         color:#595959;
+        margin: 2px 0px;
+        & > span:not(:last-child) {
+          margin-right: 5px;
+        }
       }
       .game-size {
         font-size: 12px;
@@ -127,7 +175,7 @@ export default class GameDetails extends Vue {
         color:#595959;
       }
       .button-group {
-        margin-top: 12px;
+        margin-top: 10px;
         display: flex;
         justify-content: start;
         align-content: center;

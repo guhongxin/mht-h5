@@ -71,8 +71,8 @@ export default class NavBar extends Vue{
   }
   .search-icon {
     position: absolute;
-    font-size: 18px;
-    left: 0px;
+    font-size: 14px;
+    left: 4px;
   }
 }
 

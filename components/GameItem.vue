@@ -1,18 +1,18 @@
 <template>
   <div class="game-item" @click="goDetails">
     <div class="game-item-left">
-      <img src="/img/rmgame.png" />
+      <img :src="gameIfor.iconUrl" />
     </div>
     <div class="game-item-middle">
-      <div class="game-name">末日血战</div>
+      <div class="game-name">{{gameIfor.name}}</div>
       <div class="game-tag-list">
-        <div class="game-tag">放置</div>
-        <div class="game-tag">回合</div>
-        <div class="game-tag">卡牌</div>
+        <div class="game-tag" v-for="(item, index) in gameIfor.tags" :key="index">
+          {{item}}
+        </div>
       </div>
       <div class="game-other">
-        <div class="game-subtitle">末日废土</div>
-        <div class="game-pepole-numb">900万人玩过 | 200M</div>
+        <div class="game-subtitle">{{gameIfor.title}}</div>
+        <div class="game-pepole-numb">{{ gameIfor.installCount }}人玩过 | {{gameIfor.size}}M</div>
       </div>
     </div>
     <div class="game-item-right">
@@ -24,7 +24,7 @@
 import { Vue, Component, Prop, Emit } from "vue-property-decorator"
 @Component
 export default class GameItem extends Vue {
-  // @Prop({ default: {} }) private gameIfor!:Object;
+  @Prop({ default: {} }) private gameIfor!:Object;
   @Emit("goDetailClick") goDetailClick() {}
   @Emit("downHandClick") downHandClick() {}
   private goDetails() {
@@ -59,19 +59,21 @@ export default class GameItem extends Vue {
   }
   .game-tag-list {
     margin-top: 7px;
+     & > .game-tag:not(:last-child) {
+      margin-right: 4px;
+    }
   }
   .game-tag {
     display: inline-block;
-    height: 16px;
-    width: 32px;
     font-size: 12px;
     font-weight: 400;
     color:rgba(145,144,144,1);
-    line-height: 16px;
+    padding: 1px 3px;
     border: 1px solid rgba(145,144,144,1);
     border-radius: 3px;
     text-align: center;
     position: relative;
+    line-height: normal;
   }
   .game-tag::before {
     content: "";
@@ -79,7 +81,7 @@ export default class GameItem extends Vue {
     height: 0px;
     border-right: 16px solid rgba(233, 233, 233, 1);
     border-left: 16px solid transparent;
-    border-top: 12px solid transparent;
+    border-top: 14px solid transparent;
     position: absolute;
     bottom: 0px;
     right: 0px;

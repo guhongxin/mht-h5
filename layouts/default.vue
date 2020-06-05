@@ -13,8 +13,8 @@
           <i class="iconfont iconhome"></i>
         </template>
       </van-tabbar-item>
-      <van-tabbar-item to="/gameCenter">
-        <span>游戏中心</span>
+      <van-tabbar-item to="/service">
+        <span>服务</span>
         <template slot="icon">
           <i class="iconfont icon94"></i>
         </template>
@@ -59,11 +59,11 @@ export default class Default extends Vue {
     let _name:string = route.name
     // @ts-ignore
     var vConsole = new VConsole();
-    let nameArr:Array<string> =  _name.split("-")
+    let nameArr:Array<string> =  _name.split("-");
     this.back = nameArr.length > 1
     let indexObj:any = {
       index: 0,
-      gameCenter: 1,
+      service: 1,
       forum: 2,
       my: 3,
       grid: 0

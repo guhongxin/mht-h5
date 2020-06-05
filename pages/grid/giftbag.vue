@@ -1,6 +1,6 @@
 <template>
   <div class="grid-gift-bag">
-    <Floor :floorTitle="'游戏礼包'" :isMore="false" class="giftbag-floor"></Floor>
+    <Floor :floorTitle="'游戏礼包1'" :isMore="false" class="giftbag-floor"></Floor>
     <div class="tab-menu">
       <van-tabs v-model="active"
         animated
