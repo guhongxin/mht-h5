@@ -9,7 +9,7 @@
     <Floor :floorTitle="'欢乐视频'">
       <div class="happy-videos-box">
         <div class="swiper-container1">
-          <div class="swiper-wrapper">
+          <div class="swiper-wrapper box1">
             <div
               class="swiper-slide"
               v-for="(item, index) in hotVideos"
@@ -34,7 +34,7 @@
     <Floor :floorTitle="'特色活动'">
       <div class="featActiv-box">
         <div class="swiper-container">
-          <div class="swiper-wrapper">
+          <div class="swiper-wrapper box1">
             <div
               class="swiper-slide"
               v-for="(item, index) in hotActivities"
@@ -63,27 +63,13 @@ import { device } from "~/assets/utils/comm.ts"
     HotGameItem,
     CompanyCopyWrit,
     WGrid
-  },
-  async asyncData(context) {
-    let res = await (context as any).$axios({
-      method: "POST",
-      url: "/usr/index/hotActivities"
-    })
-    let hotActivities = res.data.activities
-    let res1 = await (context as any).$axios({
-      method: "POST",
-      url: "/usr/index/hotVideos"
-    })
-    let hotVideos = res1.data.videos
-    return {
-      hotActivities: hotActivities,
-      hotVideos: hotVideos
-    }
   }
 })
 export default class Home extends Vue {
   private carousels:Array<any> = [];
   private games:Array<any> = [];
+  private hotActivities:Array<any> = [];
+  private hotVideos:Array<any> = [];
   private gridOptions: Array<any> = [
     {
       src: "/img/game.png",
@@ -99,22 +85,10 @@ export default class Home extends Vue {
       src: "/img/news.png",
       text: "新闻资讯"
     },
-    // {
-    //   src: "/img/my.png",
-    //   text: "我的"
-    // },
     {
       src: "/img/kbshop.png",
       text: "K币商城"
     },
-    // {
-    //   src: "/img/forum.png",
-    //   text: "论坛"
-    // },
-    // {
-    //   src: "/img/service.png",
-    //   text: "服务"
-    // },
     {
       src: "/img/about.png",
       text: "关于我们"
@@ -164,6 +138,10 @@ export default class Home extends Vue {
     }
   ];
   private mounted() {
+    this.carouselList();
+    this.hotVideoList();
+    this.hotGameList();
+    this.activList();
     // @ts-ignore
     let swiper1 = new Swiper(".swiper-container1", {
       slidesPerView: "auto",
@@ -173,26 +151,29 @@ export default class Home extends Vue {
       observeParents:true
     });
     this.$nextTick(() => {
-      // @ts-ignore
-      let swiper = new Swiper(".swiper-container", {
-        effect: 'coverflow',
-        slidesPerView: "auto",
-        centeredSlides: true,
-        loop: true,
-        observer: true,
-        observeParents:true,
-        coverflowEffect: {
-          rotate: 0,
-          stretch: 10,
-          depth: 60,
-          modifier: 4,
-          slideShadows: false
-        }
-      });
+      setTimeout(() => {
+        // @ts-ignore
+        let swiper = new Swiper(".swiper-container", {
+          effect: 'coverflow',
+          slidesPerView: "auto",
+          centeredSlides: true,
+          loop: true,
+          observer: true,
+          observeParents:true,
+          coverflowEffect: {
+            rotate: 0,
+            stretch: 10,
+            depth: 50,
+            modifier: 4,
+            slideShadows: false
+          }
+        });
+      }, 500)
+      let doc:any = document.querySelector(".box1")
+      setTimeout(() => {
+        doc.style.transform = 'translate3d(0px, 0px, 0px)';
+      }, 100)
     })
-    this.carouselList();
-    // this.hotVideoList();
-    this.hotGameList();
   }
   private gridItemClick(param: any, index: number) {
     if (!param.path) {
@@ -209,6 +190,13 @@ export default class Home extends Vue {
       url: "/usr/index/carousels"
     })
     this.carousels = res.data.carousels
+  }
+  private async hotVideoList() {
+    let res1 = await (this as any).$axios({
+      method: "POST",
+      url: "/usr/index/hotVideos"
+    })
+    this.hotVideos = res1.data.videos
   }
   private async hotGameList() {
     // 游戏
@@ -229,6 +217,14 @@ export default class Home extends Vue {
       total.push(obj)
       return total
     }, [])
+  }
+  private async activList() {
+    // 游戏
+    let res = await (this as any).$axios({
+      method: "POST",
+      url: "/usr/index/hotActivities"
+    })
+    this.hotActivities = res.data.activities
   }
 }
 </script>

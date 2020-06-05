@@ -2,10 +2,8 @@
 import { Dialog, Toast } from 'vant';
 export default function ({store, redirect, app: { $axios }})  {
   // 数据访问前缀
-	// $axios.setBaseURL(process.env.BASE_URL);
 	$axios.defaults.baseURL = process.env.BASE_URL
-	$axios.defaults.timeout = 1000
-  // $axios.setTimeOut(10);
+	$axios.defaults.timeout = 10000
 	// request拦截器，我这里设置了一个token，当然你可以不要
 	$axios.onRequest(config => {
 		Toast.loading({
@@ -13,10 +11,12 @@ export default function ({store, redirect, app: { $axios }})  {
 			forbidClick: true,
 			message: '加载中',
 		});
+		config.headers["jwasdadsasdwasdasdt"] = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHBpcmVUaW1lIjoxNTkzNzYwODQ2ODA0LCJ1c2VySWQiOjEyMzEyMzEyM30.GZRwiKl_V0emjG2bjX0nNVo_V_U4SE-XcFMIWebVmnk"
+		console.log("===", config)
+		return config
 	})
 	$axios.onError(error => {
 		let res = error.response;
-		console.log("res", res);
 		Toast.clear();
 		if (res.status === 400) {
 			Dialog({ message: '请求参数不对！' });

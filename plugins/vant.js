@@ -1,5 +1,6 @@
 import Vue from "vue";
 import 'vant/lib/index.css';
+import { customFormat } from "~/assets/utils/comm.ts"
 import {
   Tabbar,
   TabbarItem,
@@ -31,4 +32,5 @@ Vue.use(Tab);
 Vue.use(Tabs);
 Vue.use(Dialog);
 Vue.use(Toast);
+Vue.prototype.$customFormat = customFormat
 

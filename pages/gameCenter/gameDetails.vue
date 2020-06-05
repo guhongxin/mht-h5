@@ -37,14 +37,14 @@
     </div>
     <Floor :floorTitle="'游戏截图'" :isMore="false" class="detail-floor">
       <div class="game-gift-bag">
-        <div class="swiper-container">
-          <div class="swiper-wrapper">
+        <div class="swiper-container" >
+          <div class="swiper-wrapper box1" >
             <div
               class="swiper-slide"
-              v-for="(item, index) in giftBagOptions"
+              v-for="(item, index) in images"
               :key="index"
             >
-              <img :src="item.src" />
+              <img :src="item" />
             </div>
           </div>
         </div>
@@ -52,8 +52,9 @@
     </Floor>
     <Floor :floorTitle="'欢乐视频'" :isMore="false" class="detail-floor">
       <div class="hl-video">
-        <img src="/img/game-detail-2.png">
-        <img src="/img/game-detail-1.png">
+        <img v-for="(item, index) in videos"
+          :src="item.coverUrl"  
+          :key="index">
       </div>
     </Floor>
     <CompanyCopyWrit></CompanyCopyWrit>
@@ -83,27 +84,31 @@ export default class GameDetails extends Vue {
     tags: [],
     size: ""
   };
-  private giftBagOptions:Array<any> = [
-    {
-      src: "/img/game-detail-2.png"
-    },
-    {
-      src: "/img/game-detail-1.png"
-    }
-  ];
+  // 视频
+  private videos:Array<any> = [];
+  //截图
+  private images:Array<any> = [];
   // 详情id
   private id:number = 0;
   private mounted() {
     // 生命周期
-    // @ts-ignore
-    let mySwiper = new Swiper('.swiper-container', {
-      slidesPerView: "auto",
-      spaceBetween: -14
-    })
     // 获取id
     let route:any = this.$route
     this.id = route.query.id
     this.gameDetail();
+    this.$nextTick(() => {
+      // @ts-ignore
+      let mySwiper = new Swiper('.swiper-container', {
+        slidesPerView: "auto",
+        spaceBetween: -14,
+        observer: true,
+        observeParents:true
+      })
+      let doc:any = document.querySelector(".box1")
+      setTimeout(() => {
+        doc.style.transform = 'translate3d(0px, 0px, 0px)';
+      }, 100)
+    })
   }
   private async gameDetail() {
     // 游戏详情
@@ -119,7 +124,14 @@ export default class GameDetails extends Vue {
     let obj = Object.assign({}, res.data);
     obj.downUrl = res.data.downloads[deviceType].url;
     obj.size = (res.data.downloads[deviceType].size / 1024 / 1024).toFixed(2);
-    this.gameInfor = obj;
+    this.gameInfor = {
+      iconUrl: obj.iconUrl,
+      name: obj.name,
+      tags: obj.tags,
+      size: obj.size
+    };
+    this.videos = obj.videos.slice(0, 2);
+    this.images = obj.images;
     console.log(this.gameInfor);
   }
   private downHandClick(param:any) {

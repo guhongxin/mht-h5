@@ -10,11 +10,11 @@
         :border="false">
         <van-tab title="全部">
           <div class="gift-bag-list">
-            <GridgiftbagItem :bjUlr="'/img/grid-giftbag1.png'" class="gift-bag-list-item"></GridgiftbagItem>
-            <GridgiftbagItem :bjUlr="'/img/grid-giftbag2.png'" class="gift-bag-list-item"></GridgiftbagItem>
-            <GridgiftbagItem :bjUlr="'/img/grid-giftbag1.png'" class="gift-bag-list-item"></GridgiftbagItem>
-            <GridgiftbagItem :bjUlr="'/img/grid-giftbag2.png'" class="gift-bag-list-item"></GridgiftbagItem>
-            <GridgiftbagItem :bjUlr="'/img/grid-giftbag1.png'" class="gift-bag-list-item"></GridgiftbagItem>
+            <GridgiftbagItem
+              v-for="(item, index) in boxesList"
+              :key="index"
+              :bjUlr="item.iamgeUrl" class="gift-bag-list-item"></GridgiftbagItem>
+        
           </div>
         </van-tab>
         <van-tab title="末日血战"></van-tab>
@@ -30,6 +30,11 @@ import { Vue, Component } from "vue-property-decorator"
 import CompanyCopyWrit from "~/components/CompanyCopyWrit.vue"
 import Floor from "~/components/Floor.vue";
 import GridgiftbagItem from "~/components/GridgiftbagItem.vue";
+// 接口
+interface Page {
+  cur: number, // 当前页
+  size: number // 每页显示条数
+}
 @Component({
   components: {
     Floor,
@@ -39,6 +44,26 @@ import GridgiftbagItem from "~/components/GridgiftbagItem.vue";
 })
 export default class gridgiftbag extends Vue {
   private active:number = 0
+  private boxesList:Array<any> = []
+  private page:Page = {
+    cur: 1,
+    size: 10 
+  };
+  private mounted() {
+    // 生命周期
+    this.giftCodeBoxList();
+  }
+  private async giftCodeBoxList() {
+    // 请求列表
+    let res = await (this as any).$axios({
+      method: "POST",
+      url: "/usr/giftcode/listGiftCodeBox",
+      data: {
+        page: this.page
+      }
+    })
+    this.boxesList = res.data.boxes
+  }
 }
 </script>
 <style lang="scss" scoped>

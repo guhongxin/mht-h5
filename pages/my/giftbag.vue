@@ -9,10 +9,9 @@
         :border="false">
         <van-tab title="全部">
           <div class="my-gift-bag-list">
-            <MygiftbagItem class="my-gift-bag-list-item"></MygiftbagItem>
-            <MygiftbagItem class="my-gift-bag-list-item" :disabled="true"></MygiftbagItem>
-            <MygiftbagItem class="my-gift-bag-list-item"></MygiftbagItem>
-            <MygiftbagItem class="my-gift-bag-list-item"></MygiftbagItem>
+            <MygiftbagItem class="my-gift-bag-list-item"
+              v-for="(item, index) in giftList" :key="index"
+              :giftCodes="item"></MygiftbagItem>
           </div>
         </van-tab>
         <van-tab title="末日血战"></van-tab>
@@ -28,6 +27,11 @@ import { Vue, Component } from "vue-property-decorator"
 import Floor from "~/components/Floor.vue"
 import CompanyCopyWrit from "~/components/CompanyCopyWrit.vue"
 import MygiftbagItem from "~/components/MygiftbagItem.vue"
+// 接口
+interface Page {
+  cur: number, // 当前页
+  size: number // 每页显示条数
+}
 @Component({
   components: {
     Floor,
@@ -37,6 +41,27 @@ import MygiftbagItem from "~/components/MygiftbagItem.vue"
 })
 export default class MyGiftBag extends Vue {
   private active:number = 0
+  private giftList:Array<any> = []; // 礼包列表
+  private page:Page = {
+    cur: 1,
+    size: 10 
+  };
+  private mounted() {
+    // 生命周期
+    this.myGiftList();
+  }
+  private async myGiftList() {
+    // 我的礼包列表
+    let res = await (this as any).$axios({
+      method: "POST",
+      url: "/usr/giftcode/listMyGiftCode",
+      data: {
+        page: this.page
+      }
+    })
+    console.log("----", res)
+    this.giftList = res.data.giftCodes
+  }
 }
 </script>
 <style lang="scss" scoped>

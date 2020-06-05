@@ -1,14 +1,14 @@
 <template>
   <div class="my-giftbag-item">
     <div class="my-giftbag-item-left">
-      <img src="/img/rmgame.png" />
+      <img :src="giftCodes.iconUrl" />
     </div>
     <div class="my-gittbag-item-middle">
       <div class="gittbag-name"> 
-        末日血战 <span class="jp-name">新手礼包</span>                    
+        {{giftCodes.gameName}} <span class="jp-name">{{giftCodes.giftCodeBoxName}}</span>                    
       </div>
-      <div class="termofvalidity">有效期至:<span>2020.5.31 24:00</span></div>
-      <div class="code">礼包码:<span>joj32u4398uf</span></div>
+      <div class="termofvalidity">有效期至:<span>{{$customFormat(giftCodes.expireTime, "yyyy-MM-dd hh:mm:ss")}}</span></div>
+      <div class="code">礼包码:<span>{{giftCodes.gameName}}</span></div>
     </div>
     <div class="my-gittbag-item-right">
       <div class="copyCodeBtn"
@@ -20,7 +20,10 @@
 import { Vue, Component, Prop} from "vue-property-decorator"
 @Component
 export default class MygiftbagItem extends Vue {
-  @Prop({default: false }) disabled!:boolean
+  @Prop({ default: false }) disabled!:boolean
+  @Prop({ default: function() {
+    return {}
+  }}) giftCodes!:any
 }
 </script>
 <style lang="scss" scoped>
