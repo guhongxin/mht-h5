@@ -11,17 +11,22 @@ export default function ({store, redirect, app: { $axios }})  {
 			forbidClick: true,
 			message: '加载中',
 		});
-		config.headers["jwasdadsasdwasdasdt"] = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHBpcmVUaW1lIjoxNTkzNzYwODQ2ODA0LCJ1c2VySWQiOjEyMzEyMzEyM30.GZRwiKl_V0emjG2bjX0nNVo_V_U4SE-XcFMIWebVmnk"
+		config.headers["jwt"] = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHBpcmVUaW1lIjoxNTkzNzYwODQ2ODA0LCJ1c2VySWQiOjEyMzEyMzEyM30.GZRwiKl_V0emjG2bjX0nNVo_V_U4SE-XcFMIWebVmnk"
 		console.log("===", config)
 		return config
 	})
 	$axios.onError(error => {
 		let res = error.response;
 		Toast.clear();
-		if (res.status === 400) {
-			Dialog({ message: '请求参数不对！' });
-		} else if (res.status === 500)  {
-			Dialog({ message: '后端报错！' });
+		console.log(res);
+		if (res) {
+			if (res.status === 400) {
+				Dialog({ message: '请求参数不对！' });
+			} else if (res.status === 500)  {
+				Dialog({ message: '后端报错！' });
+			}
+		} else {
+			Dialog({ message: '请求无响应！' });
 		}
 	})
 	// response拦截器，数据返回后，你可以先在这里进行一个简单的判断
