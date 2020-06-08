@@ -1,7 +1,7 @@
 <template>
   <div class="home">
     <van-swipe class="my-swipe" :autoplay="3000" indicator-color="white">
-      <van-swipe-item v-for="(item, index) in carousels" :key="index">
+      <van-swipe-item v-for="(item, index) in carousels" :key="index" @click="swipeItemClick(item)">
         <img :src="item.imageUrl" />
       </van-swipe-item>
     </van-swipe>
@@ -14,6 +14,7 @@
               class="swiper-slide"
               v-for="(item, index) in hotVideos"
               :key="index"
+              @click="hotVideosClick(item)"
             >
               <img :src="item.coverUrl" />
             </div>
@@ -94,62 +95,12 @@ export default class Home extends Vue {
       text: "关于我们"
     }
   ];
-  private hotgameOptions: Array<any> = [
-    {
-      src: "/img/rmgame.png",
-      name: "末日血战",
-      size: "200M",
-      tag: "末日废土"
-    },
-    {
-      src: "/img/rmgame.png",
-      name: "塔防纪元",
-      size: "200M",
-      tag: "策略塔防"
-    },
-    {
-      src: "/img/rmgame.png",
-      name: "末日血战",
-      size: "200M",
-      tag: "末日废土"
-    },
-    {
-      src: "/img/rmgame.png",
-      name: "塔防纪元",
-      size: "200M",
-      tag: "策略塔防"
-    }
-  ];
-  private featActivOptions: Array<any> = [
-    {
-      imageUrl: "/img/1.png"
-    },
-    {
-      imageUrl: "/img/2.png"
-    },
-    {
-      imageUrl: "/img/1.png"
-    },
-    {
-      imageUrl: "/img/1.png"
-    },
-    {
-      imageUrl: "/img/1.png"
-    }
-  ];
   private mounted() {
     this.carouselList();
     this.hotVideoList();
     this.hotGameList();
     this.activList();
-    // @ts-ignore
-    let swiper1 = new Swiper(".swiper-container1", {
-      slidesPerView: "auto",
-      centeredSlides: false,
-      spaceBetween: 6,
-      observer: true,
-      observeParents:true
-    });
+   
     this.$nextTick(() => {
       setTimeout(() => {
         // @ts-ignore
@@ -168,14 +119,19 @@ export default class Home extends Vue {
             slideShadows: false
           }
         });
+        // @ts-ignore
+        let swiper1 = new Swiper(".swiper-container1", {
+          slidesPerView: "auto",
+          centeredSlides: false,
+          spaceBetween: 6,
+          observer: true,
+          observeParents:true
+        });
       }, 500)
-      let doc:any = document.querySelector(".box1")
-      setTimeout(() => {
-        doc.style.transform = 'translate3d(0px, 0px, 0px)';
-      }, 100)
     })
   }
   private gridItemClick(param: any, index: number) {
+    // 点击九宫格
     if (!param.path) {
       (this as any).$dialog.alert({
         message: '该功能暂未开启'
@@ -192,6 +148,7 @@ export default class Home extends Vue {
     this.carousels = res.data.carousels
   }
   private async hotVideoList() {
+    // 热门视频
     let res1 = await (this as any).$axios({
       method: "POST",
       url: "/usr/index/hotVideos"
@@ -219,12 +176,20 @@ export default class Home extends Vue {
     }, [])
   }
   private async activList() {
-    // 游戏
+    // 活动
     let res = await (this as any).$axios({
       method: "POST",
       url: "/usr/index/hotActivities"
     })
     this.hotActivities = res.data.activities
+  }
+  private swipeItemClick(param:any) {
+    // 点击轮播
+    window.location.href = param.url
+  }
+  private hotVideosClick(param:any) {
+    // 热门视频
+    console.log("---", param)
   }
 }
 </script>
