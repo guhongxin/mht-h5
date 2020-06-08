@@ -75,7 +75,7 @@ export default class Login extends Vue {
     }).then((res:any) => {
       let data = res.data;
       //设置token
-      setToken(data.token);
+      setToken(data.token, { expires: 2 });
       this.btnLoading = false;
       (this as any).$router.push({ path: "/" });
     }).catch(() => {

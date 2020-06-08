@@ -6,6 +6,6 @@ export function getToken() {
   return Cookies.get(TOKEN_KEY);
 }
 // 设置token
-export function setToken(token) {
-  return Cookies.set(TOKEN_KEY, token);
+export function setToken(token, options) {
+  return Cookies.set(TOKEN_KEY, token, options);
 }

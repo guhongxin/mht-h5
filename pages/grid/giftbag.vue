@@ -92,7 +92,7 @@ export default class gridgiftbag extends Vue {
 </script>
 <style lang="scss" scoped>
 .grid-gift-bag {
-  margin-top: 5px;
+  margin-top: 15px;
   padding: 0px 15px;
   box-sizing: border-box;
 }
