@@ -1,6 +1,6 @@
 <template>
   <div class="grid-gift-bag">
-    <Floor :floorTitle="'游戏礼包1'" :isMore="false" class="giftbag-floor"></Floor>
+    <Floor :floorTitle="'游戏礼包'" :isMore="false" class="giftbag-floor"></Floor>
     <div class="tab-menu">
       <van-tabs v-model="active"
         animated
@@ -13,8 +13,8 @@
             <GridgiftbagItem
               v-for="(item, index) in boxesList"
               :key="index"
-              :bjUlr="item.iamgeUrl" class="gift-bag-list-item"></GridgiftbagItem>
-        
+              :bjUlr="item.imageUrl" class="gift-bag-list-item"
+              @receiveClick="receiveClick(item)"></GridgiftbagItem>
           </div>
         </van-tab>
         <van-tab title="末日血战"></van-tab>
@@ -23,6 +23,7 @@
       </van-tabs>
     </div>
     <!-- <CompanyCopyWrit></CompanyCopyWrit> -->
+    <ReceiveDailog ref="receiveDailogDoc"></ReceiveDailog>
   </div>
 </template>
 <script lang="ts">
@@ -30,6 +31,7 @@ import { Vue, Component } from "vue-property-decorator"
 import CompanyCopyWrit from "~/components/CompanyCopyWrit.vue"
 import Floor from "~/components/Floor.vue";
 import GridgiftbagItem from "~/components/GridgiftbagItem.vue";
+import ReceiveDailog from "~/components/ReceiveDailog.vue";
 // 接口
 interface Page {
   cur: number, // 当前页
@@ -39,7 +41,8 @@ interface Page {
   components: {
     Floor,
     CompanyCopyWrit,
-    GridgiftbagItem
+    GridgiftbagItem,
+    ReceiveDailog
   }
 })
 export default class gridgiftbag extends Vue {
@@ -63,6 +66,19 @@ export default class gridgiftbag extends Vue {
       }
     })
     this.boxesList = res.data.boxes
+  }
+  private receiveClick(param:any) {
+    (this as any).$axios({
+      method: "POST",
+      url: "/usr/giftcode/receiveGiftCode",
+      data: {
+        giftCodeBoxId: param.id
+      }
+    }).then((res:any) => {
+      let data = res.data;
+      console.log(data);
+      (this.$refs.receiveDailogDoc as any).showModule(data);
+    })
   }
 }
 </script>

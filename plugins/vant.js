@@ -15,7 +15,11 @@ import {
   Tab,
   Tabs,
   Dialog,
-  Toast
+  Toast,
+  Form,
+  Field,
+  Button,
+  Overlay
 } from 'vant';
 
 Vue.use(Tabbar);
@@ -32,5 +36,10 @@ Vue.use(Tab);
 Vue.use(Tabs);
 Vue.use(Dialog);
 Vue.use(Toast);
+Vue.use(Form);
+Vue.use(Field);
+Vue.use(Button);
+Vue.use(Overlay);
+
 Vue.prototype.$customFormat = customFormat
 

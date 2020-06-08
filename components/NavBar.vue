@@ -39,7 +39,7 @@ export default class NavBar extends Vue{
   justify-content: space-between;
   align-items: center;
   padding: 14px;
-  z-index: 100;
+  z-index: 2;
   box-shadow: 2px 2px 5px #cccccc;
 }
 .fixed {

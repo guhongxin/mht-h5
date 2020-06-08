@@ -1,6 +1,6 @@
 <template>
   <div class="grid-giftbag-item" :style="{background: `url(${bjUlr}) no-repeat center`, backgroundSize: 'contain'}">
-    <div class="receiveBtn" >领取</div>
+    <div class="receiveBtn" @click="receiveBtn">领取</div>
   </div>
 </template>
 <script lang="ts">
@@ -8,7 +8,10 @@ import { Vue, Component, Prop } from "vue-property-decorator"
 @Component
 export default class  GridgiftbagItem extends Vue{
   @Prop({ default: "" }) bjUlr!:string
-  @Prop({ default: false }) disabled!:boolean 
+  @Prop({ default: false }) disabled!:boolean
+  private receiveBtn() {
+    this.$emit("receiveClick")
+  }
 }
 </script>
 <style lang="scss" scoped>

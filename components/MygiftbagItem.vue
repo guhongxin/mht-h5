@@ -7,8 +7,8 @@
       <div class="gittbag-name"> 
         {{giftCodes.gameName}} <span class="jp-name">{{giftCodes.giftCodeBoxName}}</span>                    
       </div>
-      <div class="termofvalidity">有效期至:<span>{{$customFormat(giftCodes.expireTime, "yyyy-MM-dd hh:mm:ss")}}</span></div>
-      <div class="code">礼包码:<span>{{giftCodes.gameName}}</span></div>
+      <div class="termofvalidity">有效期至:<span>{{$customFormat(giftCodes.expireTime, "yyyy-MM-dd")}}</span></div>
+      <div class="code">礼包码:<span>{{giftCodes.code}}</span></div>
     </div>
     <div class="my-gittbag-item-right">
       <div class="copyCodeBtn"
