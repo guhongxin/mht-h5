@@ -123,7 +123,7 @@ export default class GameDetails extends Vue {
     console.log(res);
     let obj = Object.assign({}, res.data);
     obj.downUrl = res.data.downloads[deviceType].url;
-    obj.size = (res.data.downloads[deviceType].size / 1024 / 1024).toFixed(2);
+    obj.size = res.data.downloads[deviceType].size;
     this.gameInfor = {
       iconUrl: obj.iconUrl,
       name: obj.name,

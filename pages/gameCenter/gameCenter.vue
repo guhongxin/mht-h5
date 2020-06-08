@@ -92,7 +92,7 @@ export default class GameCenter extends Vue {
         name: item.name,
         iconUrl: item.iconUrl,
         downUrl: item.downloads[deviceType].url,
-        size: (item.downloads[deviceType].size / 1024 / 1024).toFixed(2),
+        size: item.downloads[deviceType].size,
         installCount: item.installCount,
         tags: item.tags
       }

@@ -116,9 +116,18 @@ export default class My extends Vue {
       justify-content: space-between;
       align-items: center;
       .user-name {
-        font-size: 16px;
+        font-size: 18px;
         color: #1A1A1A;
         font-weight: bold;
+        .user-level {
+          display: inline-block;
+          font-size: 12px;
+          color: #fff;
+          background: linear-gradient(-90deg,rgba(69,151,67,1),rgba(125,179,73,1));
+          padding: 2px 4px;
+          border-radius: 4px;
+          margin-left: 5px;
+        }
       }
       .edit-user {
         font-size: 14px;
@@ -130,13 +139,11 @@ export default class My extends Vue {
       font-size: 11px;
       font-weight: 400;
       color: #1A1A1A;
-      margin-top: 5px;
     }
     .k-coin {
       font-size: 10px;
       font-weight: bold;
       color: rgba(153,153,153,1);
-      margin-top: 5px;
     }
   }
 }
@@ -166,7 +173,7 @@ export default class My extends Vue {
       .progress-pivot {
         display: inline-block;
         position: absolute;;
-        font-size: 8px;
+        font-size: 12px;
         font-family: Microsoft YaHei;
         font-weight:bold;
         font-style:italic;

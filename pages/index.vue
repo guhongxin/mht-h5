@@ -169,7 +169,7 @@ export default class Home extends Vue {
         name: item.name,
         iconUrl: item.iconUrl,
         downUrl: item.downloads[deviceType].url,
-        size: (item.downloads[deviceType].size / 1024 / 1024).toFixed(2)
+        size: item.downloads[deviceType].size
       }
       total.push(obj)
       return total
@@ -201,6 +201,7 @@ export default class Home extends Vue {
   background-color: #39a9ed;
   img {
     height: 220px;
+    width: 100%;
   }
 }
 .van-grid-icon {

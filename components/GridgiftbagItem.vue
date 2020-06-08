@@ -1,5 +1,5 @@
 <template>
-  <div class="grid-giftbag-item" :style="{background: `url(${bjUlr}) no-repeat center`, backgroundSize: 'contain'}">
+  <div class="grid-giftbag-item" :style="{background: `url(${bjUlr}) no-repeat center`, backgroundSize: 'cover'}">
     <div class="receiveBtn" 
       :class="[ disabled ? 'disableBtn' : 'enableBtn']"
      @click="receiveBtn">{{ disabled ? "已领取": "领取" }}</div>
