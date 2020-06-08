@@ -1,6 +1,8 @@
 <template>
   <div class="grid-giftbag-item" :style="{background: `url(${bjUlr}) no-repeat center`, backgroundSize: 'contain'}">
-    <div class="receiveBtn" @click="receiveBtn">领取</div>
+    <div class="receiveBtn" 
+      :class="[ disabled ? 'disableBtn' : 'enableBtn']"
+     @click="receiveBtn">{{ disabled ? "已领取": "领取" }}</div>
   </div>
 </template>
 <script lang="ts">
@@ -10,6 +12,9 @@ export default class  GridgiftbagItem extends Vue{
   @Prop({ default: "" }) bjUlr!:string
   @Prop({ default: false }) disabled!:boolean
   private receiveBtn() {
+    if (this.disabled) {
+      return false
+    }
     this.$emit("receiveClick")
   }
 }
@@ -23,7 +28,6 @@ export default class  GridgiftbagItem extends Vue{
     display: inline;
     right: 18px;
     bottom: 6px;
-    background:linear-gradient(0deg,rgba(69,151,67,1),rgba(125,179,73,1));
     border-radius: 22px;
     font-size: 12px;
     font-weight: bold;
@@ -31,6 +35,12 @@ export default class  GridgiftbagItem extends Vue{
     line-height: normal;
     padding: 5px 15px;
     color: #ffffff;
+  }
+  .enableBtn {
+    background:linear-gradient(0deg,rgba(69,151,67,1),rgba(125,179,73,1));
+  }
+  .disableBtn {
+    background-color: #727272;
   }
 }
 </style>

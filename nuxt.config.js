@@ -48,7 +48,8 @@ module.exports = {
   ** Nuxt.js modules
   */
   modules: [
-    '@nuxtjs/axios'
+    '@nuxtjs/axios',
+    'js-cookie'
   ],
   /*
   ** Build configuration

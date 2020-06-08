@@ -19,7 +19,8 @@ import {
   Form,
   Field,
   Button,
-  Overlay
+  Overlay,
+  Empty
 } from 'vant';
 
 Vue.use(Tabbar);
@@ -40,6 +41,7 @@ Vue.use(Form);
 Vue.use(Field);
 Vue.use(Button);
 Vue.use(Overlay);
+Vue.use(Empty);
 
 Vue.prototype.$customFormat = customFormat
 

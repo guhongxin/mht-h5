@@ -12,7 +12,7 @@
     </div>
     <div class="my-gittbag-item-right">
       <div class="copyCodeBtn"
-        :class="[ disabled ? 'disableBtn' : 'enableBtn']">复制兑换码</div>
+        :class="[ disabled ? 'disableBtn' : 'enableBtn']" @click="copyCode">复制兑换码</div>
     </div>
   </div>
 </template>
@@ -24,6 +24,17 @@ export default class MygiftbagItem extends Vue {
   @Prop({ default: function() {
     return {}
   }}) giftCodes!:any
+  private copyCode() {
+    const input = document.createElement('input');
+    document.body.appendChild(input);
+    input.setAttribute('value', this.giftCodes.code);
+    input.select();
+    if (document.execCommand('copy')) {
+      document.execCommand('copy');
+      (this as any).$toast.success('复制成功');
+    }
+    document.body.removeChild(input);
+  }
 }
 </script>
 <style lang="scss" scoped>

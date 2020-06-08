@@ -40,7 +40,6 @@ export default class ReceiveDailog extends Vue {
       code: param.code,
       expireTime: param.expireTime
     }
-    console.log("param", param);
     this.show = true
   }
   private closeClick() {
@@ -111,13 +110,14 @@ export default class ReceiveDailog extends Vue {
     .block-footer-right {
       .span-btn {
         background:linear-gradient(0deg,rgba(69,151,67,1),rgba(125,179,73,1));
-        border-radius: 22px;
-        font-size: 12px;
-        font-weight: bold;
-        text-align: center;
+        font-size: 14px;
+        font-weight:bold;
+        color:#ffffff;
         line-height: normal;
-        padding: 5px 15px;
-        color: #ffffff;
+        padding: 5px 0px;
+        box-sizing: border-box;
+        text-align: center;
+        border-radius:24px;
       }
     }
   }

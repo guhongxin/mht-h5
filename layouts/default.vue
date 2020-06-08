@@ -1,6 +1,7 @@
 <template>
   <div class="layout">
-    <nav-bar :fixed="true" @searchClick="searchClick" :back="back"></nav-bar>
+    <nav-bar :fixed="true" @searchClick="searchClick" :back="back"
+      @userImageClick="userImageClick"></nav-bar>
     <div class="main">
       <nuxt />
     </div>
@@ -68,9 +69,15 @@ export default class Default extends Vue {
       my: 3,
       grid: 0
     }
-    console.log("indexObj[nameArr[0]]", indexObj[nameArr[0]]);
     return indexObj[nameArr[0]]
-  } 
+  }
+  // 点击用户图片
+  userImageClick() {
+    // 获取token是否存在，不存在跳转到登录界面，存在进入我的页面
+    this.$router.push({
+      name: "my"
+    })
+  }
 }
 </script>
 <style lang="scss" scoped>

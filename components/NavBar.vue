@@ -8,7 +8,7 @@
       <input :value="value" type="text" class="input-text" @change="searchText"/>
       <van-icon name="search" class="search-icon"/>
     </div>
-    <img src="/img/user.png" class="user-img"/>
+    <img src="/img/user.png" class="user-img" @click="userImageHand"/>
   </div>
 </template>
 <script lang="ts">
@@ -26,6 +26,10 @@ export default class NavBar extends Vue{
   }
   private goBack() {
     this.$router.go(-1)
+  }
+  private userImageHand() {
+    // 点击用户图片
+    this.$emit("userImageClick")
   }
 }
 </script>

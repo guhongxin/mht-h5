@@ -9,17 +9,25 @@
         :line-width="15"
         :border="false">
         <van-tab title="全部">
-          <div class="gift-bag-list">
+          <div class="gift-bag-list" v-if="boxesList.length>0">
             <GridgiftbagItem
               v-for="(item, index) in boxesList"
               :key="index"
               :bjUlr="item.imageUrl" class="gift-bag-list-item"
+              :disabled="item.got"
               @receiveClick="receiveClick(item)"></GridgiftbagItem>
           </div>
+          <van-empty description="暂无数据" v-else />
         </van-tab>
-        <van-tab title="末日血战"></van-tab>
-        <van-tab title="作妖计"></van-tab>
-        <van-tab title="塔防纪元"></van-tab>
+        <van-tab title="末日血战">
+          <van-empty description="暂无数据" />
+        </van-tab>
+        <van-tab title="作妖计">
+          <van-empty description="暂无数据" />
+        </van-tab>
+        <van-tab title="塔防纪元">
+          <van-empty description="暂无数据" />
+        </van-tab>
       </van-tabs>
     </div>
     <!-- <CompanyCopyWrit></CompanyCopyWrit> -->
@@ -38,6 +46,7 @@ interface Page {
   size: number // 每页显示条数
 }
 @Component({
+  middleware: "redirectLogin",
   components: {
     Floor,
     CompanyCopyWrit,
@@ -76,7 +85,6 @@ export default class gridgiftbag extends Vue {
       }
     }).then((res:any) => {
       let data = res.data;
-      console.log(data);
       (this.$refs.receiveDailogDoc as any).showModule(data);
     })
   }

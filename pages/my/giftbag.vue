@@ -8,15 +8,22 @@
         :line-width="15"
         :border="false">
         <van-tab title="全部">
-          <div class="my-gift-bag-list">
+          <div class="my-gift-bag-list" v-if="giftList.length > 0">
             <MygiftbagItem class="my-gift-bag-list-item"
               v-for="(item, index) in giftList" :key="index"
               :giftCodes="item"></MygiftbagItem>
           </div>
+          <van-empty description="暂无数据" v-else />
         </van-tab>
-        <van-tab title="末日血战"></van-tab>
-        <van-tab title="作妖计"></van-tab>
-        <van-tab title="塔防纪元"></van-tab>
+        <van-tab title="末日血战">
+          <van-empty description="暂无数据" />
+        </van-tab>
+        <van-tab title="作妖计">
+          <van-empty description="暂无数据" />
+        </van-tab>
+        <van-tab title="塔防纪元">
+          <van-empty description="暂无数据" />
+        </van-tab>
       </van-tabs>
     </div>
     <CompanyCopyWrit></CompanyCopyWrit>

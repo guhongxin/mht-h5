@@ -1,18 +1,20 @@
 
 import { Dialog, Toast } from 'vant';
+import { getToken } from "~/assets/utils/auth.js"
 export default function ({store, redirect, app: { $axios }})  {
   // 数据访问前缀
 	$axios.defaults.baseURL = process.env.BASE_URL
 	$axios.defaults.timeout = 10000
 	// request拦截器，我这里设置了一个token，当然你可以不要
 	$axios.onRequest(config => {
+		if (getToken()) {
+			config.headers["jwt"] = getToken();
+		}
 		Toast.loading({
 			duration: 0, // 持续展示 toast
 			forbidClick: true,
 			message: '加载中',
 		});
-		config.headers["jwt"] = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHBpcmVUaW1lIjoxNTkzNzYwODQ2ODA0LCJ1c2VySWQiOjEyMzEyMzEyM30.GZRwiKl_V0emjG2bjX0nNVo_V_U4SE-XcFMIWebVmnk"
-		console.log("===", config)
 		return config
 	})
 	$axios.onError(error => {

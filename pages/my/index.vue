@@ -80,7 +80,8 @@ import CompanyCopyWrit from "~/components/CompanyCopyWrit.vue"
 @Component({
   components: {
     CompanyCopyWrit
-  }
+  },
+  middleware: "redirectLogin"
 })
 export default class My extends Vue {
   private goMyGiftBag():void {
