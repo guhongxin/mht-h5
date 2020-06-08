@@ -20,7 +20,7 @@ export default function ({store, redirect, app: { $axios }})  {
 	$axios.onError(error => {
 		let res = error.response;
 		Toast.clear();
-		console.log(res);
+		
 		if (res) {
 			if (res.status === 400) {
 				Dialog({ message: '请求参数不对！' });
@@ -35,6 +35,12 @@ export default function ({store, redirect, app: { $axios }})  {
   $axios.interceptors.response.use(response => {
 		let data = response.data;
 		Toast.clear();
-    return data
+		return new Promise((resolve, reject) => {
+			if (data.code !== 0) {
+				Dialog({ message: data.msg });
+			} else {
+				return resolve(data)
+			}
+		})
 	})
 }

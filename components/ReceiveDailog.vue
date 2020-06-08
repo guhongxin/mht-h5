@@ -108,7 +108,10 @@ export default class ReceiveDailog extends Vue {
       flex: 2;
     }
     .block-footer-right {
+      flex: 1;
       .span-btn {
+        width: 100%;
+        display: inline-block;
         background:linear-gradient(0deg,rgba(69,151,67,1),rgba(125,179,73,1));
         font-size: 14px;
         font-weight:bold;

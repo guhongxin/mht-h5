@@ -24,8 +24,8 @@ export default class HotGameItem extends Vue {
   justify-content: center;
   font-size: 12px;
   .game-icon {
-    height: 63px;
-    width: 63px;
+    height: 68px;
+    width: 68px;
   }
   .game-name {
     font-size: 12px;
