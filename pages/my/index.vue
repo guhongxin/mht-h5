@@ -26,20 +26,20 @@
     <div class="list-view">
       <div class="list-item">
         <div class="list-item-left">
-          <i class="iconfont iconmydata"></i>
+          <i class="my-infor"></i>
           <span>我的资料</span>
         </div>
       </div>
       <div class="list-item">
         <div class="list-item-left">
-          <i class="iconfont iconxiaoxi"></i>
+          <i class="my-xx"></i>
           <span>我的消息</span>
         </div>
         <div class="list-item-right">2</div>
       </div>
       <div class="list-item">
         <div class="list-item-left">
-          <i class="iconfont icon94"></i>
+          <i class="my-game"></i>
           <span>我的游戏</span>
         </div>
         <div class="list-item-right">
@@ -48,14 +48,14 @@
       </div>
       <div class="list-item" @click="goMyGiftBag">
         <div class="list-item-left">
-          <i class="iconfont iconlibao"></i>
+          <i class="my-gift"></i>
           <span>我的礼包</span>
         </div>
         <div class="list-item-right">2</div>
       </div>
       <div class="list-item">
         <div class="list-item-left">
-          <i class="iconfont iconqian"></i>
+          <i class="my-kb"></i>
           <span>赚取K币</span>
         </div>
         <div class="list-item-right">
@@ -197,8 +197,15 @@ export default class My extends Vue {
     align-items: center;
     .list-item-left {
       i {
-        font-size: 20px;
         margin-right: 10px;
+        vertical-align: middle;
+        height: 20px;
+        width: 20px;
+        display: inline-block;
+        background-size: contain;
+        vertical-align: middle;
+      }
+      span {
         vertical-align: middle;
       }
     }
@@ -230,5 +237,20 @@ export default class My extends Vue {
     color: #595959;
     text-align: center;
   }
+}
+.my-infor {
+  background: url("/img/my2.png") no-repeat center;
+}
+.my-xx {
+  background: url("/img/my3.png") no-repeat center;
+}
+.my-game {
+  background: url("/img/my4.png") no-repeat center;
+}
+.my-gift {
+  background: url("/img/my5.png") no-repeat center;
+}
+.my-kb {
+  background: url("/img/my6.png") no-repeat center;
 }
 </style>

@@ -120,6 +120,11 @@ export default class Home extends Vue {
             depth: 50,
             modifier: 4,
             slideShadows: false
+          },
+          onClick: function(swiper:any, even:any){
+            console.log("swiper", swiper)
+            console.log("even", even)
+             alert('你点了Swiper');
           }
         });
         // @ts-ignore
@@ -192,7 +197,6 @@ export default class Home extends Vue {
   }
   private playVideo(param:any) {
     // 播放热门视频
-    console.log("---", param)
     this.$router.push({ name: 'play-play', query: {
       coverUrl: param.coverUrl,
       videoUrl: param.videoUrl
@@ -308,7 +312,7 @@ export default class Home extends Vue {
       display: flex;
       justify-content: center;
       align-items: center;
-      background-color: rgba(0, 0, 0, .4);
+      background-color: rgba(0, 0, 0, .1);
       img {
         height: 40px;
         width: 40px;

@@ -21,7 +21,6 @@ export default class Play extends Vue {
     let route:any = this.$route
     this.videoSrc = route.query.videoUrl
     this.coverUrl = route.query.coverUrl
-    console.log("route", route)
   }
 }
 </script>
