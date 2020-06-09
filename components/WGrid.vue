@@ -40,6 +40,7 @@ export default class WGrid extends Vue {
     .title {
       font-size: 12px;
       font-weight: 600;
+      margin-top: -8px;
     }
   }
 }

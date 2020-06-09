@@ -10,26 +10,26 @@
       :inactive-color="'#999999'">
       <van-tabbar-item icon="home-o" to="/">
         <span>首页</span>
-        <template slot="icon">
-          <i class="iconfont iconhome"></i>
+         <template #icon="props">
+          <img :src="props.active ? homeIcon.active : homeIcon.inactive" />
         </template>
       </van-tabbar-item>
       <van-tabbar-item to="/service">
         <span>服务</span>
-        <template slot="icon">
-          <i class="iconfont icon94"></i>
+        <template #icon="props">
+          <img :src="props.active ? serviceIcon.active : serviceIcon.inactive" />
         </template>
       </van-tabbar-item>
       <van-tabbar-item to="/forum">
         <span>论坛</span>
-        <template slot="icon">
-          <i class="iconfont iconluntan"></i>
+        <template #icon="props">
+          <img :src="props.active ? forumIcon.active : forumIcon.inactive" />
         </template>
       </van-tabbar-item>
       <van-tabbar-item to="/my">
         <span>我的</span>
-        <template slot="icon">
-          <i class="iconfont iconwo"></i>
+        <template #icon="props">
+          <img :src="props.active ? myIcon.active : myIcon.inactive" />
         </template>
       </van-tabbar-item>
     </van-tabbar>
@@ -46,6 +46,22 @@ import NavBar from "~/components/NavBar.vue"
 export default class Default extends Vue {
   private active: number = 0
   private back:boolean = false
+  private homeIcon:object = {
+    active: "/img/home1.png",
+    inactive: "/img/home.png"
+  }
+  private serviceIcon:object = {
+    active: "/img/service1.png",
+    inactive: "/img/service.png"
+  }
+  private forumIcon:object = {
+    active: "/img/forum1.png",
+    inactive: "/img/forum.png"
+  }
+  private myIcon:object = {
+    active: "/img/my1.png",
+    inactive: "/img/my.png"
+  }
   searchClick(value: string) {}
   private mounted() {
     let route:any = this.$route
@@ -59,7 +75,7 @@ export default class Default extends Vue {
   private getActive(route: any): number {
     let _name:string = route.name
     // @ts-ignore
-    var vConsole = new VConsole();
+    // var vConsole = new VConsole();
     let nameArr:Array<string> =  _name.split("-");
     this.back = nameArr.length > 1
     let indexObj:any = {
