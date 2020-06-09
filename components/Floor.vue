@@ -2,7 +2,7 @@
   <div class="Floor">
     <div class="Floor-head">
       <span class="Floor-head-title">{{ floorTitle }}</span>
-      <span class="more" v-if="isMore">查看更多<van-icon name="arrow" class="more-icon"/></span>
+      <span class="more" v-if="isMore" @click="moreClick">查看更多<van-icon name="arrow" class="more-icon"/></span>
     </div>
     <div class="Floor-content">
       <slot></slot>
@@ -10,11 +10,15 @@
   </div>
 </template>
 <script lang="ts">
-import { Vue, Component, Prop} from "vue-property-decorator"
+import { Vue, Component, Prop, Emit} from "vue-property-decorator"
 @Component
 export default class Floor extends Vue {
   @Prop({ default: "" }) floorTitle!: string;
   @Prop({ default: true }) isMore!: boolean;
+  @Emit("findMore") findMore() {}
+  private moreClick() {
+    this.findMore()
+  }
 }
 </script>
 <style lang="scss" scoped>

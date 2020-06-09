@@ -1,6 +1,6 @@
 <template>
   <div class="hot-game-item">
-    <img class="game-icon" :src="gameIfor.iconUrl" />
+    <img class="game-icon" :src="gameIfor.iconUrl" @click="gameIconClick"/>
     <p class="game-name">{{ gameIfor.name }}</p>
     <p class="game-size">{{ gameIfor.size }}M</p>
     <p class="game-tag">{{ gameIfor.tag }}</p>
@@ -9,11 +9,14 @@
 </template>
 <script lang="ts">
 
-import { Vue, Component, Prop} from "vue-property-decorator"
+import { Vue, Component, Prop, Emit} from "vue-property-decorator"
 @Component 
 export default class HotGameItem extends Vue {
   @Prop({ default: {} }) private gameIfor!:Object;
-
+  @Emit("gameDetailsClick") gameDetailsClick() {}
+  private gameIconClick() {
+    this.gameDetailsClick()
+  }
 }
 </script>
 <style lang="scss" scoped>

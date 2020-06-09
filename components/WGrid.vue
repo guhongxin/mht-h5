@@ -27,7 +27,7 @@ export default class WGrid extends Vue {
   justify-items: center;
   align-items: center;
   .w-grid-item {
-    padding: 10px 0px;
+    padding: 15px 0px;
     text-align: center;
     .icon-box {
       display: inline-block;
@@ -40,7 +40,6 @@ export default class WGrid extends Vue {
     .title {
       font-size: 12px;
       font-weight: 600;
-      margin-top: -8px;
     }
   }
 }

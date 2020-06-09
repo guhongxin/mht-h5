@@ -22,13 +22,14 @@
         </div>
       </div>
     </Floor>
-    <Floor :floorTitle="'热门游戏'">
+    <Floor :floorTitle="'热门游戏'" @findMore="hotGameMore">
       <div class="hot-game-list">
         <Hot-game-item
           class="hot-game-list-item"
           v-for="(item, index) in games"
           :key="index"
           :gameIfor="item"
+          @gameDetailsClick="gameDetailsClick(item)"
         ></Hot-game-item>
       </div>
     </Floor>
@@ -191,6 +192,16 @@ export default class Home extends Vue {
     // 热门视频
     console.log("---", param)
   }
+  private hotGameMore() {
+    // 热门游戏查看更多
+    this.$router.push({
+      path: "/gameCenter/gameCenter"
+    })
+  }
+  private gameDetailsClick(param: any) {
+    // 点击热门游戏跳转到详情
+    console.log("----", param)
+  }
 }
 </script>
 
@@ -269,13 +280,14 @@ export default class Home extends Vue {
 }
 .swiper-container1 {
   width: 100%;
-  height: 170px;
+  height: 240px;
   overflow: hidden;
   .swiper-slide {
-    width: 30%;
+    width: 40%;
     img {
       width: 100%;
-      height: 170px;
+      height: 240px;
+      border-radius: 4px;
     }
   }
 }
