@@ -14,9 +14,11 @@
               class="swiper-slide"
               v-for="(item, index) in hotVideos"
               :key="index"
-              @click="hotVideosClick(item)"
             >
               <img :src="item.coverUrl" />
+              <div class="play-box">
+                <img src="/img/play.png" @click="playVideo(item)"/>
+              </div>
             </div>
           </div>
         </div>
@@ -188,9 +190,13 @@ export default class Home extends Vue {
     // 点击轮播
     window.location.href = param.url
   }
-  private hotVideosClick(param:any) {
-    // 热门视频
+  private playVideo(param:any) {
+    // 播放热门视频
     console.log("---", param)
+    this.$router.push({ name: 'play-play', query: {
+      coverUrl: param.coverUrl,
+      videoUrl: param.videoUrl
+    }})
   }
   private hotGameMore() {
     // 热门游戏查看更多
@@ -200,7 +206,9 @@ export default class Home extends Vue {
   }
   private gameDetailsClick(param: any) {
     // 点击热门游戏跳转到详情
-    console.log("----", param)
+    this.$router.push({ name: 'gameCenter-gameDetails', query: {
+      id: param.id
+    }})
   }
 }
 </script>
@@ -284,10 +292,27 @@ export default class Home extends Vue {
   overflow: hidden;
   .swiper-slide {
     width: 40%;
+    position: relative;
+    border-radius: 4px;
+    overflow: hidden;
     img {
       width: 100%;
       height: 240px;
-      border-radius: 4px;
+    }
+    .play-box {
+      position: absolute;
+      left: 0px;
+      top: 0px;
+      height: 100%;
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: rgba(0, 0, 0, .4);
+      img {
+        height: 40px;
+        width: 40px;
+      }
     }
   }
 }
