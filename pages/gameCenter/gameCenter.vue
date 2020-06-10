@@ -104,7 +104,9 @@ export default class GameCenter extends Vue {
 </script>
 <style lang="scss" scoped>
 .game-center {
-  margin-top: 10px;
+  padding-top: 10px;
+  box-sizing: border-box;
+  background-color: #ffffff;
 }
 .game-List {
   padding: 15px;

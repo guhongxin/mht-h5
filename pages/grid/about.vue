@@ -35,7 +35,7 @@
         </div>
       </div>
     </div>
-    <CompanyCopyWrit></CompanyCopyWrit>
+    <CompanyCopyWrit class="cyCopyWrit"></CompanyCopyWrit>
   </div>
 </template>
 <script lang="ts">
@@ -57,7 +57,8 @@ export default class About extends Vue {
 </script>
 <style lang="scss" scoped>
 .about {
-  margin: 15px 0px 0px 0px;
+  margin-top: 15px;
+  margin-bottom: 75px;
   .about-head {
     margin-top: 14px;
     text-align: center;
@@ -127,5 +128,9 @@ export default class About extends Vue {
     }
   }
 }
-
+.cyCopyWrit {
+  position: absolute;
+  bottom: 50px;
+  width: 100%;
+}
 </style>

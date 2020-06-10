@@ -53,7 +53,7 @@
         </div>
       </div>
     </div>
-    <CompanyCopyWrit></CompanyCopyWrit>
+    <CompanyCopyWrit class="cyCopyWrit"></CompanyCopyWrit>
   </div>
 </template>
 <script lang="ts">
@@ -112,7 +112,10 @@ export default class Service extends Vue {
 </script>
 <style lang="scss" scoped>
 .servie {
-  margin-top: 15px;
+  padding-top: 15px;
+  padding-bottom: 60px;
+  box-sizing: border-box;
+  background-color: #ffffff;
 }
 .user-infor {
   display: flex;
@@ -247,5 +250,10 @@ export default class Service extends Vue {
       }
     }
   }
+}
+.cyCopyWrit {
+  position: absolute;
+  bottom: 50px;
+  width: 100%;
 }
 </style>

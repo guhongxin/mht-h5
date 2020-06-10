@@ -24,6 +24,7 @@ export default class Floor extends Vue {
 <style lang="scss" scoped>
 .Floor {
   padding: 0px 7px;
+  background-color: #ffffff;
   .Floor-head {
     height: 18px;
     border-left: 4px solid #97C252;

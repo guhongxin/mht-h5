@@ -23,6 +23,7 @@ export default class  GridgiftbagItem extends Vue{
 .grid-giftbag-item {
   position: relative;
   height: 130px;
+  border-radius: 4px;
   .receiveBtn {
     position: absolute;
     display: inline;

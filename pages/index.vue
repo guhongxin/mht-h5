@@ -87,6 +87,7 @@ export default class Home extends Vue {
     },
     {
       src: "/img/news.png",
+      path: "/grid/gameNew",
       text: "新闻资讯"
     },
     {

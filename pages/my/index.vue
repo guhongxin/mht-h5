@@ -93,7 +93,9 @@ export default class My extends Vue {
 </script>
 <style lang="scss" scoped>
 .my {
-  margin-top: 15px;
+  padding-top: 15px;
+  background-color: #ffffff;
+  box-sizing: border-box;
 }
 .user-infor {
   display: flex;

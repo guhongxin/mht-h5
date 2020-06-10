@@ -26,6 +26,7 @@ export default class WGrid extends Vue {
   grid-template-columns: repeat(5, 1fr);
   justify-items: center;
   align-items: center;
+  background-color: #ffffff;
   .w-grid-item {
     padding: 15px 0px;
     text-align: center;

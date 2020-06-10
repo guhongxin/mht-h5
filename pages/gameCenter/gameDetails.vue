@@ -146,8 +146,9 @@ export default class GameDetails extends Vue {
 </script>
 <style lang="scss" scoped>
 .game-details {
-  padding: 10px 16px 0px;
+  padding: 15px 16px 0px;
   box-sizing: border-box;
+  background-color: #ffffff;
   .game-detail-head {
     display: flex;
     justify-content: flex-start;

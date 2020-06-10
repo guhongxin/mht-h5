@@ -73,9 +73,9 @@ export default class MyGiftBag extends Vue {
 </script>
 <style lang="scss" scoped>
 .my-gift-bag {
-  margin-top: 15px;
-  padding: 0px 15px;
+  padding: 15px 15px;
   box-sizing: border-box;
+  background-color: #ffffff;
 }
 .giftbag-floor {
   padding: 0px;

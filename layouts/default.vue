@@ -107,8 +107,10 @@ export default class Default extends Vue {
   background-color: #ffffff;
 }
 .main {
-  height: 100%;
+  min-height: 100vh;
   padding: 56px 0px 50px 0px;
+  position: relative;
+  background-color: #dddddd;
 }
 </style>
 <style>
