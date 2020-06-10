@@ -150,7 +150,7 @@ export default class GameDetails extends Vue {
   box-sizing: border-box;
   .game-detail-head {
     display: flex;
-    justify-content: start;
+    justify-content: flex-start;
     align-items: center;
     border-bottom: 1px solid #CCCCCC;
     padding-bottom: 24px;
@@ -189,7 +189,7 @@ export default class GameDetails extends Vue {
       .button-group {
         margin-top: 10px;
         display: flex;
-        justify-content: start;
+        justify-content: flex-start;
         align-content: center;
         .down-btn, .giftbag-btn {
           font-size: 12px;

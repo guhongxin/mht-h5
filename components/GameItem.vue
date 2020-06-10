@@ -94,7 +94,7 @@ export default class GameItem extends Vue {
     opacity: 0.7;
     margin-top: 10px;
     display: flex;
-    justify-content: start;
+    justify-content: flex-start;
     align-items: center;
     .game-subtitle {
       margin-right: 4px;

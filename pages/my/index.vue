@@ -97,7 +97,7 @@ export default class My extends Vue {
 }
 .user-infor {
   display: flex;
-  justify-content: start;
+  justify-content: flex-start;
   align-items: center;
   padding: 0px 23px;
   .user-infor-left {
@@ -149,7 +149,7 @@ export default class My extends Vue {
 }
 .level-percentage-box {
   display: flex;
-  justify-content: start;
+  justify-content: flex-start;
   align-items: center;
   padding: 0px 23px;
   margin-top: 20px;

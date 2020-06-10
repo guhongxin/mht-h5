@@ -120,11 +120,6 @@ export default class Home extends Vue {
             depth: 50,
             modifier: 4,
             slideShadows: false
-          },
-          onClick: function(swiper:any, even:any){
-            console.log("swiper", swiper)
-            console.log("even", even)
-             alert('你点了Swiper');
           }
         });
         // @ts-ignore
