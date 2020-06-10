@@ -16,11 +16,16 @@
         placeholder="密码"
         @blur="checkPassword" :error-message="passwordErrMsg"
       />
+      <div class="btn-group">
+        <span @click="backHome">返回</span>
+        <span class="register">注册</span>
+      </div>
       <div style="margin: 16px;">
         <van-button round block type="info" @click="submitBtn" :loading="btnLoading">
           提交
         </van-button>
       </div>
+      
     </van-form>
   </div>
 </template>
@@ -82,6 +87,12 @@ export default class Login extends Vue {
       this.btnLoading = false;
     })
   }
+  private backHome() {
+    // 返回首页
+    this.$router.push({
+      path: "/"
+    })
+  }
 }
 </script>
 <style lang="scss" scoped>
@@ -91,5 +102,16 @@ export default class Login extends Vue {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+.btn-group {
+  margin-top: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0px 16px;
+  box-sizing: border-box;
+  span {
+    font-size: 12px;
+  }
 }
 </style>

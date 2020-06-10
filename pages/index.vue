@@ -6,7 +6,7 @@
       </van-swipe-item>
     </van-swipe>
     <WGrid :itemOption="gridOptions" @gridClick="gridItemClick"></WGrid>
-    <Floor :floorTitle="'欢乐视频'">
+    <Floor :floorTitle="'欢乐视频'"  @findMore="hotVideoMore">
       <div class="happy-videos-box">
         <div class="swiper-container1">
           <div class="swiper-wrapper box1">
@@ -95,6 +95,7 @@ export default class Home extends Vue {
     },
     {
       src: "/img/about.png",
+      path:"/grid/about",
       text: "关于我们"
     }
   ];
@@ -201,6 +202,12 @@ export default class Home extends Vue {
     // 热门游戏查看更多
     this.$router.push({
       path: "/gameCenter/gameCenter"
+    })
+  }
+  private hotVideoMore() {
+    // 欢乐视频更多
+     this.$router.push({
+      path: "/play/videoList"
     })
   }
   private gameDetailsClick(param: any) {

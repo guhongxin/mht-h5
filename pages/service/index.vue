@@ -58,8 +58,8 @@
 </template>
 <script lang="ts">
 import { Vue, Component } from "vue-property-decorator"
-import Floor from "~/components/Floor.vue";
-import CompanyCopyWrit from "~/components/CompanyCopyWrit.vue";
+import Floor from "~/components/Floor.vue"
+import CompanyCopyWrit from "~/components/CompanyCopyWrit.vue"
 interface Recharge {
   /**
    * servie-grid
