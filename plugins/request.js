@@ -20,7 +20,6 @@ export default function ({store, redirect, app: { $axios }})  {
 	$axios.onError(error => {
 		let res = error.response;
 		Toast.clear();
-		
 		if (res) {
 			if (res.status === 400) {
 				Dialog({ message: '请求参数不对！' });
@@ -30,6 +29,7 @@ export default function ({store, redirect, app: { $axios }})  {
 		} else {
 			Dialog({ message: '请求无响应！' });
 		}
+		return res
 	})
 	// response拦截器，数据返回后，你可以先在这里进行一个简单的判断
   $axios.interceptors.response.use(response => {
@@ -38,8 +38,9 @@ export default function ({store, redirect, app: { $axios }})  {
 		return new Promise((resolve, reject) => {
 			if (data.code !== 0) {
 				Dialog({ message: data.msg });
+				reject(data)
 			} else {
-				return resolve(data)
+				resolve(data)
 			}
 		})
 	})

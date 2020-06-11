@@ -75,7 +75,8 @@ export default class Login extends Vue {
       setToken(data.token, { expires: 2 });
       this.btnLoading = false;
       (this as any).$router.push({ path: "/" });
-    }).catch(() => {
+    }).catch((res: any) => {
+      console.log("---", res)
       this.btnLoading = false;
     })
   }
@@ -104,11 +105,9 @@ export default class Login extends Vue {
       } else {
         // 键盘收起所后所需的页面逻辑
         let deviceType:number = device()
-         console.log("键盘弹收起后所需的页面逻辑", deviceType)
-         console.log("键盘弹收起后所需的页面逻辑", resizeHeight)
         if (deviceType === 1) {
-          // let login:any = document.querySelector(".login")
-          // login.style = undefined
+          let login:any = document.querySelector(".login")
+          login.style = undefined
         }
       }
     }, false);

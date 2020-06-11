@@ -7,7 +7,6 @@
       <div class="user-infor-right">
         <div class="user-frist">
           <div class="user-name">猕猴桃<span class="user-level">LV3</span></div>
-          <div class="edit-user">编辑资料</div>
         </div>
         <div class="account">账号：MHT123456</div>
         <div class="k-coin">K币：63</div>
