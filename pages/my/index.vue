@@ -23,7 +23,7 @@
       </div>
     </div>
     <div class="list-view">
-      <div class="list-item">
+      <div class="list-item" @click="personalClick">
         <div class="list-item-left">
           <i class="my-infor"></i>
           <span>我的资料</span>
@@ -84,8 +84,20 @@ import CompanyCopyWrit from "~/components/CompanyCopyWrit.vue"
 })
 export default class My extends Vue {
   private goMyGiftBag():void {
+    // 我的礼包
     this.$router.push({
       name: "my-giftbag"
+    })
+  }
+  private personalClick() {
+    // 我的资料
+    // @ts-ignore
+    this.$router.push({
+      path: "/my/personalData",
+      query: {
+        title: "我的资料",
+        navBarType: '1'
+      }
     })
   }
 }
@@ -192,7 +204,7 @@ export default class My extends Vue {
     font-size: 14px;
     font-weight: 500;
     color: #1A1A1A;
-    padding: 20px 0px;
+    padding: 15px 0px;
     display: flex;
     justify-content: space-between;
     align-items: center;

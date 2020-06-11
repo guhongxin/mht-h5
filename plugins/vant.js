@@ -20,7 +20,10 @@ import {
   Field,
   Button,
   Overlay,
-  Empty
+  Empty,
+  ActionSheet,
+  DatetimePicker,
+  Popup
 } from 'vant';
 
 Vue.use(Tabbar);
@@ -42,6 +45,8 @@ Vue.use(Field);
 Vue.use(Button);
 Vue.use(Overlay);
 Vue.use(Empty);
-
+Vue.use(ActionSheet);
+Vue.use(DatetimePicker);
+Vue.use(Popup);
 Vue.prototype.$customFormat = customFormat
 

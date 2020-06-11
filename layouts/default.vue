@@ -1,7 +1,23 @@
 <template>
   <div class="layout">
-    <nav-bar :fixed="true" @searchClick="searchClick" :back="back"
-      @userImageClick="userImageClick"></nav-bar>
+    <nav-bar 
+      @searchClick="searchClick"
+      :back="back"
+      :fixed="true"
+      @userImageClick="userImageClick" v-if="navBarType === '0'"></nav-bar>
+    <van-nav-bar
+      :title="navBarTitle"
+      left-text="返回"
+      left-arrow
+      @click-left="onClickLeft"
+      style="height:56px"
+      :fixed="true"
+      v-else
+    >
+    <template #right v-if="navBarRight">
+      <span @click="onClickRight">确认</span>
+    </template>
+    </van-nav-bar>
     <div class="main">
       <nuxt />
     </div>
@@ -46,6 +62,9 @@ import NavBar from "~/components/NavBar.vue"
 export default class Default extends Vue {
   private active: number = 0
   private back:boolean = false
+  private navBarType:string = "0" // 0-带搜索的navBar 1-标题居中，左侧返回键navBar
+  private navBarTitle:string = "" // navBar标题
+  private navBarRight:boolean = false // navBar右侧
   private homeIcon:object = {
     active: "/img/home1.png",
     inactive: "/img/home.png"
@@ -65,10 +84,16 @@ export default class Default extends Vue {
   searchClick(value: string) {}
   private mounted() {
     let route:any = this.$route
+    this.navBarType = route.query.navBarType === '1' ? '1' : '0'
+    this.navBarTitle = route.query.title
+    this.navBarRight = route.query.isRight === '1'
     this.active = this.getActive(route)
   }
   @Watch("$route")
   routerChange (val: any) {
+    this.navBarType = val.query.navBarType === '1' ? '1' : '0'
+    this.navBarTitle = val.query.title
+    this.navBarRight = val.query.isRight === '1'
     this.active = this.getActive(val)
   }
   // 获取当前的tab
@@ -76,6 +101,7 @@ export default class Default extends Vue {
     let _name:string = route.name
     // @ts-ignore
     var vConsole = new VConsole();
+    console.log("--", _name)
     let nameArr:Array<string> =  _name.split("-");
     this.back = nameArr.length > 1
     let indexObj:any = {
@@ -88,11 +114,21 @@ export default class Default extends Vue {
     return indexObj[nameArr[0]]
   }
   // 点击用户图片
-  userImageClick() {
+  private userImageClick() {
     // 获取token是否存在，不存在跳转到登录界面，存在进入我的页面
     this.$router.push({
       name: "my"
     })
+  }
+  // 
+  private onClickLeft() {
+    // 点击navBar 左侧按钮 返回到上一页
+    this.$router.go(-1)
+  }
+  private onClickRight() {
+    // 点击右侧按钮
+    console.log(this)
+    console.log("点击右侧", (this as any).value)
   }
 }
 </script>
