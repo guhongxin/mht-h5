@@ -57,8 +57,9 @@ export default class About extends Vue {
 </script>
 <style lang="scss" scoped>
 .about {
-  margin-top: 15px;
-  margin-bottom: 75px;
+  padding: 15px 0px 75px 0px;
+  box-sizing: border-box;
+  background-color: #ffffff;
   .about-head {
     margin-top: 14px;
     text-align: center;
