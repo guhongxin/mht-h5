@@ -10,7 +10,7 @@
     </div>
     <div class="about-context">
       <div class="understand-me" v-if="active === 0">
-        <div class="image-box">
+        <div class="image-box" @click="goCompanyIntrod">
           <img src="/img/understandme1.png" />
         </div>
         <div class="image-box">
@@ -52,6 +52,16 @@ export default class About extends Vue {
   private active:number = 0
   private menuClick(index:number) {
     this.active = index
+  }
+  private goCompanyIntrod() {
+    // 公司概述
+    this.$router.push({
+      path: "/grid/about/companyIntroduc",
+       query: {
+        title: "公司概述",
+        navBarType: '1'
+      }
+    })
   }
 } 
 </script>

@@ -222,6 +222,10 @@ export default class Home extends Vue {
 
 <style lang="scss" scoped>
 @import "@/assets/style/nuxt.scss";
+.home {
+  min-height: calc(100vh - 106px);
+  background-color: #ffffff;
+}
 .my-swipe .van-swipe-item {
   height: 220px;
   background-color: #39a9ed;

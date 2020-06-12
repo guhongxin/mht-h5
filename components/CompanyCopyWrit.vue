@@ -16,7 +16,6 @@ export default class CompanyCopyWrit extends Vue {
 </script>
 <style lang="scss" scoped>
 .company-copywrit {
-  background-color: #ffffff;
   p {
     font-size: 8px;
     color: #595959;

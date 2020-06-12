@@ -125,6 +125,9 @@ export default class PersonalData extends Vue {
 }
 </script>
 <style lang="scss" scoped>
+.personal-data {
+  min-height: calc(100vh - 106px);
+}
 .list-view {
   .list-item {
     padding: 15px 20px;

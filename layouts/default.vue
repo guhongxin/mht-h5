@@ -10,8 +10,8 @@
       left-text="返回"
       left-arrow
       @click-left="onClickLeft"
-      style="height:56px"
       :fixed="true"
+      class="txt"
       v-else
     >
     <template #right v-if="navBarRight">
@@ -146,7 +146,11 @@ export default class Default extends Vue {
   min-height: 100vh;
   padding: 56px 0px 50px 0px;
   position: relative;
+  box-sizing: border-box;
   background-color: #dddddd;
+}
+.txt {
+  height: 56px;
 }
 </style>
 <style>

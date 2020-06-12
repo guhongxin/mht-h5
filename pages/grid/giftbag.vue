@@ -94,6 +94,7 @@ export default class gridgiftbag extends Vue {
 .grid-gift-bag {
   padding: 15px 15px;
   box-sizing: border-box;
+  min-height: calc(100vh - 106px);
   background-color: #ffffff;
 }
 .tab-menu {

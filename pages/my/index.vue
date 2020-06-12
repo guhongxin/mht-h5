@@ -70,7 +70,7 @@
         <img src="/img/welfaretq.png" />
       </div>
     </div>
-    <CompanyCopyWrit></CompanyCopyWrit>
+    <CompanyCopyWrit class="cyCopyWrit"></CompanyCopyWrit>
   </div>
 </template>
 <script lang="ts">
@@ -104,9 +104,11 @@ export default class My extends Vue {
 </script>
 <style lang="scss" scoped>
 .my {
-  padding-top: 15px;
+  padding: 15px 0px;
   background-color: #ffffff;
   box-sizing: border-box;
+  min-height: calc(100vh - 106px);
+  background-color: #ffffff;
 }
 .user-infor {
   display: flex;
@@ -244,12 +246,8 @@ export default class My extends Vue {
     }
   }
 }
-.company-copywrit {
-  p {
-    font-size: 8px;
-    color: #595959;
-    text-align: center;
-  }
+.cyCopyWrit {
+  margin-top: 20px;
 }
 .my-infor {
   background: url("/img/my2.png") no-repeat center;

@@ -107,6 +107,7 @@ export default class GameCenter extends Vue {
   padding-top: 10px;
   box-sizing: border-box;
   background-color: #ffffff;
+  min-height: calc(100vh - 106px);
 }
 .game-List {
   padding: 15px;
