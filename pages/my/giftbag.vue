@@ -66,7 +66,6 @@ export default class MyGiftBag extends Vue {
         page: this.page
       }
     })
-    console.log("----", res)
     this.giftList = res.data.giftCodes
   }
 }

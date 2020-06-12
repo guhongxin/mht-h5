@@ -68,6 +68,7 @@ interface Recharge {
    */
   src: string;
   title: string;
+  path?: string;
 }
 @Component({
   components: {
@@ -88,18 +89,30 @@ export default class Service extends Vue {
   }]
   private kfCenter:Array<Recharge> = [{
     src: "/img/problem.png",
-    title: "常见问题"
+    title: "常见问题",
+    path: "/service/commProblem"
   }, {
     src: "/img/serviceNotice.png",
-    title: "服务须知"
+    title: "服务须知",
+    path: "/service/serviceMatters"
   }, {
     src: "/img/rgkf.png",
     title: "人工客服"
   }]
   private gridClick(item:any) {
     // 点击九宫格
-    (this as any).$dialog.alert({
-      message: '该功能暂未开启'
+    if (!item.path) {
+      (this as any).$dialog.alert({
+        message: '该功能暂未开启'
+      })
+      return false
+    }
+    this.$router.push({
+      path: item.path,
+      query: {
+        navBarType: "1",
+        title: item.title
+      }
     })
   }
   private signIn() {

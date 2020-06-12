@@ -23,7 +23,9 @@ import {
   Empty,
   ActionSheet,
   DatetimePicker,
-  Popup
+  Popup,
+  Collapse,
+  CollapseItem 
 } from 'vant';
 
 Vue.use(Tabbar);
@@ -48,5 +50,8 @@ Vue.use(Empty);
 Vue.use(ActionSheet);
 Vue.use(DatetimePicker);
 Vue.use(Popup);
+Vue.use(Collapse);
+Vue.use(CollapseItem);
+  
 Vue.prototype.$customFormat = customFormat
 

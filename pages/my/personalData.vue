@@ -5,7 +5,7 @@
         <div class="list-item-left">
           <span>头像</span>
         </div>
-        <div class="list-item-right">
+        <div class="list-item-right" @click="userImageClick">
           <img src="/img/user2.png" class="userImage"/>
         </div>
       </div>
@@ -116,7 +116,7 @@ export default class PersonalData extends Vue {
       query: {
         title: "修改昵称",
         navBarType: '1',
-        isRight: "1"  
+        isRight: '1'  
       }
     })
   }
@@ -127,7 +127,17 @@ export default class PersonalData extends Vue {
       query: {
         title: "修改账号",
         navBarType: '1',
-        isRight: "1"  
+        isRight: '1'  
+      }
+    })
+  }
+  private userImageClick() {
+    // 修改图像
+     this.$router.push({
+      path: "/my/myPicture",
+      query: {
+        title: "图像",
+        navBarType: '1'
       }
     })
   }
