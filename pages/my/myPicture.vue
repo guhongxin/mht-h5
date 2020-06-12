@@ -48,36 +48,14 @@ export default class myPicture extends Vue {
   }
   private openLocalImage() {
     // 打开本地相册
-    let self = this
-    // @ts-ignore
-    let inputFileDom:any = document.getElementById("inputFile")
-    if (inputFileDom) {
-      document.body.removeChild(inputFileDom)
-    }
-    let input:HTMLInputElement = document.createElement("input");
-    input.id = "inputFile"
-    input.type = "file"
-    input.className = "imgeInput"
-    input.style.display = "none"
-    input.accept="image/*"
-    input.click();
-    // @ts-ignore
-    document.body.appendChild(input)
-    input.onchange = function(e:any) {
-      let file = e.target.files[0]
-      let src = window.URL.createObjectURL(file)
-      self.accountImage = src
-      let accountImage:any = document.getElementById("accountImage")
-      accountImage.onload = function() {
-        // 明确地通过调用释放
-        window.URL.revokeObjectURL(src);
-      }
-      input.value = ""
-      document.body.removeChild(input)
-    }
+    this.fileOpen()
   }
   private openCamera() {
     // 打开相机
+    this.fileOpen(true)
+  }
+  // 打开文件 isOpenCamera 是否打开相机
+  private fileOpen(isOpenCamera?:boolean) {
     let self = this
     let inputFileDom:any = document.getElementById("inputFile")
     if (inputFileDom) {
@@ -89,7 +67,9 @@ export default class myPicture extends Vue {
     input.className = "imgeInput"
     input.style.display = "none"
     input.accept="image/*"
-    input.capture='camera'
+    if (isOpenCamera) {
+      input.capture='camera'
+    }
     input.click();
     // @ts-ignore
     document.body.appendChild(input)

@@ -17,14 +17,6 @@
           <span>猕猴桃</span>
         </div>
       </div>
-      <div class="list-item" @click="account">
-        <div class="list-item-left">
-          <span>账号</span>
-        </div>
-        <div class="list-item-right">
-          <span>MHT123456</span>
-        </div>
-      </div>
       <div class="list-item" @click="sexClick">
         <div class="list-item-left">
           <span>性别</span>
@@ -115,17 +107,6 @@ export default class PersonalData extends Vue {
       path: "/my/modifyPersonal",
       query: {
         title: "修改昵称",
-        navBarType: '1',
-        isRight: '1'  
-      }
-    })
-  }
-  private account() {
-    // 修改账号
-    this.$router.push({
-      path: "/my/modifyPersonal",
-      query: {
-        title: "修改账号",
         navBarType: '1',
         isRight: '1'  
       }
