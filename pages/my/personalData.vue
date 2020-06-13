@@ -9,7 +9,10 @@
           <img src="/img/user2.png" class="userImage"/>
         </div>
       </div>
-      <div class="list-item" @click="nickName">
+      <div class="list-item" @click="modifyClick({
+        title: '修改昵称',
+        modifyTxt: '猕猴桃'
+      })">
         <div class="list-item-left">
           <span>昵称</span>
         </div>
@@ -33,7 +36,10 @@
           <span>2015-02-03</span>
         </div>
       </div>
-      <div class="list-item">
+      <div class="list-item"  @click="modifyClick({
+        title: '修改手机',
+        modifyTxt: '18758158403'
+      })">
         <div class="list-item-left">
           <span>手机</span>
         </div>
@@ -41,7 +47,10 @@
           <span>18758158403</span>
         </div>
       </div>
-      <div class="list-item">
+      <div class="list-item"  @click="modifyClick({
+        title: '修改邮箱',
+        modifyTxt: '13256784512@qq.com'
+      })">
         <div class="list-item-left">
           <span>邮箱</span>
         </div>
@@ -101,14 +110,18 @@ export default class PersonalData extends Vue {
     // 日期确定
     this.dateShow = false
   }
-  private nickName() {
+  private modifyClick(param: {
+    title: string;
+    modifyTxt: string;
+  }) {
     // 点击昵称
     this.$router.push({
       path: "/my/modifyPersonal",
       query: {
-        title: "修改昵称",
+        title: param.title,
         navBarType: '1',
-        isRight: '1'  
+        isRight: '1',
+        modifyTxt: param.modifyTxt
       }
     })
   }
@@ -117,8 +130,9 @@ export default class PersonalData extends Vue {
      this.$router.push({
       path: "/my/myPicture",
       query: {
-        title: "图像",
-        navBarType: '1'
+        title: "修改图像",
+        navBarType: '1',
+        isRight: '1'
       }
     })
   }

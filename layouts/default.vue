@@ -15,7 +15,7 @@
       v-else
     >
     <template #right v-if="navBarRight">
-      <span @click="onClickRight">确认</span>
+      <span @click="onClickRight" class="van-nav-bar__text">确认</span>
     </template>
     </van-nav-bar>
     <div class="main">
@@ -54,6 +54,7 @@
 <script lang="ts">
 import { Vue, Component, Watch } from "vue-property-decorator"
 import NavBar from "~/components/NavBar.vue"
+import Bus from "~/plugins/Bus.js"
 @Component({
   components: {
     NavBar
@@ -101,7 +102,6 @@ export default class Default extends Vue {
     let _name:string = route.name
     // @ts-ignore
     var vConsole = new VConsole();
-    console.log("--", _name)
     let nameArr:Array<string> =  _name.split("-");
     this.back = nameArr.length > 1
     let indexObj:any = {
@@ -127,8 +127,7 @@ export default class Default extends Vue {
   }
   private onClickRight() {
     // 点击右侧按钮
-    console.log(this)
-    console.log("点击右侧", (this as any).value)
+    Bus.$emit('rightClick')
   }
 }
 </script>
