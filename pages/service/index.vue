@@ -249,6 +249,7 @@ export default class Service extends Vue {
     align-items: center;
     .servie-grid-item {
       text-align: center;
+      flex: 1;
       .grid-icon {
         line-height: 0px;
         img {

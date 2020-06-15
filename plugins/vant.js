@@ -54,4 +54,4 @@ Vue.use(Collapse);
 Vue.use(CollapseItem);
   
 Vue.prototype.$customFormat = customFormat
-
+Vue.prototype.$defaultUserImage = "/img/user.png"

@@ -4,7 +4,7 @@
       <img src="/img/time.png" />
       <div class="content">
         <p class="content-title">服务时间</p>
-        <p class="content-txt">周一至周五：12:00-21:00</p>
+        <p class="content-txt txtmargin" >周一至周五：12:00-21:00</p>
         <p class="content-txt">周末及节假日另行通知</p>
       </div>
     </div>
@@ -58,6 +58,9 @@ export default class ServiceMatters extends Vue {
         font-size: 15px;
         font-weight: 400;
         color:#ffffff;
+      }
+      .txtmargin {
+        margin: 4px 0px;
       }
     }
   }

@@ -6,18 +6,19 @@
           <span>头像</span>
         </div>
         <div class="list-item-right" @click="userImageClick">
-          <img src="/img/user2.png" class="userImage"/>
+          <img :src="user.avatarUrl ? user.avatarUrl : $defaultUserImage" class="userImage"/>
         </div>
       </div>
       <div class="list-item" @click="modifyClick({
         title: '修改昵称',
-        modifyTxt: '猕猴桃'
+        modifyTxt: user.nickname,
+        key: 'nickname'
       })">
         <div class="list-item-left">
           <span>昵称</span>
         </div>
         <div class="list-item-right">
-          <span>猕猴桃</span>
+          <span>{{user.nickname}}</span>
         </div>
       </div>
       <div class="list-item" @click="sexClick">
@@ -25,7 +26,7 @@
           <span>性别</span>
         </div>
         <div class="list-item-right">
-          <span>男</span>
+          <span>{{user.gender}}</span>
         </div>
       </div>
       <div class="list-item" @click="birthdayClick">
@@ -33,29 +34,31 @@
           <span>生日</span>
         </div>
         <div class="list-item-right">
-          <span>2015-02-03</span>
+          <span>{{$customFormat(user.birthday, "yyyy-MM-dd")}}</span>
         </div>
       </div>
       <div class="list-item"  @click="modifyClick({
         title: '修改手机',
-        modifyTxt: '18758158403'
+        modifyTxt: user.phoneNumber,
+        key: 'phoneNumber'
       })">
         <div class="list-item-left">
           <span>手机</span>
         </div>
         <div class="list-item-right">
-          <span>18758158403</span>
+           <span>{{user.phoneNumber}}</span>
         </div>
       </div>
       <div class="list-item"  @click="modifyClick({
         title: '修改邮箱',
-        modifyTxt: '13256784512@qq.com'
+        modifyTxt: user.email,
+        key: 'email'
       })">
         <div class="list-item-left">
           <span>邮箱</span>
         </div>
         <div class="list-item-right">
-          <span>13256784512@qq.com</span>
+          <span>{{user.email}}</span>
         </div>
       </div>
     </div>
@@ -81,22 +84,78 @@
 </template>
 <script lang="ts">
 import { Vue, Component } from "vue-property-decorator"
+import { getSession } from "~/assets/utils/auth.js"
+import { sessionClear, setSession } from "~/assets/utils/auth.js"
+enum GenderEnum {
+  UNKNOWN = "未知",
+  MALE = "男",
+  FEMALE = "女"
+}
 @Component
 export default class PersonalData extends Vue {
   private showSex:boolean = false
-  private sexOption:Array<any> = [{ name: '男' }, { name: '女' }, { name: '未知' }]
+  private sexOption:Array<any> = [
+    { name: '男', value: 'MALE' },
+    { name: '女', value: 'FEMALE' },
+    { name: '未知', value: 'UNKNOWN' }]
   private dateShow:boolean = false;
   private currentDate:Object = new Date()
   private minDate:Object = new Date(1917, 1, 1)
   private maxDate:Object = new Date(3000, 1, 1)
+  private user:any = {
+    nickname: "",
+    username: "",
+    avatarUrl: "",
+    birthday: "",
+    gender: "",
+    phoneNumber: "",
+    email: "",
+  }
   private sexClick() {
     // 
     this.showSex = true
   }
   private sexSelect(item:any) {
     // 选择性别
-    this.showSex = false
-    console.log("**", item);
+    this.showSex = false;
+    (this as any).$axios({
+      method: "POST",
+      url: "/usr/user/updateUser",
+      data: {
+        user:{
+          gender: item.value
+        }
+      }
+    }).then((res:any) => {
+      let data = res;
+      if (data.code === 0) {
+        (this as any).$toast.success('修改成功')
+        sessionClear()
+        this.getUserInfor()
+      }
+    })
+  }
+  private getUserInfor() {
+    // 获取用户信息
+    (this as any).$axios({
+      method: "POST",
+      url: "/usr/user/getUser"
+    }).then((res:any) => {
+      let data:any = res.data.user
+      if (data) {
+        this.user = {
+          nickname: data.nickname,
+          username: data.username,
+          avatarUrl: data.avatarUrl,
+          phoneNumber: data.phoneNumber,
+          email: data.email,
+        }
+        // @ts-ignore
+        this.user.gender = GenderEnum[ data.gender || 'UNKNOWN' ]
+        this.user.birthday = data.birthday ? data.birthday : ""
+        setSession("user",JSON.stringify(data))
+      }
+    })
   }
   private birthdayClick() {
     // 修改生日
@@ -106,22 +165,41 @@ export default class PersonalData extends Vue {
     // 日期取消
     this.dateShow = false
   }
-  private dateTimeConfirm() {
+  private dateTimeConfirm(val:any) {
     // 日期确定
+    let time = new Date(val).getTime();
+    (this as any).$axios({
+      method: "POST",
+      url: "/usr/user/updateUser",
+      data: {
+        user:{
+          birthday: time
+        }
+      }
+    }).then((res:any) => {
+      let data = res;
+      if (data.code === 0) {
+        (this as any).$toast.success('修改成功')
+        sessionClear()
+        this.getUserInfor()
+      }
+    })
     this.dateShow = false
   }
   private modifyClick(param: {
     title: string;
     modifyTxt: string;
+    key: string;
   }) {
-    // 点击昵称
+    // 点击修改
     this.$router.push({
       path: "/my/modifyPersonal",
       query: {
         title: param.title,
         navBarType: '1',
         isRight: '1',
-        modifyTxt: param.modifyTxt
+        modifyTxt: param.modifyTxt,
+        modifyKey: param.key
       }
     })
   }
@@ -135,6 +213,23 @@ export default class PersonalData extends Vue {
         isRight: '1'
       }
     })
+  }
+  private mounted() {
+    // @ts-ignore
+    let _user = getSession("user") ? JSON.parse(getSession("user")) : null
+    // @ts-ignore
+    if (_user) {
+      this.user = {
+        nickname: _user.nickname,
+        username: _user.username,
+        avatarUrl: _user.avatarUrl,
+        phoneNumber: _user.phoneNumber,
+        email: _user.email,
+      }
+      // @ts-ignore
+      this.user.gender = GenderEnum[ _user.gender || 'UNKNOWN' ]
+      this.user.birthday = _user.birthday ? _user.birthday : ""
+    }
   }
 }
 </script>

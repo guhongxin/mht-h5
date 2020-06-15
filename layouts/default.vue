@@ -66,6 +66,7 @@ export default class Default extends Vue {
   private navBarType:string = "0" // 0-带搜索的navBar 1-标题居中，左侧返回键navBar
   private navBarTitle:string = "" // navBar标题
   private navBarRight:boolean = false // navBar右侧
+  private modifyKey:string = ""
   private homeIcon:object = {
     active: "/img/home1.png",
     inactive: "/img/home.png"
@@ -88,13 +89,15 @@ export default class Default extends Vue {
     this.navBarType = route.query.navBarType === '1' ? '1' : '0'
     this.navBarTitle = route.query.title
     this.navBarRight = route.query.isRight === '1'
-    this.active = this.getActive(route)
+    this.active = this.getActive(route),
+    this.modifyKey = route.query.modifyKey
   }
   @Watch("$route")
   routerChange (val: any) {
     this.navBarType = val.query.navBarType === '1' ? '1' : '0'
     this.navBarTitle = val.query.title
     this.navBarRight = val.query.isRight === '1'
+    this.modifyKey = val.query.modifyKey
     this.active = this.getActive(val)
   }
   // 获取当前的tab
@@ -127,7 +130,7 @@ export default class Default extends Vue {
   }
   private onClickRight() {
     // 点击右侧按钮
-    Bus.$emit('rightClick')
+    Bus.$emit('rightClick', this.modifyKey)
   }
 }
 </script>

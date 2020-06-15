@@ -1,6 +1,7 @@
 
 import { Dialog, Toast } from 'vant';
-import { getToken } from "~/assets/utils/auth.js"
+import { getToken, removeToken, sessionClear } from "~/assets/utils/auth.js"
+// 
 export default function ({store, redirect, app: { $axios }})  {
   // 数据访问前缀
 	$axios.defaults.baseURL = process.env.BASE_URL
@@ -37,8 +38,14 @@ export default function ({store, redirect, app: { $axios }})  {
 		Toast.clear();
 		return new Promise((resolve, reject) => {
 			if (data.code !== 0) {
-				Dialog({ message: data.msg });
-				reject(data)
+				if (data.code === 1003) {
+					removeToken()
+					sessionClear()
+					redirect("/login")
+				} else {
+					Dialog({ message: data.msg });
+					reject(data)
+				}
 			} else {
 				resolve(data)
 			}
