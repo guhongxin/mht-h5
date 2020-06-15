@@ -6,7 +6,7 @@
       :fixed="true"
       @userImageClick="userImageClick" v-if="navBarType === '0'"></nav-bar>
     <van-nav-bar
-      :title="navBarTitle"
+      :title="`${navBarTitle}`"
       left-text="返回"
       left-arrow
       @click-left="onClickLeft"

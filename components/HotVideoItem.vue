@@ -1,22 +1,25 @@
 <template>
   <div class="hotVideoItem">
     <div class="hotVideoItem-img-box">
-      <img src="/img/2.png" />
+      <img :src="video.coverUrl" />
       <div class="play-box">
-        <img src="/img/play.png" @click="playVideo(item)"/>
+        <img src="/img/play.png" @click="playVideo(video)"/>
       </div>
     </div>
     <div class="hotVideoItem-title">
       <span>作妖记</span>
       <span>|</span>
-      <span>道观守阵推荐</span>
+      <span>{{video.title||""}}</span>
     </div>
   </div>
 </template>
 <script lang="ts">
-import { Vue, Component } from "vue-property-decorator"
+import { Vue, Component, Prop } from "vue-property-decorator"
 @Component
 export default class HotVideoItem extends Vue {
+   @Prop({ default: function() {
+    return {}
+  }}) video!:any
   private playVideo(param:any) {
     // 播放热门视频
     this.$router.push({ name: 'play-play', query: {
@@ -32,8 +35,10 @@ export default class HotVideoItem extends Vue {
   .hotVideoItem-img-box {
     line-height: 0px;
     position: relative;
+    text-align: center;
     img {
       width: 100%;
+      height: 89px;
     }
     .play-box {
       position: absolute;

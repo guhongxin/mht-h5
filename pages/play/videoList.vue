@@ -9,9 +9,10 @@
         :line-width="15"
         :border="false">
         <van-tab title="全部">
-          <div class="video-list" v-if="videoList.length==0">
-            <HotVideoItem class="video-list-item"></HotVideoItem>
-            <HotVideoItem class="video-list-item"></HotVideoItem>
+          <div class="video-list" v-if="videos.length>0">
+            <HotVideoItem class="video-list-item" v-for="(item, index) in videos" 
+             :key="index"
+             :video="item"></HotVideoItem>
           </div>
           <van-empty description="暂无数据" v-else />
         </van-tab>
@@ -32,6 +33,10 @@
 import { Vue, Component } from "vue-property-decorator"
 import HotVideoItem from "~/components/HotVideoItem.vue"
 import Floor from "~/components/Floor.vue";
+interface Page {
+  cur: number, // 当前页
+  size: number // 每页显示条数
+}
 @Component({
   components: {
     HotVideoItem,
@@ -40,12 +45,37 @@ import Floor from "~/components/Floor.vue";
 })
 export default class VideoList extends Vue {
   private active:number = 0
-  private videoList:Array<any> = []
+  private videos:Array<any> = []
+  private page:Page = {
+    cur: 1,
+    size: 10 
+  }
+  private mounted() {
+    this.getList()
+  }
+  private getList() {
+    (this as any).$axios({
+      method: "POST",
+      url: "/usr/game/listVideo",
+      data: {
+        page: this.page
+      }
+    }).then((res:any) => {
+      let data = res.data
+      console.log("---", data);
+      this.videos = data.videos
+    }).catch((err:any) => {
+      console.log(err)
+    })
+  }
 }
 </script>
 <style lang="scss" scoped>
 .video {
-  margin-top: 15px;
+  padding-top: 10px;
+  box-sizing: border-box;
+  background-color: #ffffff;
+  min-height: calc(100vh - 106px);
 }
 .video-list {
   display: flex;
@@ -54,6 +84,7 @@ export default class VideoList extends Vue {
   flex-wrap: wrap;
   .video-list-item {
     width: 50%;
+    background-color: #ffffff;
   }
 }
 </style>

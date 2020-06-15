@@ -5,12 +5,12 @@
         <div class="list-item-left">
           <span>头像</span>
         </div>
-        <div class="list-item-right" @click="userImageClick">
+        <div class="list-item-right" @click="userImageClick(user.avatarUrl)">
           <img :src="user.avatarUrl ? user.avatarUrl : $defaultUserImage" class="userImage"/>
         </div>
       </div>
       <div class="list-item" @click="modifyClick({
-        title: '修改昵称',
+        title: '昵称',
         modifyTxt: user.nickname,
         key: 'nickname'
       })">
@@ -38,7 +38,7 @@
         </div>
       </div>
       <div class="list-item"  @click="modifyClick({
-        title: '修改手机',
+        title: '手机',
         modifyTxt: user.phoneNumber,
         key: 'phoneNumber'
       })">
@@ -50,7 +50,7 @@
         </div>
       </div>
       <div class="list-item"  @click="modifyClick({
-        title: '修改邮箱',
+        title: '邮箱',
         modifyTxt: user.email,
         key: 'email'
       })">
@@ -60,6 +60,15 @@
         <div class="list-item-right">
           <span>{{user.email}}</span>
         </div>
+      </div>
+      <div class="list-item"  @click="modifyClick({
+        title: '密码',
+        key: 'password'
+      })">
+        <div class="list-item-left">
+          <span>密码</span>
+        </div>
+        <div class="list-item-right"></div>
       </div>
     </div>
     <!-- 性别 -->
@@ -203,14 +212,16 @@ export default class PersonalData extends Vue {
       }
     })
   }
-  private userImageClick() {
+  private userImageClick(url:string) {
     // 修改图像
      this.$router.push({
       path: "/my/myPicture",
       query: {
         title: "修改图像",
         navBarType: '1',
-        isRight: '1'
+        isRight: '1',
+        modifyTxt: url,
+        modifyKey: "avatarUrl"
       }
     })
   }

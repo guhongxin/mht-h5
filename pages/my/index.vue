@@ -3,8 +3,9 @@
     <div class="user-infor">
       <div class="user-infor-left">
         <img :src="user.avatarUrl ? user.avatarUrl : $defaultUserImage" />
+        
       </div>
-      <div class="user-infor-right">
+      <div class="user-infor-middle">
         <div class="user-frist">
           <div class="user-name">
             <span>{{user.nickname}}</span>
@@ -13,6 +14,9 @@
         </div>
         <div class="account">账号：{{user.username || "无"}}</div>
         <!-- <div class="k-coin">K币：63</div> -->
+      </div>
+      <div class="user-infor-right">
+        <span @click="logoutClick">退出</span>
       </div>
     </div>
     <div class="level-percentage-box">
@@ -53,7 +57,7 @@
           <i class="my-gift"></i>
           <span>我的礼包</span>
         </div>
-        <div class="list-item-right">2</div>
+        <div class="list-item-right">{{mygiftCodeCount}}</div>
       </div>
       <div class="list-item">
         <div class="list-item-left">
@@ -79,7 +83,7 @@
 <script lang="ts">
 import { Vue, Component } from "vue-property-decorator"
 import CompanyCopyWrit from "~/components/CompanyCopyWrit.vue"
-import { getSession } from "~/assets/utils/auth.js"
+import { getSession, removeToken, sessionClear } from "~/assets/utils/auth.js"
 @Component({
   components: {
     CompanyCopyWrit
@@ -102,6 +106,7 @@ export default class My extends Vue {
     maxExp: 0,
     expProgress: "0%"
   }
+  private mygiftCodeCount:number = 0
   private goMyGiftBag():void {
     // 我的礼包
     this.$router.push({
@@ -141,6 +146,32 @@ export default class My extends Vue {
         email: _user.email,
       }
     }
+    this.getMyGiftCodeCount();
+  }
+  private logoutClick() {
+    // 退出
+    (this as any).$axios({
+      method: "POST",
+      url: "/usr/user/logout"
+    }).then((res:any) => {
+      removeToken();
+      sessionClear();
+      this.$router.push({ path: "/login" })
+    }).catch((err:any) => {
+      console.log(err)
+    })
+  }
+  private getMyGiftCodeCount() {
+    (this as any).$axios({
+      method: "POST",
+      url: "/usr/giftcode/getMyGiftCodeCount"
+    }).then((res:any) => {
+      let data = res.data
+      this.mygiftCodeCount = data.count
+    }).catch((err:any) => {
+      console.log(err)
+    })
+    
   }
 }
 </script>
@@ -166,7 +197,7 @@ export default class My extends Vue {
       width: 54px;
     }
   }
-  .user-infor-right {
+  .user-infor-middle {
     flex: 1;
     .user-frist {
       display: flex;
@@ -203,6 +234,10 @@ export default class My extends Vue {
       font-weight: bold;
       color: rgba(153,153,153,1);
     }
+  }
+  .user-infor-right {
+    width: 50px;
+    font-size: 12px;
   }
 }
 .level-percentage-box {
@@ -288,6 +323,10 @@ export default class My extends Vue {
       height: 100%;
     }
   }
+}
+.login-out {
+  float: right;
+  font-size: 12px;
 }
 .cyCopyWrit {
   margin-top: 20px;

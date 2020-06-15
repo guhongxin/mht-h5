@@ -20,6 +20,8 @@
 <script lang="ts">
 import { Vue, Component } from "vue-property-decorator"
 import CompanyCopyWrit from "~/components/CompanyCopyWrit.vue"
+import Bus from "~/plugins/Bus.js"
+import { sessionClear } from "~/assets/utils/auth.js"
 @Component({
   components: {
     CompanyCopyWrit
@@ -28,7 +30,15 @@ import CompanyCopyWrit from "~/components/CompanyCopyWrit.vue"
 export default class myPicture extends Vue {
   private show:boolean = false
   private actions:Array<any> = [{ name: '相册' }, { name: '照相' }]
-  private accountImage:string ="/img/user2.png"
+  private accountImage:string =""
+  private key:string =""
+  private mounted() {
+    let route:any = this.$route;
+    this.accountImage = route.query.modifyTxt ? route.query.modifyTxt : 'http://material-mhtsdk.jingmakeji.top/2020-06-08/6675708796549079040.jpg';
+    Bus.$on("rightClick", (key: string) => {
+      this.save(key)
+    })
+  }
   private selecImage() {
     // 选择照片
     this.show = true
@@ -85,6 +95,30 @@ export default class myPicture extends Vue {
       input.value = ""
       document.body.removeChild(input)
     }
+  }
+  private save(key: string) {
+    if (!this.accountImage) {
+      (this as any).$dialog.alert({
+        message: '修改信息不能为空'
+      })
+      return false;
+    }
+    (this as any).$axios({
+      method: "POST",
+      url: "/usr/user/updateUser",
+      data: {
+        user:{
+          [key]: this.accountImage
+        }
+      }
+    }).then((res:any) => {
+      let data = res;
+      if (data.code === 0) {
+        (this as any).$toast.success('修改成功')
+        sessionClear()
+        this.$router.go(-1)
+      }
+    })
   }
 }
 </script>

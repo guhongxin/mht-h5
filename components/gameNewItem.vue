@@ -2,29 +2,31 @@
   <div class="game-new-item">
     <div class="game-new-item-head">
       <div class="game-new-item-head-left">
-        <img src="/img/rmgame.png" class="game-icon" />
+        <img :src="newInfor.game?newInfor.game.iconUrl:''" class="game-icon" />
         <div class="game-name">
-          作妖纪
+          {{newInfor.game ? newInfor.game.name:""}}
         </div>
       </div>
       <div class="game-new-item-head-right">
         <p>发布时间</p>
-        <p>2020-06-10</p>
+        <p> {{$customFormat(newInfor.pubTime, "yyyy-MM-dd")}}</p>
       </div>
     </div>
     <div class="game-new-image-box">
-      <img src="/img/1.png" />
+      <img :src="newInfor.coverUrl" />
     </div>
     <div class="game-new-footer">
-      掘金 - juejin.im - 一个帮助开发者成长的社区
+      {{newInfor.title}}
     </div>
   </div>
 </template>
 <script lang="ts">
-import  { Vue, Component } from "vue-property-decorator"
+import  { Vue, Component, Prop } from "vue-property-decorator"
 @Component
 export default class GameNewItem extends Vue {
-
+  @Prop({ default() {
+    return {}
+  }}) newInfor!:any
 }
 </script>
 <style lang="scss" scoped>
