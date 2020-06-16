@@ -66,7 +66,7 @@
         key: 'password'
       })">
         <div class="list-item-left">
-          <span>密码</span>
+          <span>修改密码</span>
         </div>
         <div class="list-item-right"></div>
       </div>

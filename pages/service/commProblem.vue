@@ -36,7 +36,8 @@
                 <span>如何更换密保信息？</span>
               </div>
             </template>
-            dasd
+            <p>换绑手机：</p>
+            <p>换绑邮箱：轻触“我的”进入用户中心，点击“我的资料”-“邮箱”进行换绑</p>
           </van-collapse-item>
           <van-collapse-item name="2">
             <template #title>
@@ -45,7 +46,8 @@
                 <span>实名认证如何完成？</span>
               </div>
             </template>
-            dasd
+            <p>QQ客服：搜索添加服务号 800184997</p>
+            <p>微信客服：搜索公众号 KiwiGame</p>
           </van-collapse-item>
           <van-collapse-item name="3">
             <template #title>
@@ -54,7 +56,7 @@
                 <span>充值记录如何查询？</span>
               </div>
             </template>
-            dasd
+            <p>登陆需要使用猕猴桃平台账号，如未拥有请您轻触“我的”进入用户中心，完成注册后登陆；如已拥有请您确保您的账密信息无误后进行登陆。若有其他登陆异常问题请联系客服。</p>
           </van-collapse-item>
         </van-collapse>
       </van-tab>

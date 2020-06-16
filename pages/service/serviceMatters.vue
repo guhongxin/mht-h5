@@ -12,7 +12,8 @@
       <img src="/img/qq.png" />
       <div class="content">
         <p class="content-title">联系客服</p>
-        <p class="content-txt">QQ：123456789</p>
+        <p class="content-txt txtmargin" ></p>
+        <p class="content-txt">QQ：800184997</p>
       </div>
     </div>
     <CompanyCopyWrit class="company"></CompanyCopyWrit>
@@ -60,7 +61,7 @@ export default class ServiceMatters extends Vue {
         color:#ffffff;
       }
       .txtmargin {
-        margin: 4px 0px;
+        margin: 6px 0px;
       }
     }
   }

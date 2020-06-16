@@ -1,6 +1,6 @@
 <template>
   <div class="news-detail">
-    <div v-html="content"></div>
+    <div v-html="content" class="content-box"></div>
   </div>
 </template>
 <script lang="ts">
@@ -33,5 +33,13 @@ export default class NesDetail extends Vue {
   box-sizing: border-box;
   min-height: calc(100vh - 106px);
   background-color: #ffffff;
+  .content-box {
+    width: 100%;
+    overflow: hidden;
+    overflow-y: auto;
+    img {
+      display: block;
+    }
+  }
 }
 </style>

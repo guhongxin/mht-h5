@@ -7,9 +7,9 @@
       </div>
     </div>
     <div class="hotVideoItem-title">
-      <span>作妖记</span>
+      <span>{{video.gameName}}</span>
       <span>|</span>
-      <span>{{video.title||""}}</span>
+      <span>{{video.title}}</span>
     </div>
   </div>
 </template>
