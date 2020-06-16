@@ -52,9 +52,12 @@
     </Floor>
     <Floor :floorTitle="'欢乐视频'" :isMore="false" class="detail-floor">
       <div class="hl-video">
-        <img v-for="(item, index) in videos"
-          :src="item.coverUrl"  
-          :key="index">
+        <div class="hotVideoItem-img-box" v-for="(item, index) in videos" :key="index">
+          <img :src="item.coverUrl" />
+          <div class="play-box">
+            <img src="/img/play.png" @click="playVideo(item)"/>
+          </div>
+        </div>
       </div>
     </Floor>
     <CompanyCopyWrit></CompanyCopyWrit>
@@ -120,7 +123,6 @@ export default class GameDetails extends Vue {
       }
     })
     let deviceType:number = device();
-    console.log(res);
     let obj = Object.assign({}, res.data);
     obj.downUrl = res.data.downloads[deviceType].url;
     obj.size = res.data.downloads[deviceType].size;
@@ -138,10 +140,18 @@ export default class GameDetails extends Vue {
     // 下载
     console.log("下载", param)
   }
+  private playVideo(item:any) {
+    // 播放视频
+    this.$router.push({ name: 'play-play', query: {
+      coverUrl: item.coverUrl,
+      videoUrl: item.videoUrl
+    }})
+  }
   private destroyed() {
     // 卸载
     this.id = 0;
   }
+  
 }
 </script>
 <style lang="scss" scoped>
@@ -239,13 +249,32 @@ export default class GameDetails extends Vue {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  img {
-    flex: 1;
-    height: 84px;
-  }
-  & > img:first-child {
-    margin-right: 5px;
-  }
+  .hotVideoItem-img-box {
+    width: 50%;
+    position: relative;
+    text-align: center;
+    padding: 2px;
+    box-sizing: border-box;
+    img {
+      width: 100%;
+      height: 89px;
+      display: block;
+    }
+    .play-box {
+      position: absolute;
+      top: 0px;
+      left: 0px;
+      height: 100%;
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      img {
+        height: 24px;
+        width: 24px;
+      }
+    }
+}
 }
 .detail-floor {
   padding: 0px;
@@ -265,4 +294,5 @@ export default class GameDetails extends Vue {
     }
 }
 }
+
 </style>

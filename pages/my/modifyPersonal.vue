@@ -11,7 +11,7 @@
 <script lang="ts">
 import { Vue, Component } from "vue-property-decorator";
 import Bus from "~/plugins/Bus.js";
-import { sessionClear } from "~/assets/utils/auth.js";
+import { sessionClear, setSession } from "~/assets/utils/auth.js";
 @Component
 export default class ModifyPersonal extends Vue {
   private value: string = "";
@@ -93,7 +93,14 @@ export default class ModifyPersonal extends Vue {
           if (data.code === 0) {
             (this as any).$toast.success("修改成功");
             sessionClear();
-            this.$router.go(-1);
+             (this as any).$axios({
+              method: "POST",
+              url: "/usr/user/getUser"
+            }).then((res:any) => {
+              let data:any = res.data.user
+              setSession("user",JSON.stringify(data))
+              this.$router.go(-1);
+            })
           }
         }).catch((err:any) => {
           console.log(err)

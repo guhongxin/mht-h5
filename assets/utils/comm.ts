@@ -22,11 +22,7 @@ export const customFormat = function(date:any, fmt:string):string {
     }
   } else {
     let timeRub = new Date(date).getTime();
-    if (timeRub.toString().length != 13) {
-      _date = timeRub * 1000;
-    } else {
-      _date = timeRub;
-    }
+    _date = timeRub;
   }
   _date = new Date(_date);
   let o:any = {

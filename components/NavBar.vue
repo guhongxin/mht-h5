@@ -8,17 +8,19 @@
       <input :value="value" type="text" class="input-text" @change="searchText"/>
       <van-icon name="search" class="search-icon"/>
     </div>
-    <img src="/img/user.png" class="user-img" @click="userImageHand"/>
+    <img :src="avatarUrl ? avatarUrl : $defaultUserImage" class="user-img" @click="userImageHand"/>
   </div>
 </template>
 <script lang="ts">
 import { Vue, Component, Prop, Emit } from "vue-property-decorator"
+import { getSession } from "~/assets/utils/auth.js"
 @Component 
 export default class NavBar extends Vue{
   @Prop({ default: false }) fixed!: boolean;
   @Prop({ default: false }) back!: boolean;
   @Emit('searchClick') searchClick(msg: string){}
   value:string = ""
+  private avatarUrl:string = ""
   searchText(e: any) {
     let doc:HTMLInputElement  = e.target;
     this.value = doc.value;
@@ -30,6 +32,12 @@ export default class NavBar extends Vue{
   private userImageHand() {
     // 点击用户图片
     this.$emit("userImageClick")
+  }
+  private mounted() {
+    // 生命周期
+    // @ts-ignore
+    let _user = getSession("user") ? JSON.parse(getSession("user")) : null
+    this.avatarUrl = _user ? _user.avatarUrl : ""
   }
 }
 </script>

@@ -41,7 +41,7 @@
           <i class="my-xx"></i>
           <span>我的消息</span>
         </div>
-        <div class="list-item-right">2</div>
+        <div class="list-item-right">-</div>
       </div>
       <div class="list-item">
         <div class="list-item-left">
@@ -195,6 +195,7 @@ export default class My extends Vue {
     img {
       height: 54px;
       width: 54px;
+      border-radius: 50%;
     }
   }
   .user-infor-middle {
@@ -207,6 +208,9 @@ export default class My extends Vue {
         font-size: 18px;
         color: #1A1A1A;
         font-weight: bold;
+        display: flex;
+        justify-content: center;
+        align-items: center;
         .user-level {
           display: inline-block;
           font-size: 12px;

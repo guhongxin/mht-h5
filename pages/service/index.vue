@@ -2,25 +2,28 @@
   <div class="servie">
     <div class="user-infor">
       <div class="user-infor-left">
-        <img src="/img/user.png" />
+        <img :src="user.avatarUrl ? user.avatarUrl : $defaultUserImage" />
       </div>
       <div class="user-infor-middle">
         <div class="user-frist">
-          <div class="user-name">猕猴桃<span class="user-level">LV3</span></div>
+          <div class="user-name">
+            <span>{{user.nickname}}</span>
+            <span class="user-level">LV<span>{{vip.level}}</span></span>
+          </div>
         </div>
-        <div class="account">账号：MHT123456</div>
-        <div class="k-coin">K币：63</div>
+        <div class="account">账号：{{user.username || "无"}}</div>
+        <div class="k-coin">K币：-</div>
       </div>
       <div class="user-infor-right">
-        <div class="div-btn" @click="signIn">签到</div>
+        <!-- <div class="div-btn" @click="signIn">签到</div> -->
       </div>
     </div>
     <div class="level-percentage-box">
       <div class="level-percentage-left"></div>
       <div class="level-percentage-right">
         <div class="level-progress">
-          <div class="progress-portion" style="width:40%;">
-            <div class="progress-pivot">LV3</div>
+          <div class="progress-portion" :style="{width: vip.expProgress}">
+            <div class="progress-pivot" :style="{left: vip.expProgress}">LV<span>{{vip.level}}</span></div>
           </div>
         </div>
       </div>
@@ -60,6 +63,7 @@
 import { Vue, Component } from "vue-property-decorator"
 import Floor from "~/components/Floor.vue"
 import CompanyCopyWrit from "~/components/CompanyCopyWrit.vue"
+import { getSession } from "~/assets/utils/auth.js"
 interface Recharge {
   /**
    * servie-grid
@@ -74,7 +78,8 @@ interface Recharge {
   components: {
     Floor,
     CompanyCopyWrit
-  }
+  },
+  middleware: "redirectLogin"
 })
 export default class Service extends Vue {
   private recharge:Array<Recharge> = [{
@@ -99,6 +104,21 @@ export default class Service extends Vue {
     src: "/img/rgkf.png",
     title: "人工客服"
   }]
+  private user:any = {
+    nickname: "",
+    username: "",
+    avatarUrl: "",
+    birthday: "",
+    gender: "",
+    phoneNumber: "",
+    email: "",
+  }
+  private vip = {
+    level: 0,
+    curExp: 0,
+    maxExp: 0,
+    expProgress: "0%"
+  }
   private gridClick(item:any) {
     // 点击九宫格
     if (!item.path) {
@@ -120,6 +140,29 @@ export default class Service extends Vue {
     (this as any).$dialog.alert({
       message: '该功能暂未开启'
     })
+  }
+  private mounted() {
+    // @ts-ignore
+    let _user = getSession("user") ? JSON.parse(getSession("user")) : null
+    if (_user) {
+      this.vip.level = _user.vip.level
+      this.vip.curExp = _user.vip.curExp
+      this.vip.maxExp = _user.vip.maxExp
+      if (!_user.vip.maxExp) {
+        this.vip.expProgress = "0%"
+      } else {
+        this.vip.expProgress = (this.vip.curExp*100 / this.vip.maxExp).toFixed(2) + "%"
+      }
+      this.user = {
+        nickname: _user.nickname,
+        username: _user.username,
+        avatarUrl: _user.avatarUrl,
+        birthday: _user.birthday,
+        gender: _user.gender,
+        phoneNumber: _user.phoneNumber,
+        email: _user.email,
+      }
+    }
   }
 }
 </script>
@@ -143,6 +186,7 @@ export default class Service extends Vue {
     img {
       height: 54px;
       width: 54px;
+      border-radius: 50%;
     }
   }
   .user-infor-middle {
@@ -155,6 +199,9 @@ export default class Service extends Vue {
         font-size: 18px;
         color: #1A1A1A;
         font-weight: bold;
+        display: flex;
+        justify-content: center;
+        align-items: center;
         .user-level {
           display: inline-block;
           font-size: 12px;
@@ -172,14 +219,14 @@ export default class Service extends Vue {
       }
     }
     .account {
-      font-size: 11px;
+      font-size: 12px;
       font-weight: 400;
       color: #1A1A1A;
     }
     .k-coin {
-      font-size: 10px;
-      font-weight: bold;
-      color: rgba(153,153,153,1);
+      font-size: 12px;
+      font-weight: 400;
+      color: #1A1A1A;
     }
   }
   .user-infor-right {

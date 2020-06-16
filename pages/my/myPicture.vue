@@ -21,7 +21,7 @@
 import { Vue, Component } from "vue-property-decorator";
 import CompanyCopyWrit from "~/components/CompanyCopyWrit.vue";
 import Bus from "~/plugins/Bus.js";
-import { sessionClear } from "~/assets/utils/auth.js";
+import { sessionClear, setSession } from "~/assets/utils/auth.js";
 @Component({
   components: {
     CompanyCopyWrit
@@ -41,7 +41,6 @@ export default class myPicture extends Vue {
     Bus.$on("rightClick", (key: string) => {
       this.save(key);
     });
-    console.log("----", process.env)
   }
   private selecImage() {
     // 选择照片
@@ -102,31 +101,41 @@ export default class myPicture extends Vue {
     };
   }
   private save(key: string) {
-    if (!this.accountImage) {
+    if (!this.fileData) {
       (this as any).$dialog.alert({
-        message: '修改信息不能为空'
+        message: '请选择上传的图片！'
       })
       return false;
     }
-    this.canvasDataURL();
+    this.canvasDataURL(this.saveApi);
+   
+  }
+  private saveApi(url: string) {
     (this as any).$axios({
       method: "POST",
       url: "/usr/user/updateUser",
       data: {
         user:{
-          [key]: this.accountImage
+          avatarUrl: url
         }
       }
     }).then((res:any) => {
       let data = res;
       if (data.code === 0) {
         (this as any).$toast.success('修改成功')
-        sessionClear()
-        this.$router.go(-1)
+        sessionClear();
+        (this as any).$axios({
+            method: "POST",
+            url: "/usr/user/getUser"
+          }).then((res:any) => {
+            let data:any = res.data.user;
+            setSession("user",JSON.stringify(data));
+            this.$router.go(-1);
+          })
       }
     })
   }
-  private canvasDataURL(obj?:any) {
+  private canvasDataURL(callback:any, obj?:any) {
     let self = this;
     let reader = new FileReader();
     let fileName = this.fileData.name;
@@ -170,10 +179,17 @@ export default class myPicture extends Vue {
             url: `http://119.3.141.128:9003/upload/single`,
           }).then((res:any) => {
             console.log("上传成功", res)
+            let data = res.data;
+            let url = `http://material-mhtsdk.jingmakeji.top${data.resourceURL}`
+            callback(url)
           })
         }, 'image/png');
       };
     };
+  }
+  private destroyed() {
+    Bus.$off("rightClick");
+    this.fileData = null;
   }
 }
 </script>

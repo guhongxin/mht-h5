@@ -226,21 +226,23 @@ export default class PersonalData extends Vue {
     })
   }
   private mounted() {
-    // @ts-ignore
-    let _user = getSession("user") ? JSON.parse(getSession("user")) : null
-    // @ts-ignore
-    if (_user) {
-      this.user = {
-        nickname: _user.nickname,
-        username: _user.username,
-        avatarUrl: _user.avatarUrl,
-        phoneNumber: _user.phoneNumber,
-        email: _user.email,
-      }
+    this.$nextTick(() => {
       // @ts-ignore
-      this.user.gender = GenderEnum[ _user.gender || 'UNKNOWN' ]
-      this.user.birthday = _user.birthday ? _user.birthday : ""
-    }
+      let _user = getSession("user") ? JSON.parse(getSession("user")) : null
+      console.log("***获取*", _user);
+      if (_user) {
+        this.user = {
+          nickname: _user.nickname,
+          username: _user.username,
+          avatarUrl: _user.avatarUrl,
+          phoneNumber: _user.phoneNumber,
+          email: _user.email,
+        };
+        // @ts-ignore
+        this.user.gender = GenderEnum[ _user.gender || 'UNKNOWN' ];
+        this.user.birthday = _user.birthday ? _user.birthday : "";
+      }
+    })
   }
 }
 </script>
@@ -284,6 +286,7 @@ export default class PersonalData extends Vue {
 .userImage {
   height: 40px;
   width: 40px;
+  border-radius: 50%;
 }
 .bottom {
   margin-bottom: 10px;
