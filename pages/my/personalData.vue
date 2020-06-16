@@ -229,7 +229,6 @@ export default class PersonalData extends Vue {
     this.$nextTick(() => {
       // @ts-ignore
       let _user = getSession("user") ? JSON.parse(getSession("user")) : null
-      console.log("***获取*", _user);
       if (_user) {
         this.user = {
           nickname: _user.nickname,

@@ -13,13 +13,13 @@
         <div class="image-box" @click="goCompanyIntrod">
           <img src="/img/understandme1.png" />
         </div>
-        <div class="image-box">
+        <div class="image-box" @click="goCulture">
           <img src="/img/understandme2.jpg" />
         </div>
-        <div class="image-box">
+        <div class="image-box" @click="goHonor">
           <img src="/img/understandme3.png" />
         </div>
-        <div class="image-box">
+        <div class="image-box" @click="goCooperation">
           <img src="/img/understandme4.png" />
         </div>
       </div>
@@ -35,7 +35,7 @@
         </div>
       </div>
     </div>
-    <CompanyCopyWrit class="cyCopyWrit"></CompanyCopyWrit>
+    <!-- <CompanyCopyWrit class="cyCopyWrit"></CompanyCopyWrit> -->
   </div>
 </template>
 <script lang="ts">
@@ -59,6 +59,36 @@ export default class About extends Vue {
       path: "/grid/about/companyIntroduc",
        query: {
         title: "公司概述",
+        navBarType: '1'
+      }
+    })
+  }
+  private goCulture() {
+    // 企业文化
+    this.$router.push({
+      path: "/grid/about/culture",
+       query: {
+        title: "企业文化",
+        navBarType: '1'
+      }
+    })
+  }
+  private goHonor() {
+    // 企业荣耀
+    this.$router.push({
+      path: "/grid/about/honor",
+       query: {
+        title: "公司荣耀",
+        navBarType: '1'
+      }
+    })
+  }
+  private goCooperation() {
+    // 商务合作
+    this.$router.push({
+      path: "/grid/about/cooperation",
+       query: {
+        title: "商务合作",
         navBarType: '1'
       }
     })
