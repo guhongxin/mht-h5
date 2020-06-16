@@ -61,7 +61,7 @@ import Floor from "~/components/Floor.vue";
 import HotGameItem from "~/components/HotGameItem.vue";
 import CompanyCopyWrit from "~/components/CompanyCopyWrit.vue";
 import WGrid from "~/components/WGrid.vue"
-import { device } from "~/assets/utils/comm.ts"
+import { device, downFile } from "~/assets/utils/comm.ts"
 @Component({
   components: {
     Floor,
@@ -191,7 +191,7 @@ export default class Home extends Vue {
   }
   private swipeItemClick(param:any) {
     // 点击轮播
-    window.location.href = param.url
+    document.location.href = param.url
   }
   private playVideo(param:any) {
     // 播放热门视频
@@ -219,7 +219,13 @@ export default class Home extends Vue {
     }})
   }
   private hotGameDown(param:any) {
-    console.log("param", param)
+    let deviceType:number = device()
+    if (deviceType === 0) {
+      // ios
+      document.location.href = param.downUrl
+    } else {
+      downFile(param.downUrl)
+    }
   }
 }
 </script>

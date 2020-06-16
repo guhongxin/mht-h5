@@ -31,7 +31,7 @@ import { Vue, Component } from "vue-property-decorator"
 import Floor from "~/components/Floor.vue"
 import GameItem from "~/components/GameItem.vue"
 import CompanyCopyWrit from "~/components/CompanyCopyWrit.vue"
-import { device } from "~/assets/utils/comm.ts"
+import { device, downFile } from "~/assets/utils/comm.ts"
 // 接口
 interface Page {
   cur: number, // 当前页
@@ -70,7 +70,13 @@ export default class GameCenter extends Vue {
     }})
   }
   private downHandClick(param: any) {
-    console.log("下载", param)
+    let deviceType:number = device()
+    if (deviceType === 0) {
+      // ios
+      document.location.href = param.downUrl
+    } else {
+      downFile(param.downUrl)
+    }
   }
   private mounted() {
     // 生命周期

@@ -50,3 +50,11 @@ export const customFormat = function(date:any, fmt:string):string {
   }
   return fmt;
 }
+
+// 下载文件
+export const downFile = function (url:string):void {
+  let a:any = document.createElement("a");
+  a.href = url;
+  a.download = "file"
+  a.click()
+}

@@ -67,12 +67,13 @@
 import { Vue, Component } from "vue-property-decorator"
 import Floor from "~/components/Floor.vue";
 import CompanyCopyWrit from "~/components/CompanyCopyWrit.vue";
-import { device } from "~/assets/utils/comm.ts"
+import { device, downFile } from "~/assets/utils/comm.ts"
 interface GameInfor {
   iconUrl: string;
   name: string;
   tags: Array<string>;
   size: string;
+  downUrl: string;
 }
 @Component({
   components: {
@@ -85,7 +86,8 @@ export default class GameDetails extends Vue {
     iconUrl: "",
     name: "",
     tags: [],
-    size: ""
+    size: "",
+    downUrl: ""
   };
   // 视频
   private videos:Array<any> = [];
@@ -130,7 +132,8 @@ export default class GameDetails extends Vue {
       iconUrl: obj.iconUrl,
       name: obj.name,
       tags: obj.tags,
-      size: obj.size
+      size: obj.size,
+      downUrl: obj.downUrl
     };
     this.videos = obj.videos.slice(0, 2);
     this.images = obj.images;
@@ -138,7 +141,13 @@ export default class GameDetails extends Vue {
   }
   private downHandClick(param:any) {
     // 下载
-    console.log("下载", param)
+    let deviceType:number = device()
+    if (deviceType === 0) {
+      // ios
+      document.location.href = param.downUrl
+    } else {
+      downFile(param.downUrl)
+    }
   }
   private playVideo(item:any) {
     // 播放视频
