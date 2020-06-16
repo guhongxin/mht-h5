@@ -32,6 +32,7 @@
           :key="index"
           :gameIfor="item"
           @gameDetailsClick="gameDetailsClick(item)"
+          @downClick="hotGameDown(item)"
         ></Hot-game-item>
       </div>
     </Floor>
@@ -78,7 +79,7 @@ export default class Home extends Vue {
     {
       src: "/img/game.png",
       path:"/gameCenter/gameCenter",
-      text: "游戏中心"
+      text: "游戏"
     },
     {
       src: "/img/giftbox.png",
@@ -88,11 +89,11 @@ export default class Home extends Vue {
     {
       src: "/img/news.png",
       path: "/grid/news",
-      text: "新闻资讯"
+      text: "新闻"
     },
     {
       src: "/img/kbshop.png",
-      text: "K币商城"
+      text: "K币"
     },
     {
       src: "/img/about.png",
@@ -216,6 +217,9 @@ export default class Home extends Vue {
     this.$router.push({ name: 'gameCenter-gameDetails', query: {
       id: param.id
     }})
+  }
+  private hotGameDown(param:any) {
+    console.log("param", param)
   }
 }
 </script>

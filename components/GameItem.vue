@@ -25,14 +25,10 @@ import { Vue, Component, Prop, Emit } from "vue-property-decorator"
 @Component
 export default class GameItem extends Vue {
   @Prop({ default: {} }) private gameIfor!:Object;
-  @Emit("goDetailClick") goDetailClick() {}
-  @Emit("downHandClick") downHandClick() {}
-  private goDetails() {
-    this.goDetailClick();
-  }
-  private downClick() {
-    this.downHandClick()
-  }
+  @Emit("goDetailClick")
+  private goDetails() {}
+  @Emit("downHandClick")
+  private downClick() {}
 }
 </script>
 <style lang="scss" scoped>
