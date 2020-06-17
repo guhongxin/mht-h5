@@ -93,7 +93,7 @@ export default class Home extends Vue {
     },
     {
       src: "/img/kbshop.png",
-      text: "K币"
+      text: "商城"
     },
     {
       src: "/img/about.png",

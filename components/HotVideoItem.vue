@@ -1,7 +1,7 @@
 <template>
   <div class="hotVideoItem">
     <div class="hotVideoItem-img-box">
-      <img :src="video.coverUrl" />
+      <img :src="video.coverUrl" class="coverImage"/>
       <div class="play-box">
         <img src="/img/play.png" @click="playVideo(video)"/>
       </div>
@@ -33,12 +33,16 @@ export default class HotVideoItem extends Vue {
 .hotVideoItem {
   padding: 10px 5px;
   .hotVideoItem-img-box {
-    line-height: 0px;
     position: relative;
     text-align: center;
-    img {
-      width: 100%;
-      height: 89px;
+    overflow: hidden;
+    padding: 30%;
+    .coverImage {
+      display: block;
+      max-width: 100%;
+      position: absolute;
+      top: 0px;
+      left: 0px;
     }
     .play-box {
       position: absolute;

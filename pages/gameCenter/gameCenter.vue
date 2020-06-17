@@ -2,25 +2,22 @@
   <div class="game-center">
     <Floor :floorTitle="'热门游戏'" :isMore="false" class="game-center-floor">
       <div class="game-List">
-        <van-pull-refresh v-model="refreshing"
-          @refresh="onRefresh"
-          class="pull-refresh">
-           <van-list
-            v-model="loading"
-            :finished="finished"
-            finished-text="没有更多了"
-            @load="onLoad"
-            class="list-view"
-          >
-          <template #default>
-            <GameItem class="list-item"
-              v-for="(item, index) in gamesList" :key="index"
-              :gameIfor="item"
-              @goDetailClick="goDetail(item)"
-              @downHandClick="downHandClick(item)"></GameItem>
-          </template>
-          </van-list>
-        </van-pull-refresh>
+        <van-list
+          v-model="listloading"
+          :finished="finished"
+          finished-text="没有更多了"
+          @load="onLoadList"
+          :immediate-check="false"
+          class="list-view"
+        >
+        <template #default>
+          <GameItem class="list-item"
+            v-for="(item, index) in gamesList" :key="index"
+            :gameIfor="item"
+            @goDetailClick="goDetail(item)"
+            @downHandClick="downHandClick(item)"></GameItem>
+        </template>
+        </van-list>
       </div>
     </Floor>
     <!-- <CompanyCopyWrit></CompanyCopyWrit> -->
@@ -46,22 +43,25 @@ interface Page {
 })
 export default class GameCenter extends Vue {
   private gamesList:Array<any> = []; // 列表
-  private refreshing:boolean = false;
-  private loading:boolean = false
-  private finished:boolean = false
+  private listloading:boolean = false;
+  private finished:boolean = false;
   private page:Page = {
     cur: 1,
-    size: 10 
-  }
-  private onRefresh() {
-    setTimeout(() => {
-      this.refreshing = false;
-    }, 3000)
-  }
-  private onLoad() {
-    this.refreshing = false;
-    this.finished = false
-    this.loading = false;
+    size: 10
+  };
+  private total:number = 0;
+  private onLoadList() {
+    this.page.cur += 1;
+    this.gameList().then((res:any) => {
+      this.listloading = false;
+      this.finished = false;
+      if (this.gamesList.length >= this.total) {
+        this.finished = true;
+      }
+    }).catch(() => {
+      this.listloading = false;
+      this.finished = false;
+    })
   }
   private goDetail(param: any) {
     // 跳转游戏详情
@@ -80,6 +80,7 @@ export default class GameCenter extends Vue {
   }
   private mounted() {
     // 生命周期
+    this.gamesList = [];
     this.gameList();
   }
   private async gameList() {
@@ -92,7 +93,9 @@ export default class GameCenter extends Vue {
       }
     })
     let deviceType:number = device();
-    this.gamesList = res.data.games.reduce((total:Array<any>, item:any) => {
+    let data = res.data;
+    this.total = data.page.total;
+    let result = data.games.reduce((total:Array<any>, item:any) => {
       let obj = {
         id: item.id,
         name: item.name,
@@ -105,6 +108,14 @@ export default class GameCenter extends Vue {
       total.push(obj)
       return total
     }, [])
+    this.gamesList = [...this.gamesList, ...result]
+    return new Promise((resolve:any, reject:any) => {
+      if (res.code === 0) {
+        resolve({ code: 0 })
+      } else {
+        reject(res)
+      }
+    })
   }
 }
 </script>
@@ -113,23 +124,22 @@ export default class GameCenter extends Vue {
   padding-top: 10px;
   box-sizing: border-box;
   background-color: #ffffff;
+  overflow: hidden;
+  overflow-y: auto;
   min-height: calc(100vh - 106px);
 }
 .game-List {
   padding: 15px;
-}
-.pull-refresh {
-  max-height: calc(100vh - 148px);
+  height: calc(100vh - 136px);
   overflow: hidden;
   overflow-y: auto;
-  position: relative;
-}
-.list-view {
-  .list-item {
-   padding: 11px 0px; 
-  }
-  &  > .list-item {
-    border-bottom: 1px solid #E0E0E0;
+  .list-view {
+    .list-item {
+    padding: 11px 0px; 
+    }
+    &  > .list-item {
+      border-bottom: 1px solid #E0E0E0;
+    }
   }
 }
 .company-copywrit {
