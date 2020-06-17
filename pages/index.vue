@@ -36,7 +36,7 @@
         ></Hot-game-item>
       </div>
     </Floor>
-    <Floor :floorTitle="'特色活动'">
+    <Floor :floorTitle="'特色活动'" @findMore="hotActivitieMore">
       <div class="featActiv-box">
         <div class="swiper-container">
           <div class="swiper-wrapper box1">
@@ -208,7 +208,7 @@ export default class Home extends Vue {
   }
   private hotVideoMore() {
     // 欢乐视频更多
-     this.$router.push({
+    this.$router.push({
       path: "/play/videoList"
     })
   }
@@ -226,6 +226,12 @@ export default class Home extends Vue {
     } else {
       downFile(param.downUrl)
     }
+  }
+  private hotActivitieMore() {
+    // 活动更多
+    this.$router.push({
+      path: "/activities/activities"
+    })
   }
 }
 </script>

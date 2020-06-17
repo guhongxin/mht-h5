@@ -62,11 +62,15 @@ export default class GameNewItem extends Vue {
     }
   }
   .game-new-image-box {
-    line-height: 0px;
     overflow: hidden;
+    position: relative;
+    padding-top: 40%;
     img {
+      display: block;
+      position: absolute; 
+      left: 0; 
+      top: 0; 
       width: 100%;
-      height: 140px;
     }
   }
   .game-new-footer {
