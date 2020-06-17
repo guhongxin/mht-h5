@@ -5,7 +5,7 @@
       <img src="/img/logo.png" class="logo" />
     </div>
     <div class="search">
-      <input :value="value" type="text" class="input-text" @change="searchText"/>
+      <input :value="value" type="text" class="input-text" @input="searchText" @focus="inputFocus"/>
       <van-icon name="search" class="search-icon"/>
     </div>
     <img :src="avatarUrl ? avatarUrl : $defaultUserImage" class="user-img" @click="userImageHand"/>
@@ -16,16 +16,25 @@ import { Vue, Component, Prop, Emit } from "vue-property-decorator"
 import { getSession } from "~/assets/utils/auth.js"
 @Component 
 export default class NavBar extends Vue{
+  private value:string = "";
+  private avatarUrl:string = "";
   @Prop({ default: false }) fixed!: boolean;
   @Prop({ default: false }) back!: boolean;
   @Emit('searchClick') searchClick(msg: string){}
-  value:string = ""
-  private avatarUrl:string = ""
+ 
   searchText(e: any) {
     let doc:HTMLInputElement  = e.target;
     this.value = doc.value;
     this.searchClick(this.value)
   }
+
+  @Emit("inputFocus")
+  private inputFocus() {
+    this.$router.push({
+      path: "/search"
+    })
+  }
+
   private goBack() {
     this.$router.go(-1)
   }
