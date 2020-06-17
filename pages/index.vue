@@ -45,7 +45,7 @@
               v-for="(item, index) in hotActivities"
               :key="index"
             >
-              <div><img :src="item.imageUrl" /></div>
+              <img :src="item.imageUrl" :data-href="item.url" data-tag="activie"/>
             </div>
           </div>
         </div>
@@ -134,6 +134,14 @@ export default class Home extends Vue {
           observeParents:true
         });
       }, 500)
+      document.addEventListener("click", function(e) {
+        let doc:any = e.target;
+        let tag = doc.dataset.tag;
+        let href = doc.dataset.href;
+        if (tag === "activie") {
+          document.location.href = href;
+        }
+      })
     })
   }
   private gridItemClick(param: any, index: number) {
@@ -291,27 +299,14 @@ export default class Home extends Vue {
 }
 .swiper-container {
   justify-content: center;
-}
-.swiper-slide-active {
-  img {
+  .swiper-wrapper .swiper-slide {
     width: 210px;
     height: 110px;
   }
-}
-.swiper-slide {
-  img {
+  .swiper-wrapper .swiper-slide img {
     width: 210px;
     height: 110px;
   }
-}
-
-.swiper-container .swiper-wrapper .swiper-slide {
-  width: 210px;
-  height: 110px;
-}
-.swiper-container .swiper-wrapper .swiper-slide img {
-  width: 210px;
-  height: 110px;
 }
 .swiper-container1 {
   width: 100%;
