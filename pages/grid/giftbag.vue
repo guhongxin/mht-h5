@@ -9,15 +9,27 @@
         :line-width="15"
         :border="false">
         <van-tab title="全部">
-          <div class="gift-bag-list" v-if="boxesList.length>0">
-            <GridgiftbagItem
-              v-for="(item, index) in boxesList"
-              :key="index"
-              :bjUlr="item.imageUrl" class="gift-bag-list-item"
-              :disabled="item.got"
-              @receiveClick="receiveClick(item)"></GridgiftbagItem>
+          <div class="gift-bag-list">
+            <van-list
+              v-if="boxesList.length>0"
+              v-model="loading"
+              :finished="finished"
+              finished-text="没有更多了"
+              @load="onLoad"
+              :immediate-check="false"
+              class="list-view"
+            >
+            <template #default>
+              <GridgiftbagItem
+                v-for="(item, index) in boxesList"
+                :key="index"
+                :bjUlr="item.imageUrl" class="gift-bag-list-item"
+                :disabled="item.got"
+                @receiveClick="receiveClick(item)"></GridgiftbagItem>
+            </template>
+          </van-list>
+            <van-empty description="暂无数据" v-else />
           </div>
-          <van-empty description="暂无数据" v-else />
         </van-tab>
         <van-tab title="末日血战">
           <van-empty description="暂无数据" />
@@ -61,8 +73,12 @@ export default class gridgiftbag extends Vue {
     cur: 1,
     size: 10 
   };
+  private loading:boolean = false;
+  private finished:boolean = false;
+  private total:number = 0;
   private mounted() {
     // 生命周期
+    this.boxesList = [];
     this.giftCodeBoxList();
   }
   private async giftCodeBoxList() {
@@ -74,7 +90,17 @@ export default class gridgiftbag extends Vue {
         page: this.page
       }
     })
-    this.boxesList = res.data.boxes
+    let data = res.data;
+    this.total = data.page.total;
+    let result = data.boxes
+    this.boxesList = [...this.boxesList, ...result];
+    return new Promise((resolve:any, reject:any) => {
+      if (res.code === 0) {
+        resolve({ code: 0 })
+      } else {
+        reject(res)
+      }
+    })
   }
   private receiveClick(param:any) {
     (this as any).$axios({
@@ -87,6 +113,19 @@ export default class gridgiftbag extends Vue {
       this.giftCodeBoxList();
       let data = res.data;
       (this.$refs.receiveDailogDoc as any).showModule(data);
+    })
+  }
+  private onLoad() {
+    this.page.cur += 1;
+    this.giftCodeBoxList().then((res:any) => {
+      this.loading = false;
+      this.finished = false;
+      if (this.boxesList.length >= this.total) {
+        this.finished = true;
+      }
+    }).catch(() => {
+      this.loading = false;
+      this.finished = false;
     })
   }
 }
@@ -104,6 +143,9 @@ export default class gridgiftbag extends Vue {
   }
 }
 .gift-bag-list {
+  height: calc(100vh - 183px);
+  overflow: hidden;
+  overflow-y: auto;
   .gift-bag-list-item {
     margin: 10px 0px;
     box-sizing: border-box;

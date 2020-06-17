@@ -8,12 +8,22 @@
         :line-width="15"
         :border="false">
         <van-tab title="全部">
-          <div class="my-gift-bag-list" v-if="giftList.length > 0">
-            <MygiftbagItem class="my-gift-bag-list-item"
-              v-for="(item, index) in giftList" :key="index"
-              :giftCodes="item"></MygiftbagItem>
+          <div class="my-gift-bag-list">
+             <van-list
+              v-if="giftList.length>0"
+              v-model="loading"
+              :finished="finished"
+              finished-text="没有更多了"
+              @load="onLoad"
+              :immediate-check="false"
+              class="list-view"
+            >
+              <MygiftbagItem class="my-gift-bag-list-item"
+                v-for="(item, index) in giftList" :key="index"
+                :giftCodes="item"></MygiftbagItem>
+            </van-list>
+            <van-empty description="暂无数据" v-else />
           </div>
-          <van-empty description="暂无数据" v-else />
         </van-tab>
         <van-tab title="末日血战">
           <van-empty description="暂无数据" />
@@ -51,10 +61,14 @@ export default class MyGiftBag extends Vue {
   private giftList:Array<any> = []; // 礼包列表
   private page:Page = {
     cur: 1,
-    size: 10 
+    size: 10
   };
+  private loading:boolean = false;
+  private finished:boolean = false;
+  private total:number = 0;
   private mounted() {
     // 生命周期
+    this.giftList = [];
     this.myGiftList();
   }
   private async myGiftList() {
@@ -66,7 +80,30 @@ export default class MyGiftBag extends Vue {
         page: this.page
       }
     })
-    this.giftList = res.data.giftCodes
+    let data = res.data;
+    this.total = data.page.total;
+    let result = data.giftCodes;
+    this.giftList = [...this.giftList, ...result];
+    return new Promise((resolve:any, reject:any) => {
+      if (res.code === 0) {
+        resolve({ code: 0 })
+      } else {
+        reject(res)
+      }
+    })
+  }
+  private onLoad() {
+    this.page.cur += 1;
+    this.myGiftList().then((res:any) => {
+      this.loading = false;
+      this.finished = false;
+      if (this.giftList.length >= this.total) {
+        this.finished = true;
+      }
+    }).catch(() => {
+      this.loading = false;
+      this.finished = false;
+    })
   }
 }
 </script>
@@ -85,12 +122,17 @@ export default class MyGiftBag extends Vue {
     background-color: #7DB349;
   }
   .my-gift-bag-list {
-    .my-gift-bag-list-item {
-      padding: 10px 0px;
-      box-sizing: border-box;
-    }
-    & > .my-gift-bag-list-item:not(:last-child) {
-      border-bottom: 1px solid #C1C1C1;
+    height: calc(100vh - 183px);
+    overflow: hidden;
+    overflow-y: auto;
+    .list-view {
+      .my-gift-bag-list-item {
+        padding: 10px 0px;
+        box-sizing: border-box;
+      }
+      & > .my-gift-bag-list-item:not(:last-child) {
+        border-bottom: 1px solid #C1C1C1;
+      }
     }
   }
 }

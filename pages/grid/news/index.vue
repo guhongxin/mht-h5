@@ -1,11 +1,24 @@
 <template>
   <div class="game-new">
     <!-- <Floor :floorTitle="'游戏资讯'" :isMore="false"></Floor> -->
-    <div class="game-new-box" v-if="news.length >0">
-      <gameNewItem v-for="(item, key) in news" :key="key"
-        :newInfor="item" @click.native="newContent(item)"></gameNewItem>
+    <div class="game-new-box">
+      <van-list
+          v-if="news.length >0"
+          v-model="loading"
+          :finished="finished"
+          finished-text="没有更多了"
+          @load="onLoad"
+          :immediate-check="false"
+          class="list-view"
+        >
+         <template #default>
+          <gameNewItem v-for="(item, key) in news" :key="key"
+            :newInfor="item" @click.native="newContent(item)"></gameNewItem>
+        </template>
+      </van-list>
+      <van-empty v-else description="暂无数据" />
     </div>
-    <van-empty v-else description="暂无数据" />
+    
   </div>
 </template>
 <script lang="ts">
@@ -23,26 +36,48 @@ interface Page {
   }
 })
 export default class gameNew extends Vue {
-  private news:Array<any> = []
+  private news:Array<any> = [];
   private page:Page = {
     cur: 1,
-    size: 10 
-  }
+    size: 10
+  };
+  private loading:boolean = false;
+  private finished:boolean = false;
+  private total:number = 0;
   private mounted() {
+    this.news = [];
     this.getList()
   }
   private getList() {
-    (this as any).$axios({
-      method: "POST",
-      url: "/usr/news/listNews",
-      data: {
-        page: this.page
+    return new Promise((resolve:any, reject:any) => {
+      (this as any).$axios({
+        method: "POST",
+        url: "/usr/news/listNews",
+        data: {
+          page: this.page
+        }
+      }).then((res:any) => {
+        let data = res.data
+        this.total = data.page.total;
+        let result = data.newsList
+        this.news = [...this.news, ...result]
+        resolve({ code: 0})
+      }).catch((err:any) => {
+        reject(err)
+      })
+    })
+  }
+  private onLoad() {
+    this.page.cur += 1;
+    this.getList().then((res:any) => {
+      this.loading = false;
+      this.finished = false;
+      if (this.news.length >= this.total) {
+        this.finished = true;
       }
-    }).then((res:any) => {
-      let data = res.data
-      this.news = data.newsList
-    }).catch((err:any) => {
-      console.log(err)
+    }).catch(() => {
+      this.loading = false;
+      this.finished = false;
     })
   }
   private newContent(item:any) {
@@ -63,5 +98,8 @@ export default class gameNew extends Vue {
 .game-new-box {
   box-sizing: border-box;
   padding: 0px 7px 10px 7px;
+  height: calc(100vh - 111px);
+  overflow: hidden;
+  overflow-y: auto;
 }
 </style>

@@ -6,11 +6,14 @@
       </div>
       <div class="game-detail-right">
         <div class="game-name">{{gameInfor.name}}</div>
-        <div class="game-tag">
+        <div class="game-intro">
+          {{gameInfor.intro}}
+        </div>
+        <!-- <div class="game-tag">
           <span v-for="(item, index) in gameInfor.tags"
             :key="index">{{item}}</span>
         </div>
-        <div class="game-size">{{gameInfor.size}}M</div>
+        <div class="game-size">{{gameInfor.size}}M</div> -->
         <div class="button-group">
           <div class="down-btn" @click="downHandClick(gameInfor)">下载</div>
           <div class="giftbag-btn">礼包</div>
@@ -74,6 +77,7 @@ interface GameInfor {
   tags: Array<string>;
   size: string;
   downUrl: string;
+  intro: string;
 }
 @Component({
   components: {
@@ -87,7 +91,8 @@ export default class GameDetails extends Vue {
     name: "",
     tags: [],
     size: "",
-    downUrl: ""
+    downUrl: "",
+    intro: ""
   };
   // 视频
   private videos:Array<any> = [];
@@ -133,7 +138,8 @@ export default class GameDetails extends Vue {
       name: obj.name,
       tags: obj.tags,
       size: obj.size,
-      downUrl: obj.downUrl
+      downUrl: obj.downUrl,
+      intro: obj.intro
     };
     this.videos = obj.videos.slice(0, 2);
     this.images = obj.images;
@@ -191,6 +197,19 @@ export default class GameDetails extends Vue {
         font-size: 20px;
         font-weight: bold;
         color:#1A1A1A;
+      }
+      .game-intro {
+        margin: 2px 0px;
+        font-size: 12px;
+        font-weight: 400;
+        color:#595959;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        text-indent: 1em;
+        
       }
       .game-tag {
         font-size: 12px;

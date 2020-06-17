@@ -3,10 +3,10 @@
     <Floor :floorTitle="'热门游戏'" :isMore="false" class="game-center-floor">
       <div class="game-List">
         <van-list
-          v-model="listloading"
+          v-model="loading"
           :finished="finished"
           finished-text="没有更多了"
-          @load="onLoadList"
+          @load="onLoad"
           :immediate-check="false"
           class="list-view"
         >
@@ -43,23 +43,23 @@ interface Page {
 })
 export default class GameCenter extends Vue {
   private gamesList:Array<any> = []; // 列表
-  private listloading:boolean = false;
+  private loading:boolean = false;
   private finished:boolean = false;
   private page:Page = {
     cur: 1,
     size: 10
   };
   private total:number = 0;
-  private onLoadList() {
+  private onLoad() {
     this.page.cur += 1;
     this.gameList().then((res:any) => {
-      this.listloading = false;
+      this.loading = false;
       this.finished = false;
       if (this.gamesList.length >= this.total) {
         this.finished = true;
       }
     }).catch(() => {
-      this.listloading = false;
+      this.loading = false;
       this.finished = false;
     })
   }
@@ -103,7 +103,8 @@ export default class GameCenter extends Vue {
         downUrl: item.downloads[deviceType].url,
         size: item.downloads[deviceType].size,
         installCount: item.installCount,
-        tags: item.tags
+        tags: item.tags,
+        intro: item.intro
       }
       total.push(obj)
       return total
