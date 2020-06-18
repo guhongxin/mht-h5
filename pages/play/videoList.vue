@@ -1,6 +1,6 @@
 <template>
   <div class="video">
-    <Floor :floorTitle="'欢乐视频'" :isMore="false"></Floor>
+    <Floor :floorTitle="'欢乐视频'" :isMore="false" class="titleFloor"></Floor>
     <div class="tab-menu">
       <van-tabs v-model="active"
         animated
@@ -11,22 +11,22 @@
         @click="vanTabClick">
         <van-tab v-for="item in tabMenu" :key="item.id" :title="item.name"></van-tab>
       </van-tabs>
-      <div class="video-list">
-        <van-list
-          v-if="videos.length>0"
-          v-model="loading"
-          :finished="finished"
-          finished-text="没有更多了"
-          @load="onLoad"
-          :immediate-check="false"
-          class="list-view"
-        >
-        <HotVideoItem class="video-list-item" v-for="(item, index) in videos" 
-          :key="index"
-          :video="item"></HotVideoItem>
-        </van-list>
-        <van-empty description="暂无数据" v-else />
-      </div>
+      <van-list
+        v-model="loading"
+        :finished="finished"
+        finished-text="没有更多了"
+        @load="onLoad"
+        :immediate-check="false"
+        class="list-view"
+        v-if="videos.length>0"
+      >
+        <div class="video-list"  >
+          <HotVideoItem class="video-list-item" v-for="(item, index) in videos" 
+            :key="index"
+            :video="item"></HotVideoItem>
+        </div>
+      </van-list>
+      <van-empty description="暂无数据" v-else />
     </div>
   </div>
 </template>
@@ -59,10 +59,11 @@ export default class VideoList extends Vue {
 
   private mounted() {
     this.tabList();
+    this.videos = [];
     this.getList()
   }
   private getList() {
-    this.videos = [];
+    
     return new Promise((resolve:any, reject:any) => {
       (this as any).$axios({
         method: "POST",
@@ -109,6 +110,7 @@ export default class VideoList extends Vue {
   }
   private vanTabClick(index:any) {
     // 切换tab
+    this.videos = [];
     this.gameId = this.tabMenu[index].id;
     this.getList();
   }
@@ -116,21 +118,24 @@ export default class VideoList extends Vue {
 </script>
 <style lang="scss" scoped>
 .video {
-  padding-top: 10px;
   box-sizing: border-box;
-  background-color: #ffffff;
   min-height: calc(100vh - 106px);
+  .titleFloor {
+    padding: 10px 0px;
+  }
+}
+.list-view {
+  background-color: #dddddd;
+  padding: 10px 5px;
+  box-sizing: border-box;
 }
 .video-list {
-  .list-view {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex-wrap: wrap;
-    .video-list-item {
-      width: 50%;
-      background-color: #ffffff;
-    }
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  .video-list-item {
+    width: 50%;
   }
 }
 </style>

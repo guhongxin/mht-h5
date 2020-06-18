@@ -18,7 +18,7 @@
     </div>
     <div class="footer">
       <div @click="goHome">返回</div>
-      <div>注册</div>
+      <!-- <div>注册</div> -->
     </div>
   </div>
 </template>

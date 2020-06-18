@@ -71,12 +71,12 @@ export default class gridgiftbag extends Vue {
   private gameId:any;
   private mounted() {
     // 生命周期
+    this.boxesList = [];
     this.tabList();
     this.giftCodeBoxList();
   }
   private async giftCodeBoxList() {
     // 请求列表
-    this.boxesList = [];
     let res = await (this as any).$axios({
       method: "POST",
       url: "/usr/giftcode/listGiftCodeBox",
@@ -137,6 +137,7 @@ export default class gridgiftbag extends Vue {
   }
   private vanTabClick(index:any) {
     // 切换tab
+    this.boxesList = [];
     this.gameId = this.tabMenu[index].id;
     this.giftCodeBoxList();
   }

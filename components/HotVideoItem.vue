@@ -1,15 +1,17 @@
 <template>
-  <div class="hotVideoItem">
-    <div class="hotVideoItem-img-box">
-      <img :src="video.verCoverUrl" class="coverImage"/>
-      <div class="play-box">
-        <img src="/img/play.png" @click="playVideo(video)"/>
+  <div class="hotVideoItem-box">
+    <div class="hotVideoItem">
+      <div class="hotVideoItem-img-box">
+        <img :src="video.verCoverUrl" class="coverImage"/>
+        <div class="play-box">
+          <img src="/img/play.png" @click="playVideo(video)"/>
+        </div>
       </div>
-    </div>
-    <div class="hotVideoItem-title">
-      <span>{{video.gameName}}</span>
-      <span>|</span>
-      <span>{{video.title}}</span>
+      <div class="hotVideoItem-title">
+        <span>{{video.gameName}}</span>
+        <span>|</span>
+        <span>{{video.title}}</span>
+      </div>
     </div>
   </div>
 </template>
@@ -31,8 +33,14 @@ export default class HotVideoItem extends Vue {
 }
 </script>
 <style lang="scss" scoped>
+.hotVideoItem-box {
+  padding: 0px 5px 10px 5px;
+  box-sizing: border-box;
+}
 .hotVideoItem {
-  padding: 10px 5px;
+  background-color: #ffffff;
+  border-radius: 4px;
+  overflow: hidden;
   .hotVideoItem-img-box {
     position: relative;
     text-align: center;
@@ -61,6 +69,7 @@ export default class HotVideoItem extends Vue {
     }
   }
   .hotVideoItem-title {
+    padding: 5px;
     font-size: 14px;
     font-weight: bold;
     color: #595959;

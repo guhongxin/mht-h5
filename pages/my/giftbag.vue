@@ -61,12 +61,12 @@ export default class MyGiftBag extends Vue {
   private gameId:any;
   private mounted() {
     // 生命周期
+    this.giftList = [];
     this.tabList();
     this.myGiftList();
   }
   private async myGiftList() {
     // 我的礼包列表
-    this.giftList = [];
     let res = await (this as any).$axios({
       method: "POST",
       url: "/usr/giftcode/listMyGiftCode",
@@ -114,6 +114,7 @@ export default class MyGiftBag extends Vue {
   }
   private vanTabClick(index:any) {
     // 切换tab
+    this.giftList = [];
     this.gameId = this.tabMenu[index].id;
     this.myGiftList();
   }
