@@ -21,15 +21,15 @@
           :immediate-check="false"
           class="list-view"
         >
-        <template #default>
-          <GridgiftbagItem
-            v-for="(item, index) in boxesList"
-            :key="index"
-            :bjUlr="item.imageUrl" class="gift-bag-list-item"
-            :disabled="item.got"
-            @receiveClick="receiveClick(item)"></GridgiftbagItem>
-        </template>
-      </van-list>
+          <template #default>
+            <GridgiftbagItem
+              v-for="(item, index) in boxesList"
+              :key="index"
+              :bjUlr="item.imageUrl" class="gift-bag-list-item"
+              :disabled="item.got"
+              @receiveClick="receiveClick(item)"></GridgiftbagItem>
+          </template>
+        </van-list>
         <van-empty description="暂无数据" v-else />
       </div>
     </div>
