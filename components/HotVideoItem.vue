@@ -2,7 +2,7 @@
   <div class="hotVideoItem-box">
     <div class="hotVideoItem">
       <div class="hotVideoItem-img-box">
-        <img :src="video.verCoverUrl" class="coverImage"/>
+        <img :src="video.horCoverUrl" class="coverImage"/>
         <div class="play-box">
           <img src="/img/play.png" @click="playVideo(video)"/>
         </div>
@@ -45,7 +45,7 @@ export default class HotVideoItem extends Vue {
     position: relative;
     text-align: center;
     overflow: hidden;
-    padding: 30%;
+    padding-bottom: 50%;
     .coverImage {
       display: block;
       max-width: 100%;

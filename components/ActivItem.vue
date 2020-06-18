@@ -54,14 +54,14 @@ export default class ActivItem extends Vue {
     background-color: #ffffff;
     border-radius: 0px 0px 4px 4px;
     position: relative;
-    padding-top: 40%;
+    padding-bottom: 50%;
     overflow: hidden;
     img {
       display: block;
       position: absolute; 
       left: 0; 
       top: 0; 
-      max-width: 100%;
+      width: 100%;
     }
   }
 }

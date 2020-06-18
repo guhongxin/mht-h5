@@ -274,17 +274,6 @@ export default class Home extends Vue {
   justify-content: center;
   align-items: center;
   overflow: hidden;
-  // .happy-videos {
-  //   flex: 1;
-  //   height: 170px;
-  //   img {
-  //     width: 100%;
-  //     height: 170px;
-  //   }
-  // }
-  // & > .happy-videos:not(:last-child) {
-  //   margin-right: 8px;
-  // }
 }
 .hot-game-list {
   display: flex;

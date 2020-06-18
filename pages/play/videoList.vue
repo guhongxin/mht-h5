@@ -124,7 +124,8 @@ export default class VideoList extends Vue {
   box-sizing: border-box;
   min-height: calc(100vh - 106px);
   .titleFloor {
-    padding: 10px 0px;
+    padding-top: 10px;
+    padding-bottom: 10px;
   }
 }
 .list-view {

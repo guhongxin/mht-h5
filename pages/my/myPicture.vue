@@ -37,7 +37,7 @@ export default class myPicture extends Vue {
     let route: any = this.$route;
     this.accountImage = route.query.modifyTxt
       ? route.query.modifyTxt
-      : "http://material-mhtsdk.jingmakeji.top/2020-06-08/6675708796549079040.jpg";
+      : "";
     Bus.$on("rightClick", (key: string) => {
       this.save(key);
     });
