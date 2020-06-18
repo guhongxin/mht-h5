@@ -88,7 +88,7 @@ export default class VideoList extends Vue {
     this.getList().then((res:any) => {
       this.loading = false;
       this.finished = false;
-      if (this.videos.length >= this.total) {
+      if (this.videos.length >= this.total && this.page.cur > 1) {
         this.finished = true;
       }
     }).catch(() => {
@@ -112,6 +112,8 @@ export default class VideoList extends Vue {
     // 切换tab
     this.videos = [];
     this.page.cur = 1;
+    this.finished = false;
+    this.loading = false;
     this.gameId = this.tabMenu[index].id;
     this.getList();
   }
@@ -126,7 +128,7 @@ export default class VideoList extends Vue {
   }
 }
 .list-view {
-  background-color: #dddddd;
+  background-color: #EEF1F3;
   padding: 10px 5px;
   box-sizing: border-box;
 }

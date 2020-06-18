@@ -15,7 +15,7 @@
               v-for="(item, index) in hotVideos"
               :key="index"
             >
-              <img :src="item.coverUrl" class="coverUrl"/>
+              <img :src="item.verCoverUrl" class="coverUrl"/>
               <div class="play-box">
                 <img src="/img/play.png" @click="playVideo(item)"/>
               </div>
@@ -204,7 +204,7 @@ export default class Home extends Vue {
   private playVideo(param:any) {
     // 播放热门视频
     this.$router.push({ name: 'play-play', query: {
-      coverUrl: param.coverUrl,
+      coverUrl: param.verCoverUrl,
       videoUrl: param.videoUrl
     }})
   }

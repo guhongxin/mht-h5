@@ -115,7 +115,7 @@ export default class gridgiftbag extends Vue {
     this.giftCodeBoxList().then((res:any) => {
       this.loading = false;
       this.finished = false;
-      if (this.boxesList.length >= this.total) {
+      if (this.boxesList.length >= this.total && this.page.cur > 1) {
         this.finished = true;
       }
     }).catch(() => {
@@ -139,6 +139,8 @@ export default class gridgiftbag extends Vue {
     // 切换tab
     this.boxesList = [];
     this.page.cur = 1;
+    this.finished = false;
+    this.loading = false;
     this.gameId = this.tabMenu[index].id;
     this.giftCodeBoxList();
   }
@@ -146,18 +148,25 @@ export default class gridgiftbag extends Vue {
 </script>
 <style lang="scss" scoped>
 .grid-gift-bag {
-  padding: 15px 15px;
   box-sizing: border-box;
   min-height: calc(100vh - 106px);
-  background-color: #ffffff;
+  .giftbag-floor {
+    padding: 10px 0px;
+  }
 }
 .tab-menu {
   /deep/ .van-tabs__line {
     background-color: #7DB349;
   }
 }
-.gift-bag-list {
+.list-view {
   height: calc(100vh - 183px);
+  border: 1px solid red;
+}
+.gift-bag-list {
+  background-color: #EEF1F3;
+  padding: 0px 5px;
+  box-sizing: border-box;
   overflow: hidden;
   overflow-y: auto;
   .gift-bag-list-item {

@@ -1,5 +1,7 @@
 <template>
-  <div class="grid-giftbag-item" :style="{background: `url(${bjUlr}) no-repeat center`, backgroundSize: 'cover'}">
+  <!-- <div class="grid-giftbag-item" :style="{background: `url(${bjUlr}) no-repeat center`, backgroundSize: 'cover'}"> -->
+  <div class="grid-giftbag-item">
+    <img :src="bjUlr" class="img-box"/>
     <div class="receiveBtn" 
       :class="[ disabled ? 'disableBtn' : 'enableBtn']"
      @click="receiveBtn">{{ disabled ? "已领取": "领取" }}</div>
@@ -22,8 +24,16 @@ export default class  GridgiftbagItem extends Vue{
 <style lang="scss" scoped>
 .grid-giftbag-item {
   position: relative;
-  height: 130px;
+  background-color: #ffffff;
   border-radius: 4px;
+  padding-bottom: 50%;
+  overflow: hidden;
+  .img-box {
+    position: absolute;
+    width: 100%;
+    top: 0px;
+    right: 0px;
+  }
   .receiveBtn {
     position: absolute;
     display: inline;

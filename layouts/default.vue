@@ -153,7 +153,7 @@ export default class Default extends Vue {
   padding: 56px 0px 50px 0px;
   position: relative;
   box-sizing: border-box;
-  background-color: #dddddd;
+  background-color: #EEF1F3;
 }
 .txt {
   height: 56px;

@@ -92,7 +92,7 @@ export default class MyGiftBag extends Vue {
     this.myGiftList().then((res:any) => {
       this.loading = false;
       this.finished = false;
-      if (this.giftList.length >= this.total) {
+      if (this.giftList.length >= this.total && this.page.cur > 1) {
         this.finished = true;
       }
     }).catch(() => {
@@ -116,6 +116,8 @@ export default class MyGiftBag extends Vue {
     // 切换tab
     this.giftList = [];
     this.page.cur = 1;
+    this.finished = false;
+    this.loading = false;
     this.gameId = this.tabMenu[index].id;
     this.myGiftList();
   }
