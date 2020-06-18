@@ -151,7 +151,8 @@ export default class gridgiftbag extends Vue {
   box-sizing: border-box;
   min-height: calc(100vh - 106px);
   .giftbag-floor {
-    padding: 10px 0px;
+    padding-top: 10px;
+    padding-bottom: 10px;
   }
 }
 .tab-menu {
@@ -160,8 +161,7 @@ export default class gridgiftbag extends Vue {
   }
 }
 .list-view {
-  height: calc(100vh - 183px);
-  border: 1px solid red;
+  height: calc(100vh - 200px);
 }
 .gift-bag-list {
   background-color: #EEF1F3;
