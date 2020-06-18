@@ -6,35 +6,26 @@
         swipeable
         sticky
         :line-width="15"
-        :border="false">
-        <van-tab title="全部">
-          <div class="my-gift-bag-list">
-             <van-list
-              v-if="giftList.length>0"
-              v-model="loading"
-              :finished="finished"
-              finished-text="没有更多了"
-              @load="onLoad"
-              :immediate-check="false"
-              class="list-view"
-            >
-              <MygiftbagItem class="my-gift-bag-list-item"
-                v-for="(item, index) in giftList" :key="index"
-                :giftCodes="item"></MygiftbagItem>
-            </van-list>
-            <van-empty description="暂无数据" v-else />
-          </div>
-        </van-tab>
-        <van-tab title="末日血战">
-          <van-empty description="暂无数据" />
-        </van-tab>
-        <van-tab title="作妖计">
-          <van-empty description="暂无数据" />
-        </van-tab>
-        <van-tab title="塔防纪元">
-          <van-empty description="暂无数据" />
-        </van-tab>
+        :border="false"
+        @click="vanTabClick">
+        <van-tab v-for="item in tabMenu" :key="item.id" :title="item.name"></van-tab>
       </van-tabs>
+      <div class="my-gift-bag-list">
+        <van-list
+        v-if="giftList.length>0"
+        v-model="loading"
+        :finished="finished"
+        finished-text="没有更多了"
+        @load="onLoad"
+        :immediate-check="false"
+        class="list-view"
+      >
+        <MygiftbagItem class="my-gift-bag-list-item"
+          v-for="(item, index) in giftList" :key="index"
+          :giftCodes="item"></MygiftbagItem>
+      </van-list>
+      <van-empty description="暂无数据" v-else />
+    </div>
     </div>
     <CompanyCopyWrit></CompanyCopyWrit>
   </div>
@@ -66,18 +57,22 @@ export default class MyGiftBag extends Vue {
   private loading:boolean = false;
   private finished:boolean = false;
   private total:number = 0;
+  private tabMenu:Array<any> = [];
+  private gameId:any;
   private mounted() {
     // 生命周期
-    this.giftList = [];
+    this.tabList();
     this.myGiftList();
   }
   private async myGiftList() {
     // 我的礼包列表
+    this.giftList = [];
     let res = await (this as any).$axios({
       method: "POST",
       url: "/usr/giftcode/listMyGiftCode",
       data: {
-        page: this.page
+        page: this.page,
+        gameId: this.gameId || undefined
       }
     })
     let data = res.data;
@@ -104,6 +99,23 @@ export default class MyGiftBag extends Vue {
       this.loading = false;
       this.finished = false;
     })
+  }
+  private tabList() {
+    (this as any).$axios({
+      method: "POST",
+      url: "/usr/game/listIdName"
+    }).then((res:any) => {
+      let data:any = res.data;
+      this.tabMenu = data.games;
+      this.tabMenu.unshift({ name: "全部", id: 0 })
+    }).catch((err:any) => {
+      console.log("err", err)
+    });
+  }
+  private vanTabClick(index:any) {
+    // 切换tab
+    this.gameId = this.tabMenu[index].id;
+    this.myGiftList();
   }
 }
 </script>

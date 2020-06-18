@@ -7,40 +7,31 @@
         swipeable
         sticky
         :line-width="15"
-        :border="false">
-        <van-tab title="全部">
-          <div class="gift-bag-list">
-            <van-list
-              v-if="boxesList.length>0"
-              v-model="loading"
-              :finished="finished"
-              finished-text="没有更多了"
-              @load="onLoad"
-              :immediate-check="false"
-              class="list-view"
-            >
-            <template #default>
-              <GridgiftbagItem
-                v-for="(item, index) in boxesList"
-                :key="index"
-                :bjUlr="item.imageUrl" class="gift-bag-list-item"
-                :disabled="item.got"
-                @receiveClick="receiveClick(item)"></GridgiftbagItem>
-            </template>
-          </van-list>
-            <van-empty description="暂无数据" v-else />
-          </div>
-        </van-tab>
-        <van-tab title="末日血战">
-          <van-empty description="暂无数据" />
-        </van-tab>
-        <van-tab title="作妖计">
-          <van-empty description="暂无数据" />
-        </van-tab>
-        <van-tab title="塔防纪元">
-          <van-empty description="暂无数据" />
-        </van-tab>
+        :border="false"
+        @click="vanTabClick">
+        <van-tab v-for="item in tabMenu" :key="item.id" :title="item.name"></van-tab>
       </van-tabs>
+      <div class="gift-bag-list">
+        <van-list
+          v-if="boxesList.length>0"
+          v-model="loading"
+          :finished="finished"
+          finished-text="没有更多了"
+          @load="onLoad"
+          :immediate-check="false"
+          class="list-view"
+        >
+        <template #default>
+          <GridgiftbagItem
+            v-for="(item, index) in boxesList"
+            :key="index"
+            :bjUlr="item.imageUrl" class="gift-bag-list-item"
+            :disabled="item.got"
+            @receiveClick="receiveClick(item)"></GridgiftbagItem>
+        </template>
+      </van-list>
+        <van-empty description="暂无数据" v-else />
+      </div>
     </div>
     <!-- <CompanyCopyWrit></CompanyCopyWrit> -->
     <ReceiveDailog ref="receiveDailogDoc"></ReceiveDailog>
@@ -76,18 +67,22 @@ export default class gridgiftbag extends Vue {
   private loading:boolean = false;
   private finished:boolean = false;
   private total:number = 0;
+  private tabMenu:Array<any> = [];
+  private gameId:any;
   private mounted() {
     // 生命周期
-    this.boxesList = [];
+    this.tabList();
     this.giftCodeBoxList();
   }
   private async giftCodeBoxList() {
     // 请求列表
+    this.boxesList = [];
     let res = await (this as any).$axios({
       method: "POST",
       url: "/usr/giftcode/listGiftCodeBox",
       data: {
-        page: this.page
+        page: this.page,
+        gameId: this.gameId || undefined
       }
     })
     let data = res.data;
@@ -127,6 +122,23 @@ export default class gridgiftbag extends Vue {
       this.loading = false;
       this.finished = false;
     })
+  }
+  private tabList() {
+    (this as any).$axios({
+      method: "POST",
+      url: "/usr/game/listIdName"
+    }).then((res:any) => {
+      let data:any = res.data;
+      this.tabMenu = data.games;
+      this.tabMenu.unshift({ name: "全部", id: 0 })
+    }).catch((err:any) => {
+      console.log("err", err)
+    });
+  }
+  private vanTabClick(index:any) {
+    // 切换tab
+    this.gameId = this.tabMenu[index].id;
+    this.giftCodeBoxList();
   }
 }
 </script>

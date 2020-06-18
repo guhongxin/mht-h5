@@ -1,7 +1,7 @@
 <template>
   <div class="hotVideoItem">
     <div class="hotVideoItem-img-box">
-      <img :src="video.coverUrl" class="coverImage"/>
+      <img :src="video.verCoverUrl" class="coverImage"/>
       <div class="play-box">
         <img src="/img/play.png" @click="playVideo(video)"/>
       </div>
@@ -22,8 +22,9 @@ export default class HotVideoItem extends Vue {
   }}) video!:any
   private playVideo(param:any) {
     // 播放热门视频
+    console.log("param",param)
     this.$router.push({ name: 'play-play', query: {
-      coverUrl: param.coverUrl,
+      coverUrl: param.verCoverUrl,
       videoUrl: param.videoUrl
     }})
   }

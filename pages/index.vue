@@ -15,7 +15,7 @@
               v-for="(item, index) in hotVideos"
               :key="index"
             >
-              <img :src="item.coverUrl" />
+              <img :src="item.coverUrl" class="coverUrl"/>
               <div class="play-box">
                 <img src="/img/play.png" @click="playVideo(item)"/>
               </div>
@@ -273,17 +273,17 @@ export default class Home extends Vue {
   display: flex;
   justify-content: center;
   align-items: center;
-  .happy-videos {
-    flex: 1;
-    height: 170px;
-    img {
-      width: 100%;
-      height: 170px;
-    }
-  }
-  & > .happy-videos:not(:last-child) {
-    margin-right: 8px;
-  }
+  // .happy-videos {
+  //   flex: 1;
+  //   height: 170px;
+  //   img {
+  //     width: 100%;
+  //     height: 170px;
+  //   }
+  // }
+  // & > .happy-videos:not(:last-child) {
+  //   margin-right: 8px;
+  // }
 }
 .hot-game-list {
   display: flex;
@@ -301,25 +301,32 @@ export default class Home extends Vue {
   justify-content: center;
   .swiper-wrapper .swiper-slide {
     width: 210px;
-    height: 110px;
+    padding-bottom: 30%;
+    overflow: hidden;
+    position: relative;
   }
   .swiper-wrapper .swiper-slide img {
-    width: 210px;
-    height: 110px;
+    display: block;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 100%;
   }
 }
 .swiper-container1 {
   width: 100%;
-  height: 240px;
-  overflow: hidden;
   .swiper-slide {
     width: 40%;
+    padding-bottom: 60%;
     position: relative;
     border-radius: 4px;
     overflow: hidden;
-    img {
+    .coverUrl {
+      display: block;
+      position: absolute;
+      top: 0px;
+      left: 0px;
       width: 100%;
-      height: 240px;
     }
     .play-box {
       position: absolute;
