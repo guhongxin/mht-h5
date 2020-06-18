@@ -111,6 +111,7 @@ export default class VideoList extends Vue {
   private vanTabClick(index:any) {
     // 切换tab
     this.videos = [];
+    this.page.cur = 1;
     this.gameId = this.tabMenu[index].id;
     this.getList();
   }

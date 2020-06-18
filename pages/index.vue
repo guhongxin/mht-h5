@@ -269,10 +269,11 @@ export default class Home extends Vue {
   font-size: 12px;
 }
 .happy-videos-box {
-  padding: 15px;
+  padding: 15px 0px;
   display: flex;
   justify-content: center;
   align-items: center;
+  overflow: hidden;
   // .happy-videos {
   //   flex: 1;
   //   height: 170px;
@@ -289,18 +290,18 @@ export default class Home extends Vue {
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 15px;
+  padding: 15px 0px;
   .hot-game-list-item {
     flex: 1;
   }
 }
 .featActiv-box {
-  padding: 15px;
+  padding: 15px 0px;
 }
 .swiper-container {
   justify-content: center;
   .swiper-wrapper .swiper-slide {
-    width: 210px;
+    width: 230px;
     padding-bottom: 30%;
     overflow: hidden;
     position: relative;

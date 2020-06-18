@@ -115,6 +115,7 @@ export default class MyGiftBag extends Vue {
   private vanTabClick(index:any) {
     // 切换tab
     this.giftList = [];
+    this.page.cur = 1;
     this.gameId = this.tabMenu[index].id;
     this.myGiftList();
   }

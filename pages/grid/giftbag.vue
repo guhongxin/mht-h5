@@ -138,6 +138,7 @@ export default class gridgiftbag extends Vue {
   private vanTabClick(index:any) {
     // 切换tab
     this.boxesList = [];
+    this.page.cur = 1;
     this.gameId = this.tabMenu[index].id;
     this.giftCodeBoxList();
   }

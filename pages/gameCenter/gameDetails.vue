@@ -56,7 +56,7 @@
     <Floor :floorTitle="'欢乐视频'" :isMore="false" class="detail-floor">
       <div class="hl-video">
         <div class="hotVideoItem-img-box" v-for="(item, index) in videos" :key="index">
-          <img :src="item.coverUrl" />
+          <img :src="item.horCoverUrl" />
           <div class="play-box">
             <img src="/img/play.png" @click="playVideo(item)"/>
           </div>
@@ -143,7 +143,6 @@ export default class GameDetails extends Vue {
     };
     this.videos = obj.videos.slice(0, 2);
     this.images = obj.images;
-    console.log(this.gameInfor);
   }
   private downHandClick(param:any) {
     // 下载
@@ -158,7 +157,7 @@ export default class GameDetails extends Vue {
   private playVideo(item:any) {
     // 播放视频
     this.$router.push({ name: 'play-play', query: {
-      coverUrl: item.coverUrl,
+      coverUrl: item.horCoverUrl,
       videoUrl: item.videoUrl
     }})
   }
