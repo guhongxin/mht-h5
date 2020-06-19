@@ -176,7 +176,7 @@ export default class myPicture extends Vue {
           (self as any).$axios({
             method: "POST",
             data: formdata,
-            url: `http://119.3.141.128:9003/upload/single`,
+            url: `http://122.112.165.158:9003/upload/single`,
           }).then((res:any) => {
             console.log("上传成功", res)
             let data = res.data;

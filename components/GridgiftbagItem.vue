@@ -26,13 +26,12 @@ export default class  GridgiftbagItem extends Vue{
   position: relative;
   background-color: #ffffff;
   border-radius: 4px;
-  padding-bottom: 50%;
+  padding-bottom: 40%;
   overflow: hidden;
   .img-box {
     position: absolute;
     width: 100%;
-    top: 0px;
-    right: 0px;
+    height: 100%;
   }
   .receiveBtn {
     position: absolute;

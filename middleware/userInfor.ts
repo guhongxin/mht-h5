@@ -14,6 +14,8 @@ export default function (context:any) {
         }).then((res:any) => {
           let data:any = res.data.user
           setSession("user",JSON.stringify(data))
+        }).catch((err:any) => {
+          console.log(err)
         })
       }
     }

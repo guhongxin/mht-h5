@@ -105,6 +105,7 @@ export default class gridgiftbag extends Vue {
         giftCodeBoxId: param.id
       }
     }).then((res:any) => {
+      this.boxesList = [];
       this.giftCodeBoxList();
       let data = res.data;
       (this.$refs.receiveDailogDoc as any).showModule(data);

@@ -95,10 +95,14 @@ export default class Home extends Vue {
       src: "/img/kbshop.png",
       text: "商城"
     },
+    // {
+    //   src: "/img/about.png",
+    //   path:"/grid/about",
+    //   text: "关于我们"
+    // },
     {
       src: "/img/about.png",
-      path:"/grid/about",
-      text: "关于我们"
+      text: "论坛"
     }
   ];
   private mounted() {

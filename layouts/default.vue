@@ -37,12 +37,12 @@
           <img :src="props.active ? serviceIcon.active : serviceIcon.inactive" />
         </template>
       </van-tabbar-item>
-      <van-tabbar-item to="/forum">
+      <!-- <van-tabbar-item to="/forum">
         <span>论坛</span>
         <template #icon="props">
           <img :src="props.active ? forumIcon.active : forumIcon.inactive" />
         </template>
-      </van-tabbar-item>
+      </van-tabbar-item> -->
       <van-tabbar-item to="/my">
         <span>我的</span>
         <template #icon="props">
