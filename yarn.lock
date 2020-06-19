@@ -3167,7 +3167,7 @@ debug@=3.1.0:
   dependencies:
     ms "2.0.0"
 
-debug@^3.0.0, debug@^3.2.6:
+debug@^3.0.0, debug@^3.1.0, debug@^3.2.6:
   version "3.2.6"
   resolved "https://registry.yarnpkg.com/debug/-/debug-3.2.6.tgz#e83d17de16d8a7efb7717edbe5fb10135eee629b"
   integrity sha512-mel+jf7nrtEl5Pn1Qx46zARXKDpBbvzezse7p7LqINmdoIk8PYP5SySaxEmYv6TZ0JyEKA1hsCId6DIhgITtWQ==
@@ -5802,6 +5802,14 @@ number-is-nan@^1.0.0:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/number-is-nan/-/number-is-nan-1.0.1.tgz#097b602b53422a522c1afb8790318336941a011d"
   integrity sha1-CXtgK1NCKlIsGvuHkDGDNpQaAR0=
+
+nuxt-relative-dir@^0.0.5:
+  version "0.0.5"
+  resolved "https://registry.yarnpkg.com/nuxt-relative-dir/-/nuxt-relative-dir-0.0.5.tgz#12873105454c7708e01713a2599fa1ccd9c9c200"
+  integrity sha512-QYZjezZlO26O/RYfSagZ05KnMBsSMtTlM5q5b+s6kZHmfQ5J+ati7oPegI5uHgGnAxzswxRTW8/rVQPow81dDA==
+  dependencies:
+    debug "^3.1.0"
+    minimist "^1.2.0"
 
 nuxt@^2.0.0:
   version "2.12.2"
