@@ -101,7 +101,7 @@ export default class Home extends Vue {
     //   text: "关于我们"
     // },
     {
-      src: "/img/about.png",
+      src: "/img/forum2.png",
       text: "论坛"
     }
   ];
@@ -226,9 +226,7 @@ export default class Home extends Vue {
   }
   private gameDetailsClick(param: any) {
     // 点击热门游戏跳转到详情
-    this.$router.push({ name: 'gameCenter-gameDetails', query: {
-      id: param.id
-    }})
+    this.$router.push({ path: `/gameCenter/gameDetails/${param.id}`})
   }
   private hotGameDown(param:any) {
     let deviceType:number = device()

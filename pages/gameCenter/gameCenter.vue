@@ -65,9 +65,7 @@ export default class GameCenter extends Vue {
   }
   private goDetail(param: any) {
     // 跳转游戏详情
-    this.$router.push({ name: 'gameCenter-gameDetails', query: {
-      id: param.id
-    }})
+    this.$router.push({ path: `/gameCenter/gameDetails/${param.id}`})
   }
   private downHandClick(param: any) {
     let deviceType:number = device()

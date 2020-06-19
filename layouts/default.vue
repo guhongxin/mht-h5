@@ -1,6 +1,6 @@
 <template>
   <div class="layout">
-    <nav-bar 
+    <nav-bar
       @searchClick="searchClick"
       :back="back"
       :fixed="true"
@@ -50,6 +50,7 @@
         </template>
       </van-tabbar-item>
     </van-tabbar>
+    
   </div>
 </template>
 <script lang="ts">
@@ -207,4 +208,5 @@ html {
   color: #fff;
   background-color: #35495e;
 }
+
 </style>

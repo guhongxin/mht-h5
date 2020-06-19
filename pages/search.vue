@@ -50,11 +50,8 @@ export default class Search extends Vue {
   }
   private goGameDetails(param:any) {
     // 跳转到游戏详情
-    this.$router.push({ name: 'gameCenter-gameDetails', query: {
-      id: param.id
-    }})
+    this.$router.push({ path: `/gameCenter/gameDetails/${param.id}`})
   }
-
 }
 </script>
 <style lang="scss" scoped>

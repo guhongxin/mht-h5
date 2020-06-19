@@ -5,10 +5,19 @@
       <img src="/img/logo.png" class="logo" />
     </div>
     <div class="search">
-      <input :value="value" type="text" class="input-text" @input="searchText" @focus="inputFocus"/>
+      <input :value="value" type="text" class="input-text" @input="searchText" @focus="inputFocus" data-tag="searchInput"/>
       <van-icon name="search" class="search-icon"/>
     </div>
     <img :src="avatarUrl ? avatarUrl : $defaultUserImage" class="user-img" @click="userImageHand"/>
+    <div class="search-area">
+      <div class="search-contert" data-tag="searchDom">
+        <ul>
+          <li v-for="(item, key) in searchData" :key="key" @click="goGameDetails(item)" data-tag="searchDom">
+            {{item.name}}
+          </li>
+        </ul>
+      </div>
+    </div>
   </div>
 </template>
 <script lang="ts">
@@ -18,21 +27,23 @@ import { getSession } from "~/assets/utils/auth.js"
 export default class NavBar extends Vue{
   private value:string = "";
   private avatarUrl:string = "";
+  private timer:any =null;
+  private searchData:Array<any> = [];
   @Prop({ default: false }) fixed!: boolean;
   @Prop({ default: false }) back!: boolean;
-  @Emit('searchClick') searchClick(msg: string){}
+  // @Emit('searchClick') searchClick(msg: string){}
  
   searchText(e: any) {
     let doc:HTMLInputElement  = e.target;
     this.value = doc.value;
-    this.searchClick(this.value)
+    // this.searchClick(this.value)
+    this.searchClick1(this.value)
   }
 
   @Emit("inputFocus")
   private inputFocus() {
-    this.$router.push({
-      path: "/search"
-    })
+    let searchArea:any = document.querySelector(".search-area");
+    searchArea.classList.add("search-area-show");
   }
 
   private goBack() {
@@ -47,6 +58,53 @@ export default class NavBar extends Vue{
     // @ts-ignore
     let _user = getSession("user") ? JSON.parse(getSession("user")) : null
     this.avatarUrl = _user ? _user.avatarUrl : ""
+    let self:any = this;
+    this.$nextTick(() => {
+      document.addEventListener("touchstart", function(e) {
+        // 监测触摸开始
+        let doc:any = e.target;
+        let tag = doc.dataset.tag;
+        if (["searchDom", "searchInput"].indexOf(tag) === -1) {
+          let searchArea:any = document.querySelector(".search-area");
+          searchArea.classList.remove("search-area-show");
+          let input:any = document.querySelector(".input-text");
+          input.blur();
+          self.searchData = [];
+        }
+      })
+    })
+  }
+  private searchClick1(param:string) {
+    let queryStr:string = param.trim();
+    if (this.timer) {
+      clearTimeout(this.timer)
+    } 
+    this.timer = setTimeout(() => {
+      clearTimeout(this.timer)
+      this.getList(queryStr);
+    }, 600)
+  }
+  private getList(inputValue:string) {
+    (this as any).$axios({
+      method: "POST",
+      url: "/usr/game/searchGame",
+      data: {
+        input: inputValue
+      }
+    }).then((res:any) => {
+      let data = res.data;
+      this.searchData = data.games;
+    }).catch((err:any) => {
+      console.log("err", err)
+    })
+  }
+  private goGameDetails(param:any) {
+    // 跳转到游戏详情
+    this.searchData = [];
+    let searchArea:any = document.querySelector(".search-area");
+    searchArea.classList.remove("search-area-show");
+    this.value = "";
+    this.$router.push({ path: `/gameCenter/gameDetails/${param.id}`})
   }
 }
 </script>
@@ -107,5 +165,30 @@ export default class NavBar extends Vue{
   font-size: 24px;
   vertical-align: middle;
   text-align: center;
+}
+.search-area {
+  position: absolute;
+  width: 100%;
+  left: 0px;
+  top: -256px;
+  z-index: 1;
+  transition: top 0.2s ease-in-out;
+  .search-contert {
+    height: 200px;
+    background-color: #ffffff;
+    border-radius: 0px 0px 4px 4px;
+    overflow: hidden;
+    overflow-y: auto;
+    ul {
+      li {
+        padding: 10px;
+        font-size: 12px;
+        font-weight: 600;
+      }
+    }
+  }
+}
+.search-area-show {
+  top: 56px;
 }
 </style>

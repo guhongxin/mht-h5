@@ -67,7 +67,7 @@
   </div>
 </template>
 <script lang="ts">
-import { Vue, Component } from "vue-property-decorator"
+import { Vue, Component, Watch } from "vue-property-decorator"
 import Floor from "~/components/Floor.vue";
 import CompanyCopyWrit from "~/components/CompanyCopyWrit.vue";
 import { device, downFile } from "~/assets/utils/comm.ts"
@@ -165,7 +165,10 @@ export default class GameDetails extends Vue {
     // 卸载
     this.id = 0;
   }
-  
+  // @Watch("$route")
+  // private  routerChane(val:any) {
+  //   console.log("--", val)
+  // }
 }
 </script>
 <style lang="scss" scoped>
