@@ -4,8 +4,7 @@
       @searchClick="searchClick"
       :back="back"
       :fixed="true"
-      @userImageClick="userImageClick" v-if="navBarType === '0'"
-      @inputFocus="inputFocus"></nav-bar>
+      @userImageClick="userImageClick" v-if="navBarType === '0'"></nav-bar>
     <van-nav-bar
       :title="`${navBarTitle}`"
       left-text="返回"
@@ -133,9 +132,6 @@ export default class Default extends Vue {
   private onClickRight() {
     // 点击右侧按钮
     Bus.$emit('rightClick', this.modifyKey)
-  }
-  private inputFocus() {
-    console.log("聚焦");
   }
 }
 </script>

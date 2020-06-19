@@ -103,8 +103,8 @@ export default class GameDetails extends Vue {
   private mounted() {
     // 生命周期
     // 获取id
-    let route:any = this.$route
-    this.id = route.query.id
+    let route:any = this.$route;
+    this.id = route.params.id;
     this.gameDetail();
     this.$nextTick(() => {
       // @ts-ignore
@@ -161,14 +161,6 @@ export default class GameDetails extends Vue {
       videoUrl: item.videoUrl
     }})
   }
-  private destroyed() {
-    // 卸载
-    this.id = 0;
-  }
-  // @Watch("$route")
-  // private  routerChane(val:any) {
-  //   console.log("--", val)
-  // }
 }
 </script>
 <style lang="scss" scoped>

@@ -31,16 +31,11 @@ export default class NavBar extends Vue{
   private searchData:Array<any> = [];
   @Prop({ default: false }) fixed!: boolean;
   @Prop({ default: false }) back!: boolean;
-  // @Emit('searchClick') searchClick(msg: string){}
- 
   searchText(e: any) {
     let doc:HTMLInputElement  = e.target;
     this.value = doc.value;
-    // this.searchClick(this.value)
-    this.searchClick1(this.value)
+    this.searchClick(this.value)
   }
-
-  @Emit("inputFocus")
   private inputFocus() {
     let searchArea:any = document.querySelector(".search-area");
     searchArea.classList.add("search-area-show");
@@ -74,7 +69,7 @@ export default class NavBar extends Vue{
       })
     })
   }
-  private searchClick1(param:string) {
+  private searchClick(param:string) {
     let queryStr:string = param.trim();
     if (this.timer) {
       clearTimeout(this.timer)
