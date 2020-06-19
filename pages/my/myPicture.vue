@@ -152,7 +152,7 @@ export default class myPicture extends Vue {
           scale = w / h;
         w = w;
         h = w / scale;
-        let quality = 0.7; // 默认图片质量为0.7
+        let quality = 0.1; // 默认图片质量为0.7
         //生成canvas
         let canvas = document.createElement("canvas");
         let ctx:any = canvas.getContext("2d");
