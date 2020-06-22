@@ -1,57 +1,61 @@
 <template>
   <div class="servie">
-    <div class="user-infor">
-      <div class="user-infor-left">
-        <img :src="user.avatarUrl ? user.avatarUrl : $defaultUserImage" />
-      </div>
-      <div class="user-infor-middle">
-        <div class="user-frist">
-          <div class="user-name">
-            <span>{{user.nickname}}</span>
-            <!-- <span class="user-level">LV<span>{{vip.level}}</span></span> -->
-          </div>
+    <div class="servie-box">
+      <div class="user-infor">
+        <div class="user-infor-left">
+          <img :src="user.avatarUrl ? user.avatarUrl : $defaultUserImage" />
         </div>
-        <div class="account">账号：{{user.username || "无"}}</div>
-        <!-- <div class="k-coin">K币：-</div> -->
-      </div>
-      <div class="user-infor-right">
-        <!-- <div class="div-btn" @click="signIn">签到</div> -->
-      </div>
-    </div>
-    <div class="level-percentage-box">
-      <div class="level-percentage-left"></div>
-      <div class="level-percentage-right">
-        <div class="level-progress">
-          <div class="progress-portion" :style="{width: vip.expProgress}">
-            <div class="progress-pivot" :style="{left: vip.expProgress}">LV<span>{{vip.level}}</span></div>
+        <div class="user-infor-middle">
+          <div class="user-frist">
+            <div class="user-name">
+              <span>{{user.nickname}}</span>
+              <!-- <span class="user-level">LV<span>{{vip.level}}</span></span> -->
+            </div>
           </div>
+          <div class="account">账号：{{user.username || "无"}}</div>
+          <!-- <div class="k-coin">K币：-</div> -->
+        </div>
+        <div class="user-infor-right">
+          <!-- <div class="div-btn" @click="signIn">签到</div> -->
         </div>
       </div>
-    </div>
-    <Floor :floorTitle="'VIP 规则说明'" style="margin: 59px 0px 20px 0px" :isMore="false">
-    </Floor>
-    <div class="servie-descript">
-      <div class="title">充值服务</div>
-      <div class="servie-grid">
-        <div class="servie-grid-item" v-for="(item, index) in recharge" :key="index" @click="gridClick(item)">
-          <div class="grid-icon">
-            <img :src="item.src" />
-          </div>
-          <div class="grid-title">
-            {{ item.title }}
+      <div class="level-percentage-box">
+        <div class="level-percentage-left"></div>
+        <div class="level-percentage-right">
+          <div class="level-progress">
+            <div class="progress-portion" :style="{width: vip.expProgress}">
+              <div class="progress-pivot" :style="{left: vip.expProgress}">LV<span>{{vip.level}}</span></div>
+            </div>
           </div>
         </div>
       </div>
     </div>
-    <div class="servie-descript">
-      <div class="title">客服中心</div>
-      <div class="servie-grid">
-        <div class="servie-grid-item" v-for="(item, index) in kfCenter" :key="index" @click="gridClick(item)">
-          <div class="grid-icon">
-            <img :src="item.src" />
+    <div class="servie-two">
+      <Floor :floorTitle="'VIP 规则说明'" style="margin: 20px 0px 20px 0px" :isMore="false">
+      </Floor>
+      <div class="servie-descript">
+        <div class="title">充值服务</div>
+        <div class="servie-grid">
+          <div class="servie-grid-item" v-for="(item, index) in recharge" :key="index" @click="gridClick(item)">
+            <div class="grid-icon">
+              <img :src="item.src" />
+            </div>
+            <div class="grid-title">
+              {{ item.title }}
+            </div>
           </div>
-          <div class="grid-title">
-            {{ item.title }}
+        </div>
+      </div>
+      <div class="servie-descript">
+        <div class="title">客服中心</div>
+        <div class="servie-grid">
+          <div class="servie-grid-item" v-for="(item, index) in kfCenter" :key="index" @click="gridClick(item)">
+            <div class="grid-icon">
+              <img :src="item.src" />
+            </div>
+            <div class="grid-title">
+              {{ item.title }}
+            </div>
           </div>
         </div>
       </div>
@@ -181,11 +185,13 @@ export default class Service extends Vue {
 </script>
 <style lang="scss" scoped>
 .servie {
-  padding-top: 15px;
   box-sizing: border-box;
   min-height: calc(100vh - 106px);
-  background-color: #ffffff;
   position: relative;
+}
+.servie-box {
+  padding: 15px 0px;
+  background-color: #ffffff;
 }
 .user-infor {
   display: flex;
@@ -330,5 +336,10 @@ export default class Service extends Vue {
   width: 100%;
   position: absolute;
   bottom: 0px;
+}
+.servie-two {
+  background-color: #ffffff;
+  overflow: hidden;
+  margin-top: 10px;
 }
 </style>
