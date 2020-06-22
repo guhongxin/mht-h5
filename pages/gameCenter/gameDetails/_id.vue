@@ -30,11 +30,11 @@
         <div class="grid-item-title">攻略</div>
       </div>
       <div class="grid-item">
-        <img src="/img/lt.png" class="grid-item-icon" />
+        <img src="/img/lt.png" class="grid-item-icon" @click="goForum(gameInfor)"/>
         <div class="grid-item-title">论坛</div>
       </div>
       <div class="grid-item">
-        <img src="/img/gw.png" class="grid-item-icon" />
+        <img src="/img/gw.png" class="grid-item-icon" @click="goOfficialWeb(gameInfor)" />
         <div class="grid-item-title">官网</div>
       </div>
     </div>
@@ -189,6 +189,14 @@ export default class GameDetails extends Vue {
         gameId: item.id
       }
     })
+  }
+  private goForum(item:any) {
+    (this as any).$dialog.alert({
+      message: '该功能暂未开启'
+    })
+  }
+  private goOfficialWeb(item:any) {
+    console.log("----", item);
   }
 }
 </script>

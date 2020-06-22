@@ -1,7 +1,8 @@
 
 import { Dialog, Toast } from 'vant';
 import { getToken, removeToken, sessionClear } from "~/assets/utils/auth.js"
-// 
+
+let timer;
 export default function ({store, redirect, app: { $axios }})  {
   // 数据访问前缀
 	$axios.defaults.baseURL = process.env.BASE_URL
@@ -11,15 +12,20 @@ export default function ({store, redirect, app: { $axios }})  {
 		if (getToken()) {
 			config.headers["jwt"] = getToken();
 		}
-		Toast.loading({
-			duration: 0, // 持续展示 toast
-			forbidClick: true,
-			message: '加载中',
-		});
+		if (!timer) {
+			timer = setTimeout(() =>{
+				Toast.loading({
+					duration: 0, // 持续展示 toast
+					forbidClick: true,
+					message: '加载中',
+				});
+			}, 3000)
+		}
 		return config
 	})
 	$axios.onError(error => {
 		let res = error.response;
+		clearTimeout(timer);
 		Toast.clear();
 		if (res) {
 			if (res.status === 400) {
@@ -35,6 +41,7 @@ export default function ({store, redirect, app: { $axios }})  {
 	// response拦截器，数据返回后，你可以先在这里进行一个简单的判断
   $axios.interceptors.response.use(response => {
 		let data = response.data;
+		clearTimeout(timer);
 		Toast.clear();
 		return new Promise((resolve, reject) => {
 			if (data.code && data.code !== 0) {

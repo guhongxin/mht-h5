@@ -27,7 +27,7 @@
       <van-empty description="暂无数据" v-else />
     </div>
     </div>
-    <CompanyCopyWrit></CompanyCopyWrit>
+    <!-- <CompanyCopyWrit></CompanyCopyWrit> -->
   </div>
 </template>
 <script lang="ts">

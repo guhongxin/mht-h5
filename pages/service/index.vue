@@ -12,7 +12,7 @@
           </div>
         </div>
         <div class="account">账号：{{user.username || "无"}}</div>
-        <div class="k-coin">K币：-</div>
+        <!-- <div class="k-coin">K币：-</div> -->
       </div>
       <div class="user-infor-right">
         <!-- <div class="div-btn" @click="signIn">签到</div> -->
@@ -56,7 +56,7 @@
         </div>
       </div>
     </div>
-    <CompanyCopyWrit class="company"></CompanyCopyWrit>
+    <!-- <CompanyCopyWrit class="company"></CompanyCopyWrit> -->
   </div>
 </template>
 <script lang="ts">

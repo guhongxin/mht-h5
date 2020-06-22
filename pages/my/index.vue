@@ -1,30 +1,32 @@
 <template>
   <div class="my">
-    <div class="user-infor">
-      <div class="user-infor-left">
-        <img :src="user.avatarUrl ? user.avatarUrl : $defaultUserImage" />
-        
-      </div>
-      <div class="user-infor-middle">
-        <div class="user-frist">
-          <div class="user-name">
-            <span>{{user.nickname}}</span>
-            <span class="user-level">LV<span>{{vip.level}}</span></span>
-          </div>
+    <div class="my-frist">
+      <div class="user-infor">
+        <div class="user-infor-left">
+          <img :src="user.avatarUrl ? user.avatarUrl : $defaultUserImage" />
+          
         </div>
-        <div class="account">账号：{{user.username || "无"}}</div>
-        <!-- <div class="k-coin">K币：63</div> -->
+        <div class="user-infor-middle">
+          <div class="user-frist">
+            <div class="user-name">
+              <span>{{user.nickname}}</span>
+              <span class="user-level">LV<span>{{vip.level}}</span></span>
+            </div>
+          </div>
+          <div class="account">账号：{{user.username || "无"}}</div>
+          <!-- <div class="k-coin">K币：63</div> -->
+        </div>
+        <div class="user-infor-right">
+          <span @click="logoutClick">退出</span>
+        </div>
       </div>
-      <div class="user-infor-right">
-        <span @click="logoutClick">退出</span>
-      </div>
-    </div>
-    <div class="level-percentage-box">
-      <div class="level-percentage-left"></div>
-      <div class="level-percentage-right">
-        <div class="level-progress">
-          <div class="progress-portion" :style="{width: vip.expProgress}">
-            <div class="progress-pivot" :style="{left: vip.expProgress}">LV<span>{{vip.level}}</span></div>
+      <div class="level-percentage-box">
+        <div class="level-percentage-left"></div>
+        <div class="level-percentage-right">
+          <div class="level-progress">
+            <div class="progress-portion" :style="{width: vip.expProgress}">
+              <div class="progress-pivot" :style="{left: vip.expProgress}">LV<span>{{vip.level}}</span></div>
+            </div>
           </div>
         </div>
       </div>
@@ -77,7 +79,7 @@
         <img src="/img/welfaretq.png" />
       </div>
     </div>
-    <CompanyCopyWrit class="cyCopyWrit"></CompanyCopyWrit>
+    <!-- <CompanyCopyWrit class="cyCopyWrit"></CompanyCopyWrit> -->
   </div>
 </template>
 <script lang="ts">
@@ -191,11 +193,13 @@ export default class My extends Vue {
 </script>
 <style lang="scss" scoped>
 .my {
-  padding: 15px 0px;
-  background-color: #ffffff;
+  padding: 0px;
   box-sizing: border-box;
   min-height: calc(100vh - 106px);
+}
+.my-frist {
   background-color: #ffffff;
+  padding: 15px 0px;
 }
 .user-infor {
   display: flex;
@@ -299,6 +303,7 @@ export default class My extends Vue {
 .list-view {
   margin-top: 20px;
   padding: 0px 23px;
+  background-color: #ffffff;
   .list-item {
     font-size: 14px;
     font-weight: 500;
@@ -333,7 +338,7 @@ export default class My extends Vue {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0px 23px 10px;
+  padding: 20px 23px;
   .tq-left, .tq-right {
     width: 156px;
     height: 85px;
