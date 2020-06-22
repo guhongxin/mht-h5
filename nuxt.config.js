@@ -75,6 +75,6 @@ module.exports = {
     BASE_URL: "http://118.25.146.170/mgp"
   },
   router: {
-    middleware: 'userInfor'
+    // middleware: 'userInfor'
   }
 }

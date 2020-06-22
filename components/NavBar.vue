@@ -22,7 +22,7 @@
 </template>
 <script lang="ts">
 import { Vue, Component, Prop, Emit } from "vue-property-decorator"
-import { getSession } from "~/assets/utils/auth.js"
+import { getToken } from "~/assets/utils/auth.js"
 @Component 
 export default class NavBar extends Vue{
   private value:string = "";
@@ -51,11 +51,12 @@ export default class NavBar extends Vue{
   private mounted() {
     // 生命周期
     let self:any = this;
+    let _token = getToken();
+    if (_token) {
+      this.getUserInfor();
+    }
     this.$nextTick(() => {
       // @ts-ignore
-      let _user = getSession("user") ? JSON.parse(getSession("user")) : null
-      console.log("_user", _user);
-      this.avatarUrl = _user ? _user.avatarUrl : ""
       document.addEventListener("touchstart", function(e) {
         // 监测触摸开始
         let doc:any = e.target;
@@ -101,6 +102,17 @@ export default class NavBar extends Vue{
     searchArea && searchArea.classList.remove("search-area-show");
     this.value = "";
     this.$router.push({ path: `/gameCenter/gameDetails/${param.id}`})
+  }
+  private getUserInfor() {
+    (this as any).$axios({
+      method: "POST",
+      url: "/usr/user/getUser"
+    }).then((res:any) => {
+      let data:any = res.data.user
+      this.avatarUrl = data ? data.avatarUrl : ""
+    }).catch((err:any) => {
+      console.log(err)
+    })
   }
 }
 </script>

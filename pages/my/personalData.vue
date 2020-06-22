@@ -95,6 +95,7 @@
 import { Vue, Component } from "vue-property-decorator"
 import { getSession } from "~/assets/utils/auth.js"
 import { sessionClear, setSession } from "~/assets/utils/auth.js"
+import { getToken } from "~/assets/utils/auth.js"
 enum GenderEnum {
   UNKNOWN = "未知",
   MALE = "男",
@@ -139,7 +140,6 @@ export default class PersonalData extends Vue {
       let data = res;
       if (data.code === 0) {
         (this as any).$toast.success('修改成功')
-        sessionClear()
         this.getUserInfor()
       }
     })
@@ -189,7 +189,6 @@ export default class PersonalData extends Vue {
       let data = res;
       if (data.code === 0) {
         (this as any).$toast.success('修改成功')
-        sessionClear()
         this.getUserInfor()
       }
     })
@@ -226,22 +225,10 @@ export default class PersonalData extends Vue {
     })
   }
   private mounted() {
-    this.$nextTick(() => {
-      // @ts-ignore
-      let _user = getSession("user") ? JSON.parse(getSession("user")) : null
-      if (_user) {
-        this.user = {
-          nickname: _user.nickname,
-          username: _user.username,
-          avatarUrl: _user.avatarUrl,
-          phoneNumber: _user.phoneNumber,
-          email: _user.email,
-        };
-        // @ts-ignore
-        this.user.gender = GenderEnum[ _user.gender || 'UNKNOWN' ];
-        this.user.birthday = _user.birthday ? _user.birthday : "";
-      }
-    })
+    let _token = getToken();
+    if (_token) {
+      this.getUserInfor();
+    }
   }
 }
 </script>

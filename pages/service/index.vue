@@ -63,7 +63,7 @@
 import { Vue, Component } from "vue-property-decorator"
 import Floor from "~/components/Floor.vue"
 import CompanyCopyWrit from "~/components/CompanyCopyWrit.vue"
-import { getSession } from "~/assets/utils/auth.js"
+import { getToken } from "~/assets/utils/auth.js"
 interface Recharge {
   /**
    * servie-grid
@@ -142,27 +142,40 @@ export default class Service extends Vue {
     })
   }
   private mounted() {
-    // @ts-ignore
-    let _user = getSession("user") ? JSON.parse(getSession("user")) : null
-    if (_user) {
-      this.vip.level = _user.vip.level
-      this.vip.curExp = _user.vip.curExp
-      this.vip.maxExp = _user.vip.maxExp
-      if (!_user.vip.maxExp) {
-        this.vip.expProgress = "0%"
-      } else {
-        this.vip.expProgress = (this.vip.curExp*100 / this.vip.maxExp).toFixed(2) + "%"
-      }
-      this.user = {
-        nickname: _user.nickname,
-        username: _user.username,
-        avatarUrl: _user.avatarUrl,
-        birthday: _user.birthday,
-        gender: _user.gender,
-        phoneNumber: _user.phoneNumber,
-        email: _user.email,
-      }
+    let _token = getToken();
+    if (_token) {
+      this.getUserInfor();
     }
+  }
+  private getUserInfor() {
+    (this as any).$axios({
+      method: "POST",
+      url: "/usr/user/getUser"
+    }).then((res:any) => {
+      let _user:any = res.data.user
+      // @ts-ignore
+      if (_user) {
+        this.vip.level = _user.vip.level
+        this.vip.curExp = _user.vip.curExp
+        this.vip.maxExp = _user.vip.maxExp
+        if (!_user.vip.maxExp) {
+          this.vip.expProgress = "0%"
+        } else {
+          this.vip.expProgress = (this.vip.curExp*100 / this.vip.maxExp).toFixed(2) + "%"
+        }
+        this.user = {
+          nickname: _user.nickname,
+          username: _user.username,
+          avatarUrl: _user.avatarUrl,
+          birthday: _user.birthday,
+          gender: _user.gender,
+          phoneNumber: _user.phoneNumber,
+          email: _user.email,
+        }
+      }
+    }).catch((err:any) => {
+      console.log(err)
+    })
   }
 }
 </script>

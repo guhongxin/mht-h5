@@ -92,15 +92,7 @@ export default class ModifyPersonal extends Vue {
           let data = res;
           if (data.code === 0) {
             (this as any).$toast.success("修改成功");
-            sessionClear();
-             (this as any).$axios({
-              method: "POST",
-              url: "/usr/user/getUser"
-            }).then((res:any) => {
-              let data:any = res.data.user
-              setSession("user",JSON.stringify(data))
-              this.$router.go(-1);
-            })
+            this.$router.go(-1);
           }
         }).catch((err:any) => {
           console.log(err)
