@@ -16,17 +16,17 @@
         <div class="game-size">{{gameInfor.size}}M</div> -->
         <div class="button-group">
           <div class="down-btn" @click="downHandClick(gameInfor)">下载</div>
-          <div class="giftbag-btn">礼包</div>
+          <div class="giftbag-btn" @click="goGiftBagClick(gameInfor)">礼包</div>
         </div>
       </div>
     </div>
     <div class="game-detail-grid">
       <div class="grid-item">
-        <img src="/img/hd.png" class="grid-item-icon" />
+        <img src="/img/hd.png" class="grid-item-icon" @click="goActivit(gameInfor)"/>
         <div class="grid-item-title">活动</div>
       </div>
       <div class="grid-item">
-        <img src="/img/gy.png" class="grid-item-icon" />
+        <img src="/img/gy.png" class="grid-item-icon" @click="goNew(gameInfor)"/>
         <div class="grid-item-title">攻略</div>
       </div>
       <div class="grid-item">
@@ -78,6 +78,7 @@ interface GameInfor {
   size: string;
   downUrl: string;
   intro: string;
+  id?: number;
 }
 @Component({
   components: {
@@ -134,6 +135,7 @@ export default class GameDetails extends Vue {
     obj.downUrl = res.data.downloads[deviceType].url;
     obj.size = res.data.downloads[deviceType].size;
     this.gameInfor = {
+      id: obj.id,
       iconUrl: obj.iconUrl,
       name: obj.name,
       tags: obj.tags,
@@ -160,6 +162,33 @@ export default class GameDetails extends Vue {
       coverUrl: item.horCoverUrl,
       videoUrl: item.videoUrl
     }})
+  }
+  private goGiftBagClick(item:any) {
+    // 跳转到礼包页
+    this.$router.push({
+      name: "grid-giftbag",
+      params: {
+        gameId: item.id
+      }
+    })
+  }
+  private goActivit(item:any) {
+    // 跳转到活动
+    this.$router.push({
+      name: "activities-activities",
+      params: {
+        gameId: item.id
+      }
+    })
+  }
+  private goNew(item:any) {
+    // 跳转到新闻
+    this.$router.push({
+      name: "grid-news",
+      params: {
+        gameId: item.id
+      }
+    })
   }
 }
 </script>

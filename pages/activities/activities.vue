@@ -34,6 +34,7 @@ interface Page {
 })
 export default class Activities extends Vue {
   private activList:Array<any> = [];
+  private gameId:any;
   private page:Page = {
     cur: 1,
     size: 3 
@@ -42,6 +43,8 @@ export default class Activities extends Vue {
   private finished:boolean = false;
   private total:number = 0;
   private mounted() {
+    let route = this.$route;
+    this.gameId = route.params.gameId;
     this.activList = [];
     // 生命周期
     this.getList();
@@ -52,7 +55,8 @@ export default class Activities extends Vue {
         method: "POST",
         url: "/usr/activity/listActivity",
         data: {
-          page: this.page
+          page: this.page,
+          gameId: this.gameId || undefined
         }
       }).then((res: any) => {
         let data = res.data;

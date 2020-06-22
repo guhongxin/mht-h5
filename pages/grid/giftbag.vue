@@ -71,6 +71,8 @@ export default class gridgiftbag extends Vue {
   private gameId:any;
   private mounted() {
     // 生命周期
+    let route:any = this.$route;
+    this.gameId = route.params.gameId
     this.boxesList = [];
     this.tabList();
     this.giftCodeBoxList();
@@ -132,6 +134,10 @@ export default class gridgiftbag extends Vue {
       let data:any = res.data;
       this.tabMenu = data.games;
       this.tabMenu.unshift({ name: "全部", id: 0 })
+      let _index = this.tabMenu.findIndex((item:any) => {
+        return item.id === this.gameId;
+      })
+      this.active = _index !== -1 ? _index : 0
     }).catch((err:any) => {
       console.log("err", err)
     });

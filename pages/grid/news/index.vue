@@ -37,6 +37,7 @@ interface Page {
 })
 export default class gameNew extends Vue {
   private news:Array<any> = [];
+  private gameId:any;
   private page:Page = {
     cur: 1,
     size: 10
@@ -45,6 +46,8 @@ export default class gameNew extends Vue {
   private finished:boolean = false;
   private total:number = 0;
   private mounted() {
+    let route = this.$route;
+    this.gameId = route.params.gameId;
     this.news = [];
     this.getList()
   }
@@ -54,7 +57,8 @@ export default class gameNew extends Vue {
         method: "POST",
         url: "/usr/news/listNews",
         data: {
-          page: this.page
+          page: this.page,
+          gameId: this.gameId || undefined
         }
       }).then((res:any) => {
         let data = res.data

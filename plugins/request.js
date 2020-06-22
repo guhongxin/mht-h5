@@ -23,7 +23,7 @@ export default function ({store, redirect, app: { $axios }})  {
 		Toast.clear();
 		if (res) {
 			if (res.status === 400) {
-				// Dialog({ message: '请求参数不对！' });
+				Dialog({ message: '请求参数不对！' });
 			} else if (res.status === 500)  {
 				Dialog({ message: '后端报错！' });
 			}
@@ -43,7 +43,7 @@ export default function ({store, redirect, app: { $axios }})  {
 					sessionClear()
 					redirect("/login")
 				} else {
-					Dialog({ message: data.msg });
+					Dialog({ message: data.code });
 					reject(data)
 				}
 			} else {
