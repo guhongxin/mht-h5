@@ -26,22 +26,22 @@
       :inactive-color="'#999999'">
       <van-tabbar-item icon="home-o" to="/">
         <span>首页</span>
-         <template #icon="props">
+        <template #icon="props">
           <img :src="props.active ? homeIcon.active : homeIcon.inactive" />
         </template>
       </van-tabbar-item>
-      <van-tabbar-item to="/service">
+      <!-- <van-tabbar-item to="/service">
         <span>服务</span>
         <template #icon="props">
           <img :src="props.active ? serviceIcon.active : serviceIcon.inactive" />
         </template>
-      </van-tabbar-item>
-      <!-- <van-tabbar-item to="/forum">
+      </van-tabbar-item> -->
+      <van-tabbar-item to="/forum">
         <span>论坛</span>
         <template #icon="props">
           <img :src="props.active ? forumIcon.active : forumIcon.inactive" />
         </template>
-      </van-tabbar-item> -->
+      </van-tabbar-item>
       <van-tabbar-item to="/my">
         <span>我的</span>
         <template #icon="props">
@@ -49,7 +49,6 @@
         </template>
       </van-tabbar-item>
     </van-tabbar>
-    
   </div>
 </template>
 <script lang="ts">
@@ -90,7 +89,7 @@ export default class Default extends Vue {
     this.navBarType = route.query.navBarType === '1' ? '1' : '0'
     this.navBarTitle = route.query.title
     this.navBarRight = route.query.isRight === '1'
-    this.active = this.getActive(route),
+    this.active = this.getActive(route)
     this.modifyKey = route.query.modifyKey
   }
   @Watch("$route")

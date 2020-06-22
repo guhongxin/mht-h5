@@ -38,7 +38,7 @@ export default class NavBar extends Vue{
   }
   private inputFocus() {
     let searchArea:any = document.querySelector(".search-area");
-    searchArea.classList.add("search-area-show");
+    searchArea && searchArea.classList.add("search-area-show");
   }
 
   private goBack() {
@@ -50,20 +50,21 @@ export default class NavBar extends Vue{
   }
   private mounted() {
     // 生命周期
-    // @ts-ignore
-    let _user = getSession("user") ? JSON.parse(getSession("user")) : null
-    this.avatarUrl = _user ? _user.avatarUrl : ""
     let self:any = this;
     this.$nextTick(() => {
+      // @ts-ignore
+      let _user = getSession("user") ? JSON.parse(getSession("user")) : null
+      console.log("_user", _user);
+      this.avatarUrl = _user ? _user.avatarUrl : ""
       document.addEventListener("touchstart", function(e) {
         // 监测触摸开始
         let doc:any = e.target;
         let tag = doc.dataset.tag;
         if (["searchDom", "searchInput"].indexOf(tag) === -1) {
           let searchArea:any = document.querySelector(".search-area");
-          searchArea.classList.remove("search-area-show");
+          searchArea && searchArea.classList.remove("search-area-show");
           let input:any = document.querySelector(".input-text");
-          input.blur();
+          input && input.blur();
           self.searchData = [];
         }
       })
@@ -97,7 +98,7 @@ export default class NavBar extends Vue{
     // 跳转到游戏详情
     this.searchData = [];
     let searchArea:any = document.querySelector(".search-area");
-    searchArea.classList.remove("search-area-show");
+    searchArea && searchArea.classList.remove("search-area-show");
     this.value = "";
     this.$router.push({ path: `/gameCenter/gameDetails/${param.id}`})
   }

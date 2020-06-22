@@ -101,8 +101,9 @@ export default class Home extends Vue {
     //   text: "关于我们"
     // },
     {
-      src: "/img/forum2.png",
-      text: "论坛"
+      src: "/img/service3.png",
+      path:"/service",
+      text: "服务"
     }
   ];
   private mounted() {
