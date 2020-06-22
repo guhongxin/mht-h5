@@ -168,11 +168,9 @@ export default class myPicture extends Vue {
           (self as any).$axios({
             method: "POST",
             data: formdata,
-            // url: `http://192.168.1.16:9103/upload/USR_AVATAR`,
-            url: `t-upload.tyu89.wang`,
+            url: `${(self as any).$upfileUrl}/upload/USR_AVATAR`
           }).then((res:any) => {
-            // let url = `http://192.168.1.16:9103${res}`
-            let url = `t-upload.tyu89.wang${res}`
+            let url = `${(self as any).$upfileUrl}${res}`
             callback(url)
           })
         }, 'image/png');

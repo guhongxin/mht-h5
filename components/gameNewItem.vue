@@ -64,7 +64,7 @@ export default class GameNewItem extends Vue {
   .game-new-image-box {
     overflow: hidden;
     position: relative;
-    padding-bottom: 40%;
+    padding-bottom: 50%;
     img {
       display: block;
       position: absolute; 

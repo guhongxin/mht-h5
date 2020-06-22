@@ -9,7 +9,7 @@
     <Floor :floorTitle="'欢乐视频'"  @findMore="hotVideoMore">
       <div class="happy-videos-box">
         <div class="swiper-container1">
-          <div class="swiper-wrapper box1">
+          <div class="swiper-wrapper box1 box3">
             <div
               class="swiper-slide"
               v-for="(item, index) in hotVideos"
@@ -113,6 +113,18 @@ export default class Home extends Vue {
     this.activList();
    
     this.$nextTick(() => {
+      // @ts-ignore
+      let swiper1 = new Swiper(".swiper-container1", {
+        slidesPerView: "auto",
+        centeredSlides: false,
+        spaceBetween: 6,
+        observer: true,
+        observeParents:true
+      });
+      let doc:any = document.querySelector(".box3")
+      setTimeout(() => {
+        doc.style.transform = 'translate3d(0px, 0px, 0px)';
+      }, 300)
       setTimeout(() => {
         // @ts-ignore
         let swiper = new Swiper(".swiper-container", {
@@ -129,14 +141,6 @@ export default class Home extends Vue {
             modifier: 4,
             slideShadows: false
           }
-        });
-        // @ts-ignore
-        let swiper1 = new Swiper(".swiper-container1", {
-          slidesPerView: "auto",
-          centeredSlides: false,
-          spaceBetween: 6,
-          observer: true,
-          observeParents:true
         });
       }, 500)
       document.addEventListener("click", function(e) {

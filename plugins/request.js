@@ -23,7 +23,7 @@ export default function ({store, redirect, app: { $axios }})  {
 		Toast.clear();
 		if (res) {
 			if (res.status === 400) {
-				Dialog({ message: '请求参数不对！' });
+				// Dialog({ message: '请求参数不对！' });
 			} else if (res.status === 500)  {
 				Dialog({ message: '后端报错！' });
 			}
@@ -37,7 +37,7 @@ export default function ({store, redirect, app: { $axios }})  {
 		let data = response.data;
 		Toast.clear();
 		return new Promise((resolve, reject) => {
-			if (data.code !== 0) {
+			if (data.code && data.code !== 0) {
 				if (data.code === 1003) {
 					removeToken()
 					sessionClear()

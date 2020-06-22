@@ -256,6 +256,7 @@ export default class My extends Vue {
   .user-infor-right {
     width: 50px;
     font-size: 12px;
+    text-align: right;
   }
 }
 .level-percentage-box {
