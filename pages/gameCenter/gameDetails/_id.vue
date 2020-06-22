@@ -78,6 +78,7 @@ interface GameInfor {
   size: string;
   downUrl: string;
   intro: string;
+  officialUrl: string;
   id?: number;
 }
 @Component({
@@ -93,7 +94,8 @@ export default class GameDetails extends Vue {
     tags: [],
     size: "",
     downUrl: "",
-    intro: ""
+    intro: "",
+    officialUrl: ""
   };
   // 视频
   private videos:Array<any> = [];
@@ -141,7 +143,8 @@ export default class GameDetails extends Vue {
       tags: obj.tags,
       size: obj.size,
       downUrl: obj.downUrl,
-      intro: obj.intro
+      intro: obj.intro,
+      officialUrl: obj.officialUrl
     };
     this.videos = obj.videos.slice(0, 2);
     this.images = obj.images;
@@ -196,7 +199,7 @@ export default class GameDetails extends Vue {
     })
   }
   private goOfficialWeb(item:any) {
-    console.log("----", item);
+    document.location.href = item.officialUrl;
   }
 }
 </script>

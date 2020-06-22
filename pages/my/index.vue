@@ -10,7 +10,7 @@
           <div class="user-frist">
             <div class="user-name">
               <span>{{user.nickname}}</span>
-              <span class="user-level">LV<span>{{vip.level}}</span></span>
+              <!-- <span class="user-level">LV<span>{{vip.level}}</span></span> -->
             </div>
           </div>
           <div class="account">账号：{{user.username || "无"}}</div>
