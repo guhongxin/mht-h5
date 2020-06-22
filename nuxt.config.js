@@ -73,8 +73,5 @@ module.exports = {
   env: {
     // BASE_URL: "http://192.168.1.16:9101"
     BASE_URL: "http://118.25.146.170/mgp"
-  },
-  router: {
-    // middleware: 'userInfor'
   }
 }
