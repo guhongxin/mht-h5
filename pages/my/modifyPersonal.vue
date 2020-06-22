@@ -20,11 +20,12 @@ export default class ModifyPersonal extends Vue {
   private password: string = "";
   private newPassword: string = "";
   private ismodifyPassword: boolean = false; // 是否修改密码
+  private oldValue: string = ""; // 老的值
   private mounted() {
     let route: any = this.$route;
     this.value = route.query.modifyTxt;
+    this.oldValue = route.query.modifyTxt;
     this.placeholder = route.query.title;
-    console.log("---", route);
     this.ismodifyPassword = route.query.modifyKey === "password";
     Bus.$on("rightClick", (key: string) => {
       this.save(key);
@@ -75,6 +76,12 @@ export default class ModifyPersonal extends Vue {
       if (!this.value) {
         (this as any).$dialog.alert({
           message: "修改信息不能为空"
+        });
+        return false;
+      }
+      if (this.value === this.oldValue) {
+        (this as any).$dialog.alert({
+          message: "请修改用户信息！"
         });
         return false;
       }
