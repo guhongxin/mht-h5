@@ -109,9 +109,9 @@ export default class Default extends Vue {
     this.back = nameArr.length > 1
     let indexObj:any = {
       index: 0,
-      service: 1,
-      forum: 2,
-      my: 3,
+      // service: 1,
+      forum: 1,
+      my: 2,
       grid: 0
     }
     return indexObj[nameArr[0]]

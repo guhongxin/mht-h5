@@ -36,15 +36,21 @@
           <i class="my-infor"></i>
           <span>我的资料</span>
         </div>
+        <div class="list-item-right">
+           <van-icon name="arrow" class="more-icon"/>
+        </div>
       </div>
-      <div class="list-item">
+      <div class="list-item" @click="myxxClick">
         <div class="list-item-left">
           <i class="my-xx"></i>
           <span>我的消息</span>
         </div>
-        <div class="list-item-right">-</div>
+        <div class="list-item-right">
+          <span>-</span>
+          <van-icon name="arrow" class="more-icon"/>
+        </div>
       </div>
-      <div class="list-item">
+      <div class="list-item" @click="myGameClick">
         <div class="list-item-left">
           <i class="my-game"></i>
           <span>我的游戏</span>
@@ -58,9 +64,12 @@
           <i class="my-gift"></i>
           <span>我的礼包</span>
         </div>
-        <div class="list-item-right">{{mygiftCodeCount}}</div>
+        <div class="list-item-right">
+          <span>{{mygiftCodeCount}}</span>
+          <van-icon name="arrow" class="more-icon"/>
+        </div>
       </div>
-      <div class="list-item">
+      <div class="list-item" @click="myKbClick">
         <div class="list-item-left">
           <i class="my-kb"></i>
           <span>赚取K币</span>
@@ -72,10 +81,10 @@
     </div>
     <div class="tq">
       <div class="tq-left">
-        <img src="/img/servicetq.png" />
+        <img src="/img/servicetq.png" @click="fwtqClick" />
       </div>
       <div class="tq-right">
-        <img src="/img/welfaretq.png" />
+        <img src="/img/welfaretq.png" @click="fltqClick" />
       </div>
     </div>
     <!-- <CompanyCopyWrit class="cyCopyWrit"></CompanyCopyWrit> -->
@@ -186,6 +195,34 @@ export default class My extends Vue {
       }
     }).catch((err:any) => {
       console.log(err)
+    })
+  }
+  private myxxClick() {
+    // 查看我的消息
+    (this as any).$dialog.alert({
+      message: '该功能暂未开启,敬请期待'
+    })
+  }
+  private myGameClick() {
+    // 查看我的游戏
+    (this as any).$dialog.alert({
+      message: '该功能暂未开启,敬请期待'
+    })
+  }
+  private myKbClick() {
+    // 赚取K币
+    (this as any).$dialog.alert({
+      message: '该功能暂未开启,敬请期待'
+    })
+  }
+  private fwtqClick() {
+    (this as any).$dialog.alert({
+      message: '该功能暂未开启,敬请期待'
+    })
+  }
+  private fltqClick() {
+    (this as any).$dialog.alert({
+      message: '该功能暂未开启,敬请期待'
     })
   }
 }
@@ -368,5 +405,8 @@ export default class My extends Vue {
 }
 .my-kb {
   background: url("/img/my6.png") no-repeat center;
+}
+.more-icon {
+  vertical-align: middle;
 }
 </style>

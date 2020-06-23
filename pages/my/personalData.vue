@@ -19,6 +19,7 @@
         </div>
         <div class="list-item-right">
           <span>{{user.nickname}}</span>
+          <van-icon name="arrow" class="arrow-cion"/>
         </div>
       </div>
       <div class="list-item" @click="sexClick">
@@ -27,6 +28,7 @@
         </div>
         <div class="list-item-right">
           <span>{{user.gender}}</span>
+          <van-icon name="arrow" class="arrow-cion" />
         </div>
       </div>
       <div class="list-item" @click="birthdayClick">
@@ -34,7 +36,8 @@
           <span>生日</span>
         </div>
         <div class="list-item-right">
-          <span>{{$customFormat(user.birthday, "yyyy-MM-dd")}}</span>
+          <span>{{user.birthday?$customFormat(user.birthday, "yyyy-MM-dd"):"-"}}</span>
+          <van-icon name="arrow" class="arrow-cion" />
         </div>
       </div>
       <div class="list-item"  @click="modifyClick({
@@ -47,6 +50,7 @@
         </div>
         <div class="list-item-right">
            <span>{{user.phoneNumber}}</span>
+           <van-icon name="arrow" class="arrow-cion" />
         </div>
       </div>
       <div class="list-item"  @click="modifyClick({
@@ -59,6 +63,7 @@
         </div>
         <div class="list-item-right">
           <span>{{user.email}}</span>
+          <van-icon name="arrow" class="arrow-cion" />
         </div>
       </div>
       <div class="list-item"  @click="modifyClick({
@@ -68,7 +73,9 @@
         <div class="list-item-left">
           <span>修改密码</span>
         </div>
-        <div class="list-item-right"></div>
+        <div class="list-item-right">
+          <van-icon name="arrow" class="arrow-cion" />
+        </div>
       </div>
     </div>
     <!-- 性别 -->
@@ -276,5 +283,8 @@ export default class PersonalData extends Vue {
 }
 .bottom {
   margin-bottom: 10px;
+}
+.arrow-cion {
+  vertical-align: middle;
 }
 </style>
