@@ -53,7 +53,7 @@
         </div>
       </div>
     </Floor>
-    <Floor :floorTitle="'欢乐视频'" :isMore="false" class="detail-floor">
+    <Floor :floorTitle="'欢乐视频12'" :isMore="false" class="detail-floor">
       <div class="hl-video">
         <div class="hotVideoItem-img-box" v-for="(item, index) in videos" :key="index">
           <img :src="item.horCoverUrl" />
@@ -107,7 +107,7 @@ export default class GameDetails extends Vue {
     // 生命周期
     // 获取id
     let route:any = this.$route;
-    this.id = route.params.id;
+    this.id = route.query.id;
     this.gameDetail();
     this.$nextTick(() => {
       // @ts-ignore
@@ -200,6 +200,11 @@ export default class GameDetails extends Vue {
   }
   private goOfficialWeb(item:any) {
     document.location.href = item.officialUrl;
+  }
+  @Watch("$route")
+  private routeChange(val: any) {
+    this.id = val.query.id;
+    this.gameDetail();
   }
 }
 </script>

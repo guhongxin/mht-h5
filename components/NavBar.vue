@@ -105,7 +105,10 @@ export default class NavBar extends Vue{
     let searchArea:any = document.querySelector(".search-area");
     searchArea && searchArea.classList.remove("search-area-show");
     this.value = "";
-    this.$router.push({ path: `/gameCenter/gameDetails/${param.id}`})
+    // this.$router.push({ path: `/gameCenter/gameDetails/${param.id}`})
+    this.$router.push({ path: '/gameCenter/gameDetails', query: {
+      id: param.id
+    }})
   }
   private getUserInfor() {
     (this as any).$axios({

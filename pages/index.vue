@@ -231,7 +231,10 @@ export default class Home extends Vue {
   }
   private gameDetailsClick(param: any) {
     // 点击热门游戏跳转到详情
-    this.$router.push({ path: `/gameCenter/gameDetails/${param.id}`})
+    // this.$router.push({ path: `/gameCenter/gameDetails/${param.id}`})
+    this.$router.push({ path: '/gameCenter/gameDetails', query: {
+      id: param.id
+    }})
   }
   private hotGameDown(param:any) {
     let deviceType:number = device()
