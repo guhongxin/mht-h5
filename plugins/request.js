@@ -36,7 +36,7 @@ export default function ({store, redirect, app: { $axios }})  {
 		} else {
 			Dialog({ message: '请求无响应！' });
 		}
-		return res
+		return Promise.reject(error)
 	})
 	// response拦截器，数据返回后，你可以先在这里进行一个简单的判断
   $axios.interceptors.response.use(response => {

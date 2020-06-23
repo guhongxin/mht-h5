@@ -108,7 +108,6 @@ export default class myPicture extends Vue {
       return false;
     }
     this.canvasDataURL(this.saveApi);
-   
   }
   private saveApi(url: string) {
     (this as any).$axios({
@@ -120,14 +119,21 @@ export default class myPicture extends Vue {
         }
       }
     }).then((res:any) => {
+      (this as any).$toast.clear()
       let data = res;
       if (data.code === 0) {
         (this as any).$toast.success('修改成功')
         this.$router.go(-1);
       }
+    }).catch((err:any) => {
+      (this as any).$toast.clear()
     })
   }
   private canvasDataURL(callback:any, obj?:any) {
+    (this as any).$toast.loading({
+      message: '加载中...',
+      forbidClick: true,
+    });
     let self = this;
     let reader = new FileReader();
     let fileName = this.fileData.name;
@@ -144,7 +150,7 @@ export default class myPicture extends Vue {
           scale = w / h;
         w = w;
         h = w / scale;
-        let quality = 0.1; // 默认图片质量为0.7
+        let quality = 0.1; // 默认图片质量为0.1
         //生成canvas
         let canvas = document.createElement("canvas");
         let ctx:any = canvas.getContext("2d");
@@ -158,10 +164,16 @@ export default class myPicture extends Vue {
         ctx.drawImage(that, 0, 0, w, h);
         // 图像质量
         // quality值越小，所绘制出的图像越模糊
-        let base64 = canvas.toDataURL("image/jpeg", quality);
+        // let base64 = canvas.toDataURL("image/jpeg", quality);
         canvas.toBlob(function (blob) {
           // @ts-ignore
-          let file = new File([blob], fileName, {type: filetype, lastModified: Date.now()})
+          let file = new File([blob], fileName, {type: filetype, lastModified: Date.now()});
+          let size = file.size / 1024;
+          console.log("szie", size);
+          if (size > 50) {
+            (self as any).$toast.fail('上传照片不能超过50k');
+            return false
+          }
           let formdata = new FormData();
           // @ts-ignore
           formdata.append("file",file);
@@ -172,8 +184,10 @@ export default class myPicture extends Vue {
           }).then((res:any) => {
             let url = `${(self as any).$upfileUrl}${res}`
             callback(url)
+          }).catch((err:any) => {
+            (self as any).$toast.clear()
           })
-        }, 'image/png');
+        }, 'image/jpeg', quality);
       };
     };
   }

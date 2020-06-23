@@ -43,7 +43,7 @@
             <template #title>
               <div class="collapse-title">
                 <img src="/img/question.png" />
-                <span>实名认证如何完成？</span>
+                <span>如何联系客服？</span>
               </div>
             </template>
             <p>QQ客服：搜索添加服务号 800184997</p>
