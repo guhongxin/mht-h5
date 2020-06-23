@@ -113,7 +113,7 @@ export default class GameDetails extends Vue {
       // @ts-ignore
       let mySwiper = new Swiper('.swiper-container', {
         slidesPerView: "auto",
-        spaceBetween: -14,
+        spaceBetween: 10,
         observer: true,
         observeParents:true
       })
@@ -349,10 +349,16 @@ export default class GameDetails extends Vue {
     width: 100%;
   }
   .swiper-slide {
+    width: 270px;
+    padding-bottom: 50%;
+    overflow: hidden;
+    position: relative;
     img {
-      width: 330px;
-      height: 150px;
-      vertical-align: middle;
+      width: 100%;
+      display: block;
+      position: absolute;
+      top: 0px;
+      left: 0px;
     }
 }
 }
