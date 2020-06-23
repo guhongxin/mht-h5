@@ -1,11 +1,32 @@
 <template>
   <div class="modify-personal">
-    <template v-if="ismodifyPassword">
+    <template v-if="modifyKey==='password'">
       <van-field v-model="username" placeholder="请输入用户名" />
       <van-field v-model="password" placeholder="请输入旧的密码" />
       <van-field v-model="newPassword" placeholder="请输入新的密码" />
+      <van-field
+        v-model="sms"
+        center
+        clearable
+        placeholder="请输入短信验证码"
+      >
+        <template #button>
+          <van-button size="small" type="primary">发送验证码</van-button>
+        </template>
+      </van-field>
     </template>
     <van-field v-model="value" :placeholder="`请输入${placeholder}`" v-else />
+    <van-field
+        v-model="sms"
+        center
+        clearable
+        placeholder="请输入短信验证码"
+        v-if="modifyKey==='phoneNumber'"
+      >
+        <template #button>
+          <van-button size="small" type="primary">发送验证码</van-button>
+        </template>
+      </van-field>
   </div>
 </template>
 <script lang="ts">
@@ -19,21 +40,21 @@ export default class ModifyPersonal extends Vue {
   private username: string = "";
   private password: string = "";
   private newPassword: string = "";
-  private ismodifyPassword: boolean = false; // 是否修改密码
+  private modifyKey: string = ""; // 修改的属性
   private oldValue: string = ""; // 老的值
+  private sms:string = ""; // 验证码
   private mounted() {
     let route: any = this.$route;
     this.value = route.query.modifyTxt;
     this.oldValue = route.query.modifyTxt;
     this.placeholder = route.query.title;
-    this.ismodifyPassword = route.query.modifyKey === "password";
+    this.modifyKey = route.query.modifyKey;
     Bus.$on("rightClick", (key: string) => {
       this.save(key);
     });
   }
   private save(key: string) {
-    
-    if (this.ismodifyPassword) {
+    if (this.modifyKey === "password") {
       if (!this.username) {
         (this as any).$dialog.alert({
           message: "用户名不能为空!"

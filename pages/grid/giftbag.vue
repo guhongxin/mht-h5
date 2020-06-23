@@ -69,6 +69,7 @@ export default class gridgiftbag extends Vue {
   private total:number = 0;
   private tabMenu:Array<any> = [];
   private gameId:any;
+  private isrequstDuration:boolean = false;
   private mounted() {
     // 生命周期
     let route:any = this.$route;
@@ -144,12 +145,22 @@ export default class gridgiftbag extends Vue {
   }
   private vanTabClick(index:any) {
     // 切换tab
-    this.boxesList = [];
-    this.page.cur = 1;
-    this.finished = false;
-    this.loading = false;
-    this.gameId = this.tabMenu[index].id;
-    this.giftCodeBoxList();
+    if (!this.isrequstDuration) {
+      (this as any).$toast.loading({
+        message: '正在请求数据...',
+        forbidClick: true,
+      })
+      this.boxesList = [];
+      this.page.cur = 1;
+      this.finished = false;
+      this.loading = false;
+      this.gameId = this.tabMenu[index].id;
+      this.giftCodeBoxList().then(() => {
+        this.isrequstDuration = false;
+      }).catch(() => {
+        this.isrequstDuration = false;
+      });
+    }
   }
 }
 </script>

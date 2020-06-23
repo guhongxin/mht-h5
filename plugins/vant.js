@@ -55,6 +55,7 @@ Vue.use(CollapseItem);
   
 Vue.prototype.$customFormat = customFormat
 Vue.prototype.$defaultUserImage = "/img/user.png"
+Vue.prototype.$defaultUserImage3 = "/img/user3.png"
 Vue.prototype.$upfileUrl = "http://t-upload.tyu89.wang"
 
 // Vue.prototype.$upfileUrl = "http://192.168.1.16:9103"

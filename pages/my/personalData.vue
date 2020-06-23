@@ -38,7 +38,7 @@
         </div>
       </div>
       <div class="list-item"  @click="modifyClick({
-        title: '手机',
+        title: '绑定手机',
         modifyTxt: user.phoneNumber,
         key: 'phoneNumber'
       })">

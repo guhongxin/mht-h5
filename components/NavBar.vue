@@ -8,7 +8,7 @@
       <input :value="value" type="text" class="input-text" @input="searchText" @focus="inputFocus" data-tag="searchInput"/>
       <van-icon name="search" class="search-icon"/>
     </div>
-    <img :src="avatarUrl ? avatarUrl : $defaultUserImage" class="user-img" @click="userImageHand"/>
+    <img :src="isLogin ? (avatarUrl ? avatarUrl: $defaultUserImage3) : $defaultUserImage" class="user-img" @click="userImageHand"/>
     <div class="search-area">
       <div class="search-contert" data-tag="searchDom">
         <ul>
@@ -27,7 +27,8 @@ import { getToken } from "~/assets/utils/auth.js"
 export default class NavBar extends Vue{
   private value:string = "";
   private avatarUrl:string = "";
-  private timer:any =null;
+  private timer:any = null;
+  private isLogin:boolean = false; // 是否登录
   private searchData:Array<any> = [];
   @Prop({ default: false }) fixed!: boolean;
   @Prop({ default: false }) back!: boolean;
@@ -53,7 +54,10 @@ export default class NavBar extends Vue{
     let self:any = this;
     let _token = getToken();
     if (_token) {
+      this.isLogin = true;
       this.getUserInfor();
+    } else {
+      this.isLogin = false;
     }
     this.$nextTick(() => {
       // @ts-ignore

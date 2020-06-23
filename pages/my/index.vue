@@ -3,8 +3,7 @@
     <div class="my-frist">
       <div class="user-infor">
         <div class="user-infor-left">
-          <img :src="user.avatarUrl ? user.avatarUrl : $defaultUserImage" />
-          
+          <img :src="user.avatarUrl ? user.avatarUrl : $defaultUserImage3" />
         </div>
         <div class="user-infor-middle">
           <div class="user-frist">

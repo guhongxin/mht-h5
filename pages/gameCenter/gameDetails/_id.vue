@@ -349,8 +349,8 @@ export default class GameDetails extends Vue {
     width: 100%;
   }
   .swiper-slide {
-    width: 270px;
-    padding-bottom: 50%;
+    width: 225px;
+    padding-bottom: 40%;
     overflow: hidden;
     position: relative;
     img {

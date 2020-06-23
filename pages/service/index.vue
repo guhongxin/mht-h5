@@ -1,38 +1,43 @@
 <template>
   <div class="servie">
     <div class="servie-box">
-      <div class="user-infor">
-        <div class="user-infor-left">
-          <img :src="user.avatarUrl ? user.avatarUrl : $defaultUserImage" />
-        </div>
-        <div class="user-infor-middle">
-          <div class="user-frist">
-            <div class="user-name">
-              <span>{{user.nickname}}</span>
-              <!-- <span class="user-level">LV<span>{{vip.level}}</span></span> -->
-            </div>
+      <template v-if="isLogin">
+        <div class="user-infor">
+          <div class="user-infor-left">
+            <img :src="user.avatarUrl ? user.avatarUrl : $defaultUserImage3" />
           </div>
-          <div class="account">账号：{{user.username || "无"}}</div>
-          <!-- <div class="k-coin">K币：-</div> -->
-        </div>
-        <div class="user-infor-right">
-          <!-- <div class="div-btn" @click="signIn">签到</div> -->
-        </div>
-      </div>
-      <div class="level-percentage-box">
-        <div class="level-percentage-left"></div>
-        <div class="level-percentage-right">
-          <div class="level-progress">
-            <div class="progress-portion" :style="{width: vip.expProgress}">
-              <div class="progress-pivot" :style="{left: vip.expProgress}">LV<span>{{vip.level}}</span></div>
+          <div class="user-infor-middle">
+            <div class="user-frist">
+              <div class="user-name">
+                <span>{{user.nickname}}</span>
+                <!-- <span class="user-level">LV<span>{{vip.level}}</span></span> -->
+              </div>
             </div>
+            <div class="account">账号：{{user.username || "无"}}</div>
+            <!-- <div class="k-coin">K币：-</div> -->
+          </div>
+          <div class="user-infor-right">
+            <!-- <div class="div-btn" @click="signIn">签到</div> -->
           </div>
         </div>
+        <div class="level-percentage-box">
+          <div class="level-percentage-left"></div>
+          <div class="level-percentage-right">
+            <div class="level-progress">
+              <div class="progress-portion" :style="{width: vip.expProgress}">
+                <div class="progress-pivot" :style="{left: vip.expProgress}">LV<span>{{vip.level}}</span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </template>
+      <div class="no-login" v-else>
+        <div class="login-status">未登录</div>
       </div>
     </div>
     <div class="servie-two">
-      <Floor :floorTitle="'VIP 规则说明'" style="margin: 20px 0px 20px 0px" :isMore="false">
-      </Floor>
+      <!-- <Floor :floorTitle="'VIP 规则说明'" style="margin: 20px 0px 20px 0px" :isMore="false">
+      </Floor> -->
       <div class="servie-descript">
         <div class="title">充值服务</div>
         <div class="servie-grid">
@@ -83,9 +88,10 @@ interface Recharge {
     Floor,
     CompanyCopyWrit
   },
-  middleware: "redirectLogin"
+  // middleware: "redirectLogin"
 })
 export default class Service extends Vue {
+  private isLogin:boolean = false; // 是否登录
   private recharge:Array<Recharge> = [{
     src: "/img/recharge.png",
     title: "充值"
@@ -148,7 +154,10 @@ export default class Service extends Vue {
   private mounted() {
     let _token = getToken();
     if (_token) {
+      this.isLogin = true;
       this.getUserInfor();
+    } else {
+      this.isLogin = false;
     }
   }
   private getUserInfor() {
@@ -192,6 +201,21 @@ export default class Service extends Vue {
 .servie-box {
   padding: 15px 0px;
   background-color: #ffffff;
+  .no-login {
+    height: 60px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    .login-status {
+      font-size: 16px;
+      font-weight: 600;
+      padding: 4px 10px;
+      color: #ffffff;
+      background-color: #dddddd;
+      border-radius: 4px;
+      letter-spacing: 4px;
+    }
+  }
 }
 .user-infor {
   display: flex;
@@ -319,13 +343,13 @@ export default class Service extends Vue {
       .grid-icon {
         line-height: 0px;
         img {
-          height: 20px;
-          width: 20px;
+          height: 30px;
+          width: 30px;
         }
       }
       .grid-title {
         margin-top: 10px;
-        font-size: 12px;
+        font-size: 14px;
         color: #666666;
         font-weight: 400;
       }
@@ -341,5 +365,6 @@ export default class Service extends Vue {
   background-color: #ffffff;
   overflow: hidden;
   margin-top: 10px;
+  padding: 20px 0px;
 }
 </style>

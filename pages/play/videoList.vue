@@ -34,6 +34,7 @@
 import { Vue, Component } from "vue-property-decorator"
 import HotVideoItem from "~/components/HotVideoItem.vue"
 import Floor from "~/components/Floor.vue";
+import { FALSE } from "node-sass";
 interface Page {
   cur: number, // 当前页
   size: number // 每页显示条数
@@ -56,7 +57,7 @@ export default class VideoList extends Vue {
   private total:number = 0;
   private tabMenu:Array<any> = [];
   private gameId:any;
-
+  private isrequstDuration:boolean = false;
   private mounted() {
     this.tabList();
     this.videos = [];
@@ -110,12 +111,23 @@ export default class VideoList extends Vue {
   }
   private vanTabClick(index:any) {
     // 切换tab
-    this.videos = [];
-    this.page.cur = 1;
-    this.finished = false;
-    this.loading = false;
-    this.gameId = this.tabMenu[index].id;
-    this.getList();
+    if (!this.isrequstDuration) {
+      (this as any).$toast.loading({
+        message: '正在请求数据...',
+        forbidClick: true,
+      })
+      this.videos = [];
+      this.page.cur = 1;
+      this.finished = false;
+      this.loading = false;
+      this.gameId = this.tabMenu[index].id;
+      this.isrequstDuration = true;
+      this.getList().then(() => {
+        this.isrequstDuration = false;
+      }).catch(() => {
+        this.isrequstDuration = false;
+      });
+    }
   }
 }
 </script>
