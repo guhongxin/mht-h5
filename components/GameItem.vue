@@ -7,7 +7,7 @@
       <div class="game-name">{{gameIfor.name}}</div>
       <div class="game-tag-list">
         <div class="game-tag" v-for="(item, index) in gameIfor.tags" :key="index">
-          {{item}}
+          <span class="game-tag-span">{{item}}</span>
         </div>
       </div>
       <div class="game-other">
@@ -70,10 +70,14 @@ export default class GameItem extends Vue {
     text-align: center;
     position: relative;
     line-height: normal;
+    .game-tag-span {
+      position: relative;
+      z-index: 1;
+    }
   }
-  .game-tag::before {
+  .game-tag::after {
     content: "";
-    width: 0px;
+    width: 0px; 
     height: 0px;
     border-right: 16px solid rgba(233, 233, 233, 1);
     border-left: 16px solid transparent;
@@ -81,7 +85,7 @@ export default class GameItem extends Vue {
     position: absolute;
     bottom: 0px;
     right: 0px;
-    z-index: -1;
+    z-index: 0;
   }
   .game-other {
     font-size: 10px;
