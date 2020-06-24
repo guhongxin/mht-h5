@@ -1,20 +1,20 @@
 <template>
   <div class="servie">
     <div class="servie-box">
-      <template v-if="isLogin">
+      <template >
         <div class="user-infor">
           <div class="user-infor-left">
-            <img :src="user.avatarUrl ? user.avatarUrl : $defaultUserImage3" />
+            <img :src="isLogin ? (user.avatarUrl ? user.avatarUrl : $defaultUserImage3) : $defaultUserImage" />
           </div>
           <div class="user-infor-middle">
             <div class="user-frist">
               <div class="user-name">
-                <span>{{user.nickname}}</span>
+                <span>{{user.nickname || "未登录"}}</span>
                 <!-- <span class="user-level">LV<span>{{vip.level}}</span></span> -->
               </div>
             </div>
             <div class="account">账号：{{user.username || "无"}}</div>
-            <!-- <div class="k-coin">K币：-</div> -->
+            <div class="k-coin">K币：-</div>
           </div>
           <div class="user-infor-right">
             <!-- <div class="div-btn" @click="signIn">签到</div> -->
@@ -31,9 +31,9 @@
           </div>
         </div>
       </template>
-      <div class="no-login" v-else>
+      <!-- <div class="no-login" v-else>
         <div class="login-status">未登录</div>
-      </div>
+      </div> -->
     </div>
     <div class="servie-two">
       <!-- <Floor :floorTitle="'VIP 规则说明'" style="margin: 20px 0px 20px 0px" :isMore="false">
@@ -264,7 +264,7 @@ export default class Service extends Vue {
     .account {
       font-size: 12px;
       font-weight: 400;
-      color: #1A1A1A;
+      color: #1A1A1A;                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 
     }
     .k-coin {
       font-size: 12px;

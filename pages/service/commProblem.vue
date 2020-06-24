@@ -4,7 +4,7 @@
       <van-tab title="账号相关">
         <div class="flex-grid account-frist">
           <div class="grid-item">
-            <div class="grid-item-icon">
+            <div class="grid-item-icon" @click="passwordClick">
               <img src="/img/lock.png" />
             </div>
             <div class="grid-item-title">
@@ -12,7 +12,7 @@
             </div>
           </div>
           <div class="grid-item">
-            <div class="grid-item-icon">
+            <div class="grid-item-icon" @click="secretGuardAbout">
               <img src="/img/shield.png"/>
             </div>
             <div class="grid-item-title">
@@ -20,7 +20,7 @@
             </div>
           </div>
           <div class="grid-item">
-            <div class="grid-item-icon">
+            <div class="grid-item-icon" @click="rechargeRecord">
               <img src="/img/magnifier.png"/>
             </div>
             <div class="grid-item-title">
@@ -63,7 +63,7 @@
       <van-tab title="充值服务" disabled></van-tab>
       <van-tab title="其它" disabled></van-tab>
     </van-tabs>
-    <CompanyCopyWrit class="company"></CompanyCopyWrit>
+    <!-- <CompanyCopyWrit class="company"></CompanyCopyWrit> -->
   </div>
 </template>
 <script lang="ts">
@@ -77,6 +77,21 @@ import CompanyCopyWrit from "~/components/CompanyCopyWrit.vue"
 export default class CommProblem extends Vue {
   private active:number = 0
   private activeNames:string = ''
+  private secretGuardAbout() {
+    (this as any).$dialog.alert({
+      message: '该功能暂未开启'
+    })
+  }
+  private rechargeRecord() {
+    (this as any).$dialog.alert({
+      message: '该功能暂未开启'
+    })
+  }
+  private passwordClick() {
+    (this as any).$dialog.alert({
+      message: '该功能暂未开启'
+    })
+  }
 }
 </script>
 <style lang="scss" scoped>

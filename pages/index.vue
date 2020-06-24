@@ -137,7 +137,7 @@ export default class Home extends Vue {
           coverflowEffect: {
             rotate: 0,
             stretch: 10,
-            depth: 50,
+            depth: 100,
             modifier: 4,
             slideShadows: false
           }

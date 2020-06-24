@@ -36,7 +36,8 @@
           <img :src="props.active ? serviceIcon.active : serviceIcon.inactive" />
         </template>
       </van-tabbar-item> -->
-      <van-tabbar-item to="/forum">
+      <!-- <van-tabbar-item to="/forum"> -->
+      <van-tabbar-item @click="forumClick">
         <span>论坛</span>
         <template #icon="props">
           <img :src="props.active ? forumIcon.active : forumIcon.inactive" />
@@ -131,6 +132,11 @@ export default class Default extends Vue {
   private onClickRight() {
     // 点击右侧按钮
     Bus.$emit('rightClick', this.modifyKey)
+  }
+  private forumClick() {
+    (this as any).$dialog.alert({
+      message: '该功能暂未开启'
+    })
   }
 }
 </script>
