@@ -3,9 +3,18 @@
     <div class="image-content">
       <div class="image-box">
         <img :src="accountImage" id="accountImage" />
-        <div class="camera-icon" @click="selecImage"></div>
       </div>
     </div>
+    <div class="select-box">
+      <span class="selectBtn" @click="selectImage">选择图像</span>
+    </div>
+    <van-action-sheet  v-model="show">
+      <div class="default-image-box">
+        <div class="item" v-for="(item, index) in imgIcon" :key="index" @click="iconClick(index)">
+          <img :src="`http://173up.tyu89.wang/static/USR_AVATAR/${index + 1}.png`">
+        </div>
+      </div>
+    </van-action-sheet>
   </div>
 </template>
 <script lang="ts">
@@ -19,8 +28,9 @@ export default class myPicture extends Vue {
   private show: boolean = false;
   private accountImage: string = "";
   private key: string = "";
-  private fileData: any;
+  private imgIcon:Array<string> = new Array(18);
   private mounted() {
+    console.log("imgIcon", this.imgIcon)
     let route: any = this.$route;
     this.accountImage = route.query.modifyTxt
       ? route.query.modifyTxt
@@ -29,22 +39,24 @@ export default class myPicture extends Vue {
       this.save(key);
     });
   }
-  private selecImage() {
-    // 选择照片
-    this.show = true;
-  }
   private onCancel() {
     // 取消
     this.show = false;
   }
-  // 打开文件 isOpenCamera 是否打开相机
+  // 打开文件
   private save(key: string) {
-    if (!this.fileData) {
-      (this as any).$dialog.alert({
-        message: '请选择上传的图片！'
-      })
-      return false;
-    }
+    (this as any).$toast.loading({
+      mask: true
+    });
+    this.saveApi(this.accountImage)
+  }
+  private selectImage() {
+    // 选择图像
+    this.show = true;
+  }
+  private iconClick(index:number) {
+    this.show = false;
+    this.accountImage = `http://173up.tyu89.wang/static/USR_AVATAR/${index + 1}.png`;
   }
   private saveApi(url: string) {
     (this as any).$axios({
@@ -66,7 +78,6 @@ export default class myPicture extends Vue {
       (this as any).$toast.clear()
     })
   }
-
   private destroyed() {
     Bus.$off("rightClick");
   }
@@ -107,5 +118,26 @@ export default class myPicture extends Vue {
   width: 100%;
   position: absolute;
   bottom: 0px;
+}
+.select-box {
+  text-align: center;
+  .selectBtn {
+    font-size: 14px;
+    display: inline-block;
+  }
+}
+.default-image-box {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  background-color: #ffffff;
+  justify-items: center;
+  align-items: center;
+  .item {
+    padding: 5px;
+    img {
+      width: 40px;
+      display:block;
+    }
+  }
 }
 </style>
