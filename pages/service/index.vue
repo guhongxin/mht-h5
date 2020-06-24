@@ -14,7 +14,7 @@
               </div>
             </div>
             <div class="account">账号：{{user.username || "无"}}</div>
-            <div class="k-coin">K币：-</div>
+            <div class="k-coin">K币：{{ user.kCoin }}</div>
           </div>
           <div class="user-infor-right">
             <!-- <div class="div-btn" @click="signIn">签到</div> -->
@@ -122,6 +122,7 @@ export default class Service extends Vue {
     gender: "",
     phoneNumber: "",
     email: "",
+    kCoin: 0
   }
   private vip = {
     level: 0,
@@ -184,6 +185,7 @@ export default class Service extends Vue {
           gender: _user.gender,
           phoneNumber: _user.phoneNumber,
           email: _user.email,
+          kCoin: _user.kCoin
         }
       }
     }).catch((err:any) => {
