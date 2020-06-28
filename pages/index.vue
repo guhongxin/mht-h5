@@ -93,6 +93,7 @@ export default class Home extends Vue {
     },
     {
       src: "/img/kbshop.png",
+      path: "http://dev.17173g.cn/mht/shop_V2.0_20191213/index.html",
       text: "商城"
     },
     // {
@@ -155,12 +156,18 @@ export default class Home extends Vue {
   }
   private gridItemClick(param: any, index: number) {
     // 点击九宫格
-    if (!param.path) {
-      (this as any).$dialog.alert({
-        message: '该功能暂未开启'
-      })
+    console.log("param", param);
+    console.log("index", index);
+    if (index === 3) {
+
+    } else {
+      if (!param.path) {
+        (this as any).$dialog.alert({
+          message: '该功能暂未开启'
+        })
+      }
+      this.$router.push({ path: param.path })
     }
-    this.$router.push({ path: param.path })
   }
   private async carouselList() {
     // 轮播
