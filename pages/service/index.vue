@@ -343,14 +343,15 @@ export default class Service extends Vue {
       text-align: center;
       flex: 1;
       .grid-icon {
-        line-height: 0px;
         img {
+          display: block;
           height: 30px;
           width: 30px;
+          margin: 0px auto;
         }
       }
       .grid-title {
-        margin-top: 10px;
+        margin-top: 4px;
         font-size: 14px;
         color: #666666;
         font-weight: 400;

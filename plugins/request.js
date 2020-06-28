@@ -50,7 +50,7 @@ export default function ({store, redirect, app: { $axios }})  {
 					sessionClear()
 					redirect("/login")
 				} else {
-					Dialog({ message: data.code });
+					Dialog({ message: data.msg });
 					reject(data)
 				}
 			} else {

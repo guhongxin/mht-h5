@@ -134,17 +134,18 @@ export default class CommProblem extends Vue {
       text-align: center;
       flex: 1;
       .grid-item-icon {
-        line-height: 0px;
         img {
-          height: 20px;
-          width: 20px;
+          margin: 0px auto;
+          height: 30px;
+          width: 30px;
+          display: block;
         }
       }
       .grid-item-title {
         color: #666666;
         font-size: 12px;
         font-weight: 400;
-        margin-top: 10px;
+        margin-top: 4px;
       }
     }
   }
