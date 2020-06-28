@@ -124,6 +124,10 @@ export default class myPicture extends Vue {
   .selectBtn {
     font-size: 14px;
     display: inline-block;
+    color: #fff;
+    background: linear-gradient(-90deg,rgba(69,151,67,1),rgba(125,179,73,1));
+    padding: 2px 4px;
+    border-radius: 4px;
   }
 }
 .default-image-box {
