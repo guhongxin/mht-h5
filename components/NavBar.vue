@@ -5,8 +5,11 @@
       <img src="/img/logo.png" class="logo" />
     </div>
     <div class="search">
-      <input :value="value" type="text" class="input-text" @input="searchText" @focus="inputFocus" data-tag="searchInput"/>
       <van-icon name="search" class="search-icon"/>
+      <input :value="value" class="input-text"
+        @keyup="test"
+        @input="searchText" @focus="inputFocus" data-tag="searchInput"  type="search"/>
+      
     </div>
     <img :src="isLogin ? (avatarUrl ? avatarUrl: $defaultUserImage3) : $defaultUserImage" class="user-img" @click="userImageHand"/>
     <div class="search-area">
@@ -94,7 +97,9 @@ export default class NavBar extends Vue{
       }
     }).then((res:any) => {
       let data = res.data;
-      this.searchData = data.games;
+      if (data) {
+        this.searchData = data.games;
+      }
     }).catch((err:any) => {
       console.log("err", err)
     })
@@ -104,6 +109,8 @@ export default class NavBar extends Vue{
     this.searchData = [];
     let searchArea:any = document.querySelector(".search-area");
     searchArea && searchArea.classList.remove("search-area-show");
+    let input:any = document.querySelector(".input-text");
+    input && input.blur();
     this.value = "";
     // this.$router.push({ path: `/gameCenter/gameDetails/${param.id}`})
     this.$router.push({ path: '/gameCenter/gameDetails', query: {
@@ -120,6 +127,16 @@ export default class NavBar extends Vue{
     }).catch((err:any) => {
       console.log(err)
     })
+  }
+  private test(e:any) {
+    let keyCode:number = e.keyCode;
+    if (keyCode === 13) {
+      let searchArea:any = document.querySelector(".search-area");
+      if(!searchArea.classList.contains('search-area-show')){
+        searchArea && searchArea.classList.add("search-area-show")
+      }
+      (this as any).getList(this.value);
+    }
   }
 }
 </script>
@@ -153,9 +170,10 @@ export default class NavBar extends Vue{
   border:1px solid #EBEBEB;
   border-radius:27px;
   display: flex;
+  justify-content: flex-start;
   align-items: center;
-  padding: 2px 27px;
-  position: relative;
+  overflow: hidden;
+  padding: 0px 4px;
   .input-text {
     height: 100%;
     width: 100%;
@@ -165,9 +183,7 @@ export default class NavBar extends Vue{
     font-size: $nuxt-font-size-sm;
   }
   .search-icon {
-    position: absolute;
     font-size: 14px;
-    left: 4px;
   }
 }
 
@@ -197,7 +213,7 @@ export default class NavBar extends Vue{
     ul {
       li {
         padding: 10px;
-        font-size: 12px;
+        font-size: 14px;
         font-weight: 600;
       }
     }
@@ -206,4 +222,5 @@ export default class NavBar extends Vue{
 .search-area-show {
   top: 56px;
 }
+::-webkit-search-cancel-button { display: none; }
 </style>

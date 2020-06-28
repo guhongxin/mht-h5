@@ -53,7 +53,7 @@
         </div>
       </div>
     </Floor>
-    <Floor :floorTitle="'欢乐视频12'" :isMore="false" class="detail-floor">
+    <Floor :floorTitle="'欢乐视频'" :isMore="false" class="detail-floor">
       <div class="hl-video">
         <div class="hotVideoItem-img-box" v-for="(item, index) in videos" :key="index">
           <img :src="item.horCoverUrl" />

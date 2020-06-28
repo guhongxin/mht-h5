@@ -37,7 +37,7 @@
               </div>
             </template>
             <p>换绑手机：</p>
-            <p>换绑邮箱：轻触“我的”进入用户中心，点击“我的资料”-“邮箱”进行换绑</p>
+            <p>换绑邮箱：轻触“我的”进入用户中心，点击“我的资料”-“手机”进行换绑</p>
           </van-collapse-item>
           <van-collapse-item name="2">
             <template #title>
