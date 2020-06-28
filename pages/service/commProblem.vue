@@ -33,30 +33,48 @@
             <template #title>
               <div class="collapse-title">
                 <img src="/img/question.png" />
+                <span>登陆未成功或异常报错？</span>
+              </div>
+            </template>
+            <p>登陆需要使用猕猴桃平台账号，如已拥有，请您确保您的账密信息无误后进行登陆；如未拥有/登陆失败或遇到其他异常情况请联系人工客服。</p>
+          </van-collapse-item>
+          <van-collapse-item name="2">
+            <template #title>
+              <div class="collapse-title">
+                <img src="/img/question.png" />
                 <span>如何更换密保信息？</span>
               </div>
             </template>
-            <p>换绑手机：</p>
-            <p>换绑邮箱：轻触“我的”进入用户中心，点击“我的资料”-“手机”进行换绑</p>
+            <p>换绑手机：您可在登录任一游戏后，点开游戏内侧方悬浮球，进入账号安全选项，可以进行手机换绑。</p>
+            <p>换绑邮箱：轻触“我的”进入用户中心，点击“我的资料”-“邮箱”进行换绑。</p>
           </van-collapse-item>
-          <van-collapse-item name="2">
+          <van-collapse-item name="3">
             <template #title>
               <div class="collapse-title">
                 <img src="/img/question.png" />
                 <span>如何联系客服？</span>
               </div>
             </template>
-            <p>QQ客服：搜索添加服务号 800184997</p>
+            <p>QQ客服：搜索添加服务号800184997</p>
             <p>微信客服：搜索公众号 KiwiGame</p>
           </van-collapse-item>
-          <van-collapse-item name="3">
+          <van-collapse-item name="4">
             <template #title>
               <div class="collapse-title">
                 <img src="/img/question.png" />
-                <span>充值记录如何查询？</span>
+                <span>如何领取及兑换游戏礼包？</span>
               </div>
             </template>
-            <p>登陆需要使用猕猴桃平台账号，如未拥有请您轻触“我的”进入用户中心，完成注册后登陆；如已拥有请您确保您的账密信息无误后进行登陆。若有其他登陆异常问题请联系客服。</p>
+            <p>领取礼包需要先使用猕猴桃平台账号进行登陆，已领取的礼包码可进入“我的”-“我的礼包”进行查看。且关注对应游戏的公众号及微博，也可以领取更多礼包哦。</p>
+          </van-collapse-item>
+          <van-collapse-item name="5">
+            <template #title>
+              <div class="collapse-title">
+                <img src="/img/question.png" />
+                <span>K币如何获取？</span>
+              </div>
+            </template>
+            <p>每充值1元可对应获得10枚K币，K币可进入首页“商城”进行奖励兑换。更多K币获取方式敬请期待后续优惠活动和规则。</p>
           </van-collapse-item>
         </van-collapse>
       </van-tab>
