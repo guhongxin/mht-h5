@@ -328,7 +328,6 @@ export default class Service extends Vue {
 }
 .servie-descript {
   padding: 0px 7px;
-  margin-bottom: 20px;
   .title {
     font-size: 14px;
     font-weight: bold;
@@ -369,5 +368,8 @@ export default class Service extends Vue {
   overflow: hidden;
   margin-top: 10px;
   padding: 20px 0px;
+  & > .servie-descript:not(:last-child) {
+    margin-bottom: 20px;
+  }
 }
 </style>

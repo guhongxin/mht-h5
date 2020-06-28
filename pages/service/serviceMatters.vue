@@ -16,7 +16,7 @@
         <p class="content-txt">QQ：800184997</p>
       </div>
     </div>
-    <CompanyCopyWrit class="company"></CompanyCopyWrit>
+    <!-- <CompanyCopyWrit class="company"></CompanyCopyWrit> -->
   </div>
 </template>
 <script lang="ts">

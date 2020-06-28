@@ -70,6 +70,7 @@ export default class GameItem extends Vue {
     text-align: center;
     position: relative;
     line-height: normal;
+    overflow: hidden;
     .game-tag-span {
       position: relative;
       z-index: 1;
@@ -81,7 +82,7 @@ export default class GameItem extends Vue {
     height: 0px;
     border-right: 16px solid rgba(233, 233, 233, 1);
     border-left: 16px solid transparent;
-    border-top: 14px solid transparent;
+    border-top: 16px solid transparent;
     position: absolute;
     bottom: 0px;
     right: 0px;
