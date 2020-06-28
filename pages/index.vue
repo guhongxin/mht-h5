@@ -60,8 +60,9 @@ import { Vue, Component, Prop } from "vue-property-decorator";
 import Floor from "~/components/Floor.vue";
 import HotGameItem from "~/components/HotGameItem.vue";
 import CompanyCopyWrit from "~/components/CompanyCopyWrit.vue";
-import WGrid from "~/components/WGrid.vue"
-import { device, downFile } from "~/assets/utils/comm.ts"
+import WGrid from "~/components/WGrid.vue";
+import { device, downFile } from "~/assets/utils/comm.ts";
+import { getToken } from "~/assets/utils/auth.js"
 @Component({
   components: {
     Floor,
@@ -156,10 +157,26 @@ export default class Home extends Vue {
   }
   private gridItemClick(param: any, index: number) {
     // 点击九宫格
-    console.log("param", param);
-    console.log("index", index);
     if (index === 3) {
-
+      let _token = getToken();
+      let url:string = "http://dev.17173g.cn/mht/shop_V2.0_20191213/index.html"
+      if (_token) {
+        (this as any).$axios({
+          method: "POST",
+          url: "/usr/user/generateGameStoreToken"
+        }).then((res:any) => {
+          let token = res.data.token
+          if (token) {
+            document.location.href = url+`?token=${token}`;
+          } else {
+            document.location.href = url;
+          }
+        }).catch((err:any) => {
+          console.log(err);
+        });
+      } else {
+        document.location.href = url;
+      }
     } else {
       if (!param.path) {
         (this as any).$dialog.alert({
