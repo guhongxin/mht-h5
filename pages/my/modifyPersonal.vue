@@ -156,6 +156,15 @@ export default class ModifyPersonal extends Vue {
         });
         return false;
       }
+      if (key === "email") {
+        let reg = /^[\w!#$%&’*+/=?`{|}~^-]+(?:\.[\w!#$%&’*+/=?`{|}~^-]+)*@(?:[a-zA-Z0-9-]+\.)+[a-zA-Z]{2,6}$/
+        if (!reg.test(this.value)) {
+          (this as any).$dialog.alert({
+            message: "请输入正确的邮箱！"
+          });
+          return false;
+        }
+      }
       (this as any).$toast.loading({
         mask: true
       });
@@ -181,12 +190,19 @@ export default class ModifyPersonal extends Vue {
     }
   }
   private sendCode() {
-    if (!(this as any).value) {
+    let phoneNumber:any = (this as any).value;
+    if (!phoneNumber) {
       (this as any).$dialog.alert({
         message: "请输入电话号码"
       });
       return false;
     }
+    if(!(/^1(3|4|5|6|7|8|9)\d{9}$/.test(phoneNumber))){ 
+      (this as any).$dialog.alert({
+        message: "请输入正确的手机号码！"
+      });
+      return false; 
+    } 
     this.isSendCode = true;
     let timer = setInterval(()=> {
       this.btnTxt = this.btnTxt - 1;
@@ -196,7 +212,6 @@ export default class ModifyPersonal extends Vue {
         clearInterval(timer)
       }
     }, 1000)
-    let phoneNumber:any = (this as any).value;
     let obj:any = {
       phoneNumber: phoneNumber
     }
@@ -208,6 +223,12 @@ export default class ModifyPersonal extends Vue {
         message: "请输入电话号码"
       });
       return false;
+    }
+    if(!(/^1(3|4|5|6|7|8|9)\d{9}$/.test(this.phoneNumber))){ 
+      (this as any).$dialog.alert({
+        message: "请输入正确的手机号码！"
+      });
+      return false; 
     }
     this.isSendCode1 = true;
     let timer = setInterval(()=> {
