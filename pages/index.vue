@@ -64,6 +64,15 @@ import WGrid from "~/components/WGrid.vue";
 import { device, downFile } from "~/assets/utils/comm.ts";
 import { getToken } from "~/assets/utils/auth.js"
 @Component({
+  head() {
+    //使用 head 方法设置当前页面的头部标签。
+    return {
+      title: "s",
+      meta: [
+        { hid: 'description', name: 'description', content: 'My custom description' }
+      ]
+    }
+  },
   components: {
     Floor,
     HotGameItem,

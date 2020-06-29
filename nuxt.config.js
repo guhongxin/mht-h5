@@ -9,14 +9,15 @@ module.exports = {
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no' },
-      { hid: 'description', name: 'description', content: process.env.npm_package_description || '' }
+      { hid: 'description', name: 'description', content: process.env.npm_package_description || '' },
+      { hid: 'keywords', name: 'keywords', content: "游戏,末日血战" }
     ],
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
     ],
     script: [
       { src: '/js/swiper.min.js' },
-      { src: '/js/vconsole.min.js' }
+      // { src: '/js/vconsole.min.js' }
     ]
   },
   /*

@@ -88,15 +88,15 @@ export default class Login extends Vue {
   }
   private mounted() {
     // @ts-ignore
-    var vConsole = new VConsole();
+    // var vConsole = new VConsole();
     const originHeight = document.documentElement.clientHeight || document.body.clientHeight;
-    console.log("---", originHeight)
+    // console.log("---", originHeight)
     window.addEventListener('resize', () => {
       const resizeHeight = document.documentElement.clientHeight || document.body.clientHeight;
       // @ts-check
       if (resizeHeight < originHeight) {
         // 键盘弹起所后所需的页面逻辑
-        console.log("键盘弹起所后所需的页面逻辑", resizeHeight)
+        // console.log("键盘弹起所后所需的页面逻辑", resizeHeight)
         let deviceType:number = device()
         if (deviceType === 1) {
           let login:any = document.querySelector(".login")

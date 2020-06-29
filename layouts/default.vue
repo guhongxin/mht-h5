@@ -105,7 +105,7 @@ export default class Default extends Vue {
   private getActive(route: any): number {
     let _name:string = route.name
     // @ts-ignore
-    var vConsole = new VConsole();
+    // var vConsole = new VConsole();
     let nameArr:Array<string> =  _name.split("-");
     this.back = nameArr.length > 1
     let indexObj:any = {

@@ -43,13 +43,13 @@ import CompanyCopyWrit from "~/components/CompanyCopyWrit.vue"
 import Floor from "~/components/Floor.vue";
 import GridgiftbagItem from "~/components/GridgiftbagItem.vue";
 import ReceiveDailog from "~/components/ReceiveDailog.vue";
+import { getToken } from "~/assets/utils/auth.js";
 // 接口
 interface Page {
   cur: number, // 当前页
   size: number // 每页显示条数
 }
 @Component({
-  middleware: "redirectLogin",
   components: {
     Floor,
     CompanyCopyWrit,
@@ -101,6 +101,16 @@ export default class gridgiftbag extends Vue {
     })
   }
   private receiveClick(param:any) {
+    let _token = getToken();
+    if (!_token) {
+      this.$dialog.confirm({
+        message: '请先登录！',
+        showCancelButton: false
+      }).then(res => {
+        this.$router.push({ path: "/login" })
+      });
+      return  false;
+    }
     (this as any).$axios({
       method: "POST",
       url: "/usr/giftcode/receiveGiftCode",
