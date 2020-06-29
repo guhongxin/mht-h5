@@ -104,7 +104,7 @@ import { getSession } from "~/assets/utils/auth.js"
 import { sessionClear, setSession } from "~/assets/utils/auth.js"
 import { getToken } from "~/assets/utils/auth.js"
 enum GenderEnum {
-  UNKNOWN = "未知",
+  UNKNOWN = "保密",
   MALE = "男",
   FEMALE = "女"
 }
@@ -114,7 +114,7 @@ export default class PersonalData extends Vue {
   private sexOption:Array<any> = [
     { name: '男', value: 'MALE' },
     { name: '女', value: 'FEMALE' },
-    { name: '未知', value: 'UNKNOWN' }]
+    { name: '保密', value: 'UNKNOWN' }]
   private dateShow:boolean = false;
   private currentDate:Object = new Date()
   private minDate:Object = new Date(1917, 1, 1)
