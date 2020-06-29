@@ -31,11 +31,10 @@ export default class WGrid extends Vue {
     padding: 15px 0px;
     text-align: center;
     .icon-box {
-      display: inline-block;
-      line-height: 0px;
       img {
         height: 34px;
         width: 34px;
+        display: block;
       }
     }
     .title {
