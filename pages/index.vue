@@ -132,7 +132,7 @@ export default class Home extends Vue {
         observer: true,
         observeParents:true
       });
-      let doc:any = document.querySelector(".box3")
+      let doc:any = document.querySelector(".box3");
       setTimeout(() => {
         doc.style.transform = 'translate3d(0px, 0px, 0px)';
       }, 300)
@@ -153,7 +153,7 @@ export default class Home extends Vue {
             slideShadows: false
           }
         });
-      }, 500)
+      }, 500);
       document.addEventListener("click", function(e) {
         let doc:any = e.target;
         let tag = doc.dataset.tag;
@@ -168,13 +168,13 @@ export default class Home extends Vue {
     // 点击九宫格
     if (index === 3) {
       let _token = getToken();
-      let url:string = "http://dev.17173g.cn/mht/shop_V2.0_20191213/index.html"
+      let url:string = "http://dev.17173g.cn/mht/shop_V2.0_20191213/index.html";
       if (_token) {
         (this as any).$axios({
           method: "POST",
           url: "/usr/user/generateGameStoreToken"
         }).then((res:any) => {
-          let token = res.data.token
+          let token = res.data.token;
           if (token) {
             document.location.href = url+`?token=${token}`;
           } else {
@@ -192,7 +192,7 @@ export default class Home extends Vue {
           message: '该功能暂未开启'
         })
       }
-      this.$router.push({ path: param.path })
+      this.$router.push({ path: param.path });
     }
   }
   private async carouselList() {
@@ -201,7 +201,7 @@ export default class Home extends Vue {
       method: "POST",
       url: "/usr/index/carousels"
     })
-    this.carousels = res.data.carousels
+    this.carousels = res.data.carousels;
   }
   private async hotVideoList() {
     // 热门视频
@@ -209,7 +209,7 @@ export default class Home extends Vue {
       method: "POST",
       url: "/usr/index/hotVideos"
     })
-    this.hotVideos = res1.data.videos
+    this.hotVideos = res1.data.videos;
   }
   private async hotGameList() {
     // 游戏
@@ -217,8 +217,8 @@ export default class Home extends Vue {
       method: "POST",
       url: "/usr/index/hotGames"
     })
-    this.games = res.data.games
-    let deviceType:number = device()
+    this.games = res.data.games;
+    let deviceType:number = device();
     this.games = res.data.games.reduce((total:Array<any>, item:any) => {
       let obj = {
         id: item.id,
@@ -227,7 +227,7 @@ export default class Home extends Vue {
         downUrl: item.downloads[deviceType].url,
         size: item.downloads[deviceType].size
       }
-      total.push(obj)
+      total.push(obj);
       return total
     }, [])
   }
@@ -241,48 +241,48 @@ export default class Home extends Vue {
   }
   private swipeItemClick(param:any) {
     // 点击轮播
-    document.location.href = param.url
+    document.location.href = param.url;
   }
   private playVideo(param:any) {
     // 播放热门视频
     this.$router.push({ name: 'play-play', query: {
       coverUrl: param.verCoverUrl,
       videoUrl: param.videoUrl
-    }})
+    }});
   }
   private hotGameMore() {
     // 热门游戏查看更多
     this.$router.push({
       path: "/gameCenter/gameCenter"
-    })
+    });
   }
   private hotVideoMore() {
     // 欢乐视频更多
     this.$router.push({
       path: "/play/videoList"
-    })
+    });
   }
   private gameDetailsClick(param: any) {
     // 点击热门游戏跳转到详情
     // this.$router.push({ path: `/gameCenter/gameDetails/${param.id}`})
     this.$router.push({ path: '/gameCenter/gameDetails', query: {
       id: param.id
-    }})
+    }});
   }
   private hotGameDown(param:any) {
     let deviceType:number = device()
     if (deviceType === 0) {
       // ios
-      document.location.href = param.downUrl
+      document.location.href = param.downUrl;
     } else {
-      downFile(param.downUrl)
+      downFile(param.downUrl);
     }
   }
   private hotActivitieMore() {
     // 活动更多
     this.$router.push({
       path: "/activities/activities"
-    })
+    });
   }
 }
 </script>

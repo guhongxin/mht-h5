@@ -76,7 +76,6 @@ export default class Login extends Vue {
       this.btnLoading = false;
       (this as any).$router.push({ path: "/" });
     }).catch((res: any) => {
-      console.log("---", res)
       this.btnLoading = false;
     })
   }
@@ -90,24 +89,22 @@ export default class Login extends Vue {
     // @ts-ignore
     // var vConsole = new VConsole();
     const originHeight = document.documentElement.clientHeight || document.body.clientHeight;
-    // console.log("---", originHeight)
     window.addEventListener('resize', () => {
       const resizeHeight = document.documentElement.clientHeight || document.body.clientHeight;
       // @ts-check
       if (resizeHeight < originHeight) {
         // 键盘弹起所后所需的页面逻辑
-        // console.log("键盘弹起所后所需的页面逻辑", resizeHeight)
-        let deviceType:number = device()
+        let deviceType:number = device();
         if (deviceType === 1) {
-          let login:any = document.querySelector(".login")
-          login.style.height = originHeight + "px"
+          let login:any = document.querySelector(".login");
+          login.style.height = originHeight + "px";
         }
       } else {
         // 键盘收起所后所需的页面逻辑
-        let deviceType:number = device()
+        let deviceType:number = device();
         if (deviceType === 1) {
-          let login:any = document.querySelector(".login")
-          login.style = undefined
+          let login:any = document.querySelector(".login");
+          login.style = undefined;
         }
       }
     }, false);
