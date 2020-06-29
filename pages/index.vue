@@ -67,7 +67,7 @@ import { getToken } from "~/assets/utils/auth.js"
   head() {
     //使用 head 方法设置当前页面的头部标签。
     return {
-      title: "s",
+      title: "猕猴桃",
       meta: [
         { hid: 'description', name: 'description', content: 'My custom description' }
       ]
