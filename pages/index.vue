@@ -148,7 +148,7 @@ export default class Home extends Vue {
           coverflowEffect: {
             rotate: 0,
             stretch: 10,
-            depth: 100,
+            depth: 130,
             modifier: 4,
             slideShadows: false
           }
@@ -333,8 +333,8 @@ export default class Home extends Vue {
 .swiper-container {
   justify-content: center;
   .swiper-wrapper .swiper-slide {
-    width: 230px;
-    padding-bottom: 30%;
+    width: 280px;
+    padding-bottom: 35%;
     overflow: hidden;
     position: relative;
   }
