@@ -27,7 +27,8 @@
       </div>
       <div class="grid-item">
         <img src="/img/gy.png" class="grid-item-icon" @click="goNew(gameInfor)"/>
-        <div class="grid-item-title">攻略</div>
+        <!-- <div class="grid-item-title">攻略</div> -->
+        <div class="grid-item-title">新闻</div>
       </div>
       <div class="grid-item">
         <img src="/img/lt.png" class="grid-item-icon" @click="goForum(gameInfor)"/>

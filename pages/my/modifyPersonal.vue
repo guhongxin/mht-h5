@@ -17,6 +17,7 @@
       </van-field>
     </template>
     <van-field v-model="value" :placeholder="`请输入${placeholder}`" v-else />
+    <p class="ts" v-if="modifyKey==='nickname'">每月只能修改一次昵称</p>
     <van-field
         v-model="smsVerifyCode"
         center
@@ -266,3 +267,12 @@ export default class ModifyPersonal extends Vue {
   }
 }
 </script>
+<style lang="scss" scoped>
+// .modify-personal {
+//   background-color: #ffffff;
+// }
+.ts {
+  padding: 8px 5px;
+  font-size: 12px;
+}
+</style>
