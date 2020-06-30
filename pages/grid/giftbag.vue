@@ -73,7 +73,7 @@ export default class gridgiftbag extends Vue {
   private mounted() {
     // 生命周期
     let route:any = this.$route;
-    this.gameId = route.params.gameId
+    this.gameId = route.params.gameId;
     this.boxesList = [];
     this.tabList();
     this.giftCodeBoxList();

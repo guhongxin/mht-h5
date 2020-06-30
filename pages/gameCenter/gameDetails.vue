@@ -53,7 +53,7 @@
         </div>
       </div>
     </Floor>
-    <Floor :floorTitle="'欢乐视频'" :isMore="false" class="detail-floor">
+    <Floor :floorTitle="'欢乐视频'" class="detail-floor" @findMore="videoMore(gameInfor)">
       <div class="hl-video">
         <div class="hotVideoItem-img-box" v-for="(item, index) in videos" :key="index">
           <img :src="item.horCoverUrl" />
@@ -201,6 +201,15 @@ export default class GameDetails extends Vue {
   }
   private goOfficialWeb(item:any) {
     document.location.href = item.officialUrl;
+  }
+  private videoMore(item:any) {
+    // 查看视频更多
+    this.$router.push({
+      name: "play-videoList",
+      params: {
+        gameId: item.id
+      }
+    })
   }
   @Watch("$route")
   private routeChange(val: any) {

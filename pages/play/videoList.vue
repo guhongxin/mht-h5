@@ -59,12 +59,13 @@ export default class VideoList extends Vue {
   private gameId:any;
   private isrequstDuration:boolean = false;
   private mounted() {
+    let route:any = this.$route;
+    this.gameId = route.params.gameId;
     this.tabList();
     this.videos = [];
     this.getList()
   }
   private getList() {
-    
     return new Promise((resolve:any, reject:any) => {
       (this as any).$axios({
         method: "POST",
@@ -105,6 +106,10 @@ export default class VideoList extends Vue {
       let data:any = res.data;
       this.tabMenu = data.games;
       this.tabMenu.unshift({ name: "全部", id: 0 })
+      let _index = this.tabMenu.findIndex((item:any) => {
+        return item.id === this.gameId;
+      })
+      this.active = _index !== -1 ? _index : 0
     }).catch((err:any) => {
       console.log("err", err)
     });
