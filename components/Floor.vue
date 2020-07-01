@@ -51,5 +51,8 @@ export default class Floor extends Vue {
       font-size: 11px;
     }
   }
+  .Floor-content {
+    overflow: hidden;
+  }
 }
 </style>
