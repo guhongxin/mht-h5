@@ -33,7 +33,7 @@ export default class GameNewItem extends Vue {
 .game-new-item {
   width: 100%;
   box-sizing: border-box;
-  margin-bottom: 10px;
+  margin-top: 10px;
   .game-new-item-head {
     padding: 4px 6px;
     background-color: #ffffff;

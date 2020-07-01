@@ -90,7 +90,6 @@ export default class Activities extends Vue {
 </script>
 <style lang="scss" scoped>
 .activities {
-  padding-top: 15px;
   box-sizing: border-box;
   .activities-content {
     padding: 0px 10px;

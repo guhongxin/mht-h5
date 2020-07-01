@@ -97,7 +97,6 @@ export default class gameNew extends Vue {
 </script>
 <style lang="scss" scoped>
 .game-new {
-  padding-top: 15px;
   box-sizing: border-box;
 }
 .game-new-box {

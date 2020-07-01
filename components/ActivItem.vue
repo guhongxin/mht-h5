@@ -27,7 +27,7 @@ export default class ActivItem extends Vue {
 .activ-item {
   width: 100%;
   box-sizing: border-box;
-  margin-bottom: 10px;
+  margin-top: 10px;
   .activ-item-head {
     padding: 4px 6px;
     background-color: #ffffff;
