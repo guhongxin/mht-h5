@@ -103,7 +103,7 @@ export default class Home extends Vue {
     },
     {
       src: "/img/kbshop.png",
-      path: "http://dev.17173g.cn/mht/shop_V2.0_20191213/index.html",
+      path: "http://dev.17173g.cn/mht/shop_V2.0_20200701/index.html",
       text: "商城"
     },
     // {
@@ -168,7 +168,7 @@ export default class Home extends Vue {
     // 点击九宫格
     if (index === 3) {
       let _token = getToken();
-      let url:string = "http://dev.17173g.cn/mht/shop_V2.0_20191213/index.html";
+      let url:string = param.path;
       if (_token) {
         (this as any).$axios({
           method: "POST",

@@ -1,12 +1,11 @@
 export function device():number {
   // 获取设备类型 1-安卓 0-ios
   let userAgentInfo: string = navigator.userAgent;
-  if (/Android/.test(userAgentInfo)) {
-    return 1
-  } else if (/iPhone/.test(userAgentInfo)) {
+  if (/(iPhone|iPad|iPod|iOS)/i.test(userAgentInfo)) {
     return 0
+  } else {
+    return 1
   }
-  return 0
 }
 // 时间格式化
 export const customFormat = function(date:any, fmt:string):string {

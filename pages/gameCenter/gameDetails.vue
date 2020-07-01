@@ -153,7 +153,6 @@ export default class GameDetails extends Vue {
   private downHandClick(param:any) {
     // 下载
     let deviceType:number = device()
-    console.log("---", param)
     if (deviceType === 0) {
       // ios
       document.location.href = param.downUrl
