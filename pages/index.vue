@@ -24,7 +24,7 @@
         </div>
       </div>
     </Floor>
-    <Floor :floorTitle="'热门游戏1'" @findMore="hotGameMore">
+    <Floor :floorTitle="'热门游戏'" @findMore="hotGameMore">
       <div class="hot-game-list">
         <Hot-game-item
           class="hot-game-list-item"
