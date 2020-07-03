@@ -10,7 +10,7 @@
       </div>
     </div>
     <div class="active-content" @click="itemClick">
-      <img :src="activeData.imageUrl" />
+      <img :src="activeData.imageUrl"/>
     </div>
   </div>
 </template>

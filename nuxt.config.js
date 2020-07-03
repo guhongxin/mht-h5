@@ -5,12 +5,12 @@ module.exports = {
   ** Headers of the page
   */
   head: {
-    title: process.env.npm_package_name || '',
+    title: process.env.npm_package_name || '猕猴桃',
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no' },
       { hid: 'description', name: 'description', content: process.env.npm_package_description || '' },
-      { hid: 'keywords', name: 'keywords', content: "游戏,末日血战" }
+      { hid: 'keywords', name: 'keywords', content: "灵动,灵动在线,武汉灵动,灵动科技,猕猴桃,猕猴桃游戏,猕猴桃手游,武汉猕猴桃,武汉猕猴桃游戏,武汉猕猴桃手游,17173,17173g,17173g.com,18183,18183g,18183g.com,猕猴桃平台,猕猴桃游戏平台,武汉猕猴桃游戏平台,武汉灵动在线,武汉灵动在线科技有限公司,猕猴桃game,猕猴桃game平台,武汉手游,武汉游戏,mht,mhtyx,放置手游,卡牌手游" },
     ],
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
