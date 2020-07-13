@@ -12,7 +12,7 @@
       @click-left="onClickLeft"
       :fixed="true"
       class="txt"
-      v-else
+      v-if="navBarType === '1'"
     >
     <template #right v-if="navBarRight">
       <span @click="onClickRight" class="van-nav-bar__text">确认</span>
@@ -36,8 +36,8 @@
           <img :src="props.active ? serviceIcon.active : serviceIcon.inactive" />
         </template>
       </van-tabbar-item> -->
-      <!-- <van-tabbar-item to="/forum"> -->
-      <van-tabbar-item @click="forumClick">
+      <!-- <van-tabbar-item @click="forumClick"> -->
+      <van-tabbar-item to="/forum">
         <span>论坛</span>
         <template #icon="props">
           <img :src="props.active ? forumIcon.active : forumIcon.inactive" />
@@ -87,17 +87,27 @@ export default class Default extends Vue {
   searchClick(value: string) {}
   private mounted() {
     let route:any = this.$route
-    this.navBarType = route.query.navBarType === '1' ? '1' : '0'
-    this.navBarTitle = route.query.title
-    this.navBarRight = route.query.isRight === '1'
+    if (route.query.navBarType === '2') {
+      this.navBarType = route.query.navBarType
+    } else {
+      this.navBarType = route.query.navBarType === '1' ? '1' : '0'
+      this.navBarTitle = route.query.title
+      this.navBarRight = route.query.isRight === '1'
+    }
+    
     this.active = this.getActive(route)
     this.modifyKey = route.query.modifyKey
   }
   @Watch("$route")
   routerChange (val: any) {
-    this.navBarType = val.query.navBarType === '1' ? '1' : '0'
-    this.navBarTitle = val.query.title
-    this.navBarRight = val.query.isRight === '1'
+    if (val.query.navBarType === '2') {
+      this.navBarType = val.query.navBarType
+    } else {
+      this.navBarType = val.query.navBarType === '1' ? '1' : '0'
+      this.navBarTitle = val.query.title
+      this.navBarRight = val.query.isRight === '1'
+    }
+   
     this.modifyKey = val.query.modifyKey
     this.active = this.getActive(val)
   }
