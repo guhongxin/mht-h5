@@ -8,12 +8,12 @@
         <div class="user-infor-middle">
           <div class="user-frist">
             <div class="user-name">
-              <span>{{user.nickname}}</span>
+              <span>{{ user.nickname }}</span>
               <!-- <span class="user-level">LV<span>{{vip.level}}</span></span> -->
             </div>
           </div>
-          <div class="account">账号：{{user.username || "无"}}</div>
-          <div class="k-coin">K币：{{user.kCoin}}</div>
+          <div class="account">账号：{{ user.username || "无" }}</div>
+          <div class="k-coin">K币：{{ user.kCoin }}</div>
         </div>
         <div class="user-infor-right">
           <span @click="logoutClick">退出</span>
@@ -23,8 +23,10 @@
         <div class="level-percentage-left"></div>
         <div class="level-percentage-right">
           <div class="level-progress">
-            <div class="progress-portion" :style="{width: vip.expProgress}">
-              <div class="progress-pivot" :style="{left: vip.expProgress}">LV<span>{{vip.level}}</span></div>
+            <div class="progress-portion" :style="{ width: vip.expProgress }">
+              <div class="progress-pivot" :style="{ left: vip.expProgress }">
+                LV<span>{{ vip.level }}</span>
+              </div>
             </div>
           </div>
         </div>
@@ -37,7 +39,7 @@
           <span>我的资料</span>
         </div>
         <div class="list-item-right">
-           <van-icon name="arrow" class="more-icon"/>
+          <van-icon name="arrow" class="more-icon" />
         </div>
       </div>
       <div class="list-item" @click="myxxClick">
@@ -47,7 +49,7 @@
         </div>
         <div class="list-item-right">
           <span>-</span>
-          <van-icon name="arrow" class="more-icon"/>
+          <van-icon name="arrow" class="more-icon" />
         </div>
       </div>
       <div class="list-item" @click="myGameClick">
@@ -56,7 +58,7 @@
           <span>我的游戏</span>
         </div>
         <div class="list-item-right">
-          <van-icon name="arrow" class="more-icon"/>
+          <van-icon name="arrow" class="more-icon" />
         </div>
       </div>
       <div class="list-item" @click="goMyGiftBag">
@@ -65,8 +67,8 @@
           <span>我的礼包</span>
         </div>
         <div class="list-item-right">
-          <span>{{mygiftCodeCount}}</span>
-          <van-icon name="arrow" class="more-icon"/>
+          <span>{{ mygiftCodeCount }}</span>
+          <van-icon name="arrow" class="more-icon" />
         </div>
       </div>
       <div class="list-item" @click="myKbClick">
@@ -75,7 +77,7 @@
           <span>赚取K币</span>
         </div>
         <div class="list-item-right">
-          <van-icon name="arrow" class="more-icon"/>
+          <van-icon name="arrow" class="more-icon" />
         </div>
       </div>
     </div>
@@ -91,10 +93,10 @@
   </div>
 </template>
 <script lang="ts">
-import { Vue, Component } from "vue-property-decorator"
-import CompanyCopyWrit from "~/components/CompanyCopyWrit.vue"
-import { getSession, removeToken, sessionClear } from "~/assets/utils/auth.js"
-import { getToken } from "~/assets/utils/auth.js"
+import { Vue, Component } from "vue-property-decorator";
+import CompanyCopyWrit from "~/components/CompanyCopyWrit.vue";
+import { getSession, removeToken, sessionClear } from "~/assets/utils/auth.js";
+import { getToken } from "~/assets/utils/auth.js";
 @Component({
   components: {
     CompanyCopyWrit
@@ -102,7 +104,7 @@ import { getToken } from "~/assets/utils/auth.js"
   middleware: "redirectLogin"
 })
 export default class My extends Vue {
-  private user:any = {
+  private user: any = {
     nickname: "",
     username: "",
     avatarUrl: "",
@@ -111,19 +113,19 @@ export default class My extends Vue {
     phoneNumber: "",
     email: "",
     kCoin: 0
-  }
+  };
   private vip = {
     level: 0,
     curExp: 0,
     maxExp: 0,
     expProgress: "0%"
-  }
-  private mygiftCodeCount:number = 0
-  private goMyGiftBag():void {
+  };
+  private mygiftCodeCount: number = 0;
+  private goMyGiftBag(): void {
     // 我的礼包
     this.$router.push({
       name: "my-giftbag"
-    })
+    });
   }
   private personalClick() {
     // 我的资料
@@ -132,9 +134,9 @@ export default class My extends Vue {
       path: "/my/personalData",
       query: {
         title: "我的资料",
-        navBarType: '1'
+        navBarType: "1"
       }
-    })
+    });
   }
   private mounted() {
     // @ts-ignore
@@ -146,86 +148,96 @@ export default class My extends Vue {
   }
   private logoutClick() {
     // 退出
-    (this as any).$axios({
-      method: "POST",
-      url: "/usr/user/logout"
-    }).then((res:any) => {
-      removeToken();
-      sessionClear();
-      this.$router.push({ path: "/login" })
-    }).catch((err:any) => {
-      console.log(err)
-    })
+    (this as any)
+      .$axios({
+        method: "POST",
+        url: "/usr/user/logout"
+      })
+      .then((res: any) => {
+        removeToken();
+        sessionClear();
+        this.$router.push({ path: "/login" });
+      })
+      .catch((err: any) => {
+        console.log(err);
+      });
   }
   private getMyGiftCodeCount() {
-    (this as any).$axios({
-      method: "POST",
-      url: "/usr/giftcode/getMyGiftCodeCount"
-    }).then((res:any) => {
-      let data = res.data
-      this.mygiftCodeCount = data.count
-    }).catch((err:any) => {
-      console.log(err)
-    })
+    (this as any)
+      .$axios({
+        method: "POST",
+        url: "/usr/giftcode/getMyGiftCodeCount"
+      })
+      .then((res: any) => {
+        let data = res.data;
+        this.mygiftCodeCount = data.count;
+      })
+      .catch((err: any) => {
+        console.log(err);
+      });
   }
   private getUserInfor() {
-    (this as any).$axios({
-      method: "POST",
-      url: "/usr/user/getUser"
-    }).then((res:any) => {
-      let _user:any = res.data.user
-      // @ts-ignore
-      if (_user) {
-        this.vip.level = _user.vip.level
-        this.vip.curExp = _user.vip.curExp
-        this.vip.maxExp = _user.vip.maxExp
-        if (!_user.vip.maxExp) {
-          this.vip.expProgress = "0%"
-        } else {
-          this.vip.expProgress = (this.vip.curExp*100 / this.vip.maxExp).toFixed(2) + "%"
+    (this as any)
+      .$axios({
+        method: "POST",
+        url: "/usr/user/getUser"
+      })
+      .then((res: any) => {
+        let _user: any = res.data.user;
+        // @ts-ignore
+        if (_user) {
+          this.vip.level = _user.vip.level;
+          this.vip.curExp = _user.vip.curExp;
+          this.vip.maxExp = _user.vip.maxExp;
+          if (!_user.vip.maxExp) {
+            this.vip.expProgress = "0%";
+          } else {
+            this.vip.expProgress =
+              ((this.vip.curExp * 100) / this.vip.maxExp).toFixed(2) + "%";
+          }
+          this.user = {
+            nickname: _user.nickname,
+            username: _user.username,
+            avatarUrl: _user.avatarUrl,
+            birthday: _user.birthday,
+            gender: _user.gender,
+            phoneNumber: _user.phoneNumber,
+            email: _user.email,
+            kCoin: _user.kCoin
+          };
         }
-        this.user = {
-          nickname: _user.nickname,
-          username: _user.username,
-          avatarUrl: _user.avatarUrl,
-          birthday: _user.birthday,
-          gender: _user.gender,
-          phoneNumber: _user.phoneNumber,
-          email: _user.email,
-          kCoin: _user.kCoin
-        }
-      }
-    }).catch((err:any) => {
-      console.log(err)
-    })
+      })
+      .catch((err: any) => {
+        console.log(err);
+      });
   }
   private myxxClick() {
     // 查看我的消息
     (this as any).$dialog.alert({
-      message: '该功能暂未开启,敬请期待'
-    })
+      message: "该功能暂未开启,敬请期待"
+    });
   }
   private myGameClick() {
     // 查看我的游戏
     (this as any).$dialog.alert({
-      message: '该功能暂未开启,敬请期待'
-    })
+      message: "该功能暂未开启,敬请期待"
+    });
   }
   private myKbClick() {
     // 赚取K币
     (this as any).$dialog.alert({
-      message: '该功能暂未开启,敬请期待'
-    })
+      message: "该功能暂未开启,敬请期待"
+    });
   }
   private fwtqClick() {
     (this as any).$dialog.alert({
-      message: '该功能暂未开启,敬请期待'
-    })
+      message: "该功能暂未开启,敬请期待"
+    });
   }
   private fltqClick() {
     (this as any).$dialog.alert({
-      message: '该功能暂未开启,敬请期待'
-    })
+      message: "该功能暂未开启,敬请期待"
+    });
   }
 }
 </script>
@@ -262,7 +274,7 @@ export default class My extends Vue {
       align-items: center;
       .user-name {
         font-size: 18px;
-        color: #1A1A1A;
+        color: #1a1a1a;
         font-weight: bold;
         display: flex;
         justify-content: center;
@@ -271,7 +283,11 @@ export default class My extends Vue {
           display: inline-block;
           font-size: 12px;
           color: #fff;
-          background: linear-gradient(-90deg,rgba(69,151,67,1),rgba(125,179,73,1));
+          background: linear-gradient(
+            -90deg,
+            rgba(69, 151, 67, 1),
+            rgba(125, 179, 73, 1)
+          );
           padding: 2px 4px;
           border-radius: 4px;
           margin-left: 5px;
@@ -287,12 +303,12 @@ export default class My extends Vue {
     .account {
       font-size: 11px;
       font-weight: 400;
-      color: #1A1A1A;
+      color: #1a1a1a;
     }
     .k-coin {
       font-size: 10px;
       font-weight: bold;
-      color: rgba(153,153,153,1);
+      color: rgba(153, 153, 153, 1);
     }
   }
   .user-infor-right {
@@ -316,22 +332,26 @@ export default class My extends Vue {
     .level-progress {
       width: 100%;
       height: 8px;
-      background: #E6E6E6;
+      background: #e6e6e6;
       border-radius: 4px;
     }
     .progress-portion {
       height: 8px;
-      background: linear-gradient(-90deg,rgba(69,151,67,1),rgba(125,179,73,1));
+      background: linear-gradient(
+        -90deg,
+        rgba(69, 151, 67, 1),
+        rgba(125, 179, 73, 1)
+      );
       border-radius: 4px;
       position: relative;
       .progress-pivot {
         display: inline-block;
-        position: absolute;;
+        position: absolute;
         font-size: 12px;
         font-family: Microsoft YaHei;
-        font-weight:bold;
-        font-style:italic;
-        color:rgba(125,179,73,1);
+        font-weight: bold;
+        font-style: italic;
+        color: rgba(125, 179, 73, 1);
         top: -14px;
         right: 0px;
       }
@@ -345,7 +365,7 @@ export default class My extends Vue {
   .list-item {
     font-size: 14px;
     font-weight: 500;
-    color: #1A1A1A;
+    color: #1a1a1a;
     padding: 15px 0px;
     display: flex;
     justify-content: space-between;
@@ -369,7 +389,7 @@ export default class My extends Vue {
     }
   }
   & > .list-item:not(:last-child) {
-    border-bottom: 1px solid #F3F3F3;
+    border-bottom: 1px solid #f3f3f3;
   }
 }
 .tq {
@@ -377,7 +397,8 @@ export default class My extends Vue {
   justify-content: space-between;
   align-items: center;
   padding: 20px 23px;
-  .tq-left, .tq-right {
+  .tq-left,
+  .tq-right {
     width: 156px;
     height: 85px;
     img {
