@@ -71,6 +71,16 @@
           <van-icon name="arrow" class="more-icon" />
         </div>
       </div>
+      <div class="list-item" @click="goMySc">
+        <div class="list-item-left">
+          <i class="my-sc"></i>
+          <span>我的收藏</span>
+        </div>
+        <div class="list-item-right">
+          <span>{{ mygiftCodeCount }}</span>
+          <van-icon name="arrow" class="more-icon" />
+        </div>
+      </div>
       <div class="list-item" @click="myKbClick">
         <div class="list-item-left">
           <i class="my-kb"></i>
@@ -241,6 +251,16 @@ export default class My extends Vue {
   private fltqClick() {
     (this as any).$dialog.alert({
       message: "该功能暂未开启,敬请期待"
+    });
+  }
+  private goMySc()  {
+    // 收藏
+    (this as any).$router.push({
+      path: "/my/myCollect",
+      query: {
+        title: "我的消息",
+        navBarType: "1"
+      }
     });
   }
 }
@@ -432,6 +452,9 @@ export default class My extends Vue {
 }
 .my-kb {
   background: url("/img/my6.png") no-repeat center;
+}
+.my-sc {
+  background: url("/img/my7.png") no-repeat center;
 }
 .more-icon {
   vertical-align: middle;

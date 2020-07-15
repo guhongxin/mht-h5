@@ -12,6 +12,10 @@
         <MyNewsItem class="list-item"></MyNewsItem>
         <MyNewsItem class="list-item"></MyNewsItem>
         <MyNewsItem class="list-item"></MyNewsItem>
+        <MyNewsItem class="list-item"></MyNewsItem>
+        <MyNewsItem class="list-item"></MyNewsItem>
+        <MyNewsItem class="list-item"></MyNewsItem>
+        <MyNewsItem class="list-item"></MyNewsItem>
       </van-tab>
     </van-tabs>
   </div>
@@ -32,6 +36,9 @@ export default class MyNews extends Vue {
 </script>
 <style lang="scss" scoped>
 .my-news {
+  /deep/ .van-tabs__line {
+    background-color: #7DB349;
+  }
   .list-item {
     margin-bottom: 10px;
   }

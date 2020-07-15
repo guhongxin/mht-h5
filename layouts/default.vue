@@ -169,6 +169,7 @@ export default class Default extends Vue {
 }
 .txt {
   height: 56px;
+  z-index: 2;
 }
 </style>
 <style>
