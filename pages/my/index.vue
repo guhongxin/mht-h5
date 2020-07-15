@@ -258,7 +258,7 @@ export default class My extends Vue {
     (this as any).$router.push({
       path: "/my/myCollect",
       query: {
-        title: "我的消息",
+        title: "我的收藏",
         navBarType: "1"
       }
     });

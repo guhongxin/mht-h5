@@ -1,8 +1,6 @@
 <template>
   <div class="my-news">
-    <van-tabs v-model="active" :line-width="20" :line-height="4"
-      :type="'line'"
-      border>
+    <van-tabs v-model="active" :line-width="20" :line-height="4">
       <van-tab title="通知" style="padding-top: 3px;">
         <SystemNewsItem class="list-item"></SystemNewsItem>
         <SystemNewsItem class="list-item"></SystemNewsItem>

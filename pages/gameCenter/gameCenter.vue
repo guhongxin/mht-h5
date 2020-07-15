@@ -1,25 +1,24 @@
 <template>
   <div class="game-center">
-    <Floor :floorTitle="'热门游戏'" :isMore="false" class="game-center-floor">
-      <div class="game-List">
-        <van-list
-          v-model="loading"
-          :finished="finished"
-          finished-text="没有更多了"
-          @load="onLoad"
-          :immediate-check="false"
-          class="list-view"
-        >
-        <template #default>
-          <GameItem class="list-item"
-            v-for="(item, index) in gamesList" :key="index"
-            :gameIfor="item"
-            @goDetailClick="goDetail(item)"
-            @downHandClick="downHandClick(item)"></GameItem>
-        </template>
-        </van-list>
-      </div>
-    </Floor>
+    <Floor :floorTitle="'热门游戏'" :isMore="false" class="game-center-floor"></Floor>
+    <div class="game-List">
+      <van-list
+        v-model="loading"
+        :finished="finished"
+        finished-text="没有更多了"
+        @load="onLoad"
+        :immediate-check="false"
+        class="list-view"
+      >
+      <template #default>
+        <GameItem class="list-item"
+          v-for="(item, index) in gamesList" :key="index"
+          :gameIfor="item"
+          @goDetailClick="goDetail(item)"
+          @downHandClick="downHandClick(item)"></GameItem>
+      </template>
+      </van-list>
+    </div>
     <!-- <CompanyCopyWrit></CompanyCopyWrit> -->
   </div>
 </template>
@@ -122,24 +121,22 @@ export default class GameCenter extends Vue {
 </script>
 <style lang="scss" scoped>
 .game-center {
-  padding-top: 10px;
   box-sizing: border-box;
-  background-color: #ffffff;
   overflow: hidden;
   overflow-y: auto;
   min-height: calc(100vh - 106px);
 }
+.game-center-floor {
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
 .game-List {
-  padding: 15px;
   height: calc(100vh - 136px);
   overflow: hidden;
   overflow-y: auto;
   .list-view {
-    .list-item {
-    padding: 11px 0px; 
-    }
     &  > .list-item {
-      border-bottom: 1px solid #E0E0E0;
+      margin-bottom: 10px;
     }
   }
 }

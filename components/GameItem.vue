@@ -37,6 +37,9 @@ export default class GameItem extends Vue {
   justify-content: space-between;
   align-items: center;
   font-size: 12px;
+  padding: 10px;
+  box-sizing: border-box;
+  background-color: #ffffff;
 }
 .game-item-left {
   width: 68px;
