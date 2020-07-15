@@ -213,8 +213,12 @@ export default class My extends Vue {
   }
   private myxxClick() {
     // 查看我的消息
-    (this as any).$dialog.alert({
-      message: "该功能暂未开启,敬请期待"
+    (<any> this).$router.push({
+      path: "/my/myNews",
+      query: {
+        title: "我的消息",
+        navBarType: "1"
+      }
     });
   }
   private myGameClick() {
