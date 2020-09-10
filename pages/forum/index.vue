@@ -20,6 +20,7 @@
 import { Vue, Component } from "vue-property-decorator"
 import Floor from "~/components/Floor.vue";
 import ForumItem from "~/components/ForumItem.vue";
+import { getToken } from "~/assets/utils/auth.js";
 @Component({
   components: {
     Floor,
@@ -39,12 +40,15 @@ export default class Forum extends Vue {
   private goforumClick() {
     // 进入论坛详情页
     console.log("论坛")
-    this.$router.push({
-      path: "/forum/forumDetails",
-      query: {
-        navBarType: '2'
-      }
-    })
+    // this.$router.push({
+    //   path: "/forum/forumDetails",
+    //   query: {
+    //     navBarType: '2'
+    //   }
+    // })
+    let _token = getToken()
+    // window.location.href = `http://192.168.1.16:8081/index.html?token=${_token}`
+    window.location.href = `http://192.168.1.17:8080/index.html?token=${_token}`
   }
   private goGiftBagClick() {
     // 进入礼包页
