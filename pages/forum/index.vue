@@ -48,7 +48,11 @@ export default class Forum extends Vue {
     // })
     let _token = getToken()
     // window.location.href = `http://192.168.1.16:8081/index.html?token=${_token}`
-    window.location.href = `http://192.168.1.17:8080/index.html?token=${_token}`
+    let _herf = 'http://192.168.1.16:8081/index.html?'
+    if (_token) {
+      _herf += `token=${_token}`
+    } 
+    window.location.href = _herf
   }
   private goGiftBagClick() {
     // 进入礼包页
