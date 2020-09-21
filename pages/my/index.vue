@@ -71,7 +71,7 @@
           <van-icon name="arrow" class="more-icon" />
         </div>
       </div>
-      <div class="list-item" @click="goMySc">
+      <!-- <div class="list-item" @click="goMySc">
         <div class="list-item-left">
           <i class="my-sc"></i>
           <span>我的收藏</span>
@@ -80,7 +80,7 @@
           <span>{{ mygiftCodeCount }}</span>
           <van-icon name="arrow" class="more-icon" />
         </div>
-      </div>
+      </div> -->
       <div class="list-item" @click="myKbClick">
         <div class="list-item-left">
           <i class="my-kb"></i>

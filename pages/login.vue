@@ -74,7 +74,13 @@ export default class Login extends Vue {
       //设置token
       setToken(data.token, { expires: 2 });
       this.btnLoading = false;
-      (this as any).$router.push({ path: "/" });
+      let to = this.getQueryString('redirect');
+      console.log(to)
+      if (to) {
+        window.location.href = `http://192.168.1.17:8080/index.html?token=${data.token}`
+      } else {
+        (this as any).$router.push({ path: "/" });
+      }
     }).catch((res: any) => {
       this.btnLoading = false;
     })
@@ -108,6 +114,14 @@ export default class Login extends Vue {
         }
       }
     }, false);
+  }
+  private getQueryString(name:string):string {
+    var reg = new RegExp('(^|&)' + name + '=([^&]*)(&|$)', 'i');
+    var r = location.search.substr(1).match(reg);
+    if (r != null) {
+      return unescape(r[2]);
+    }
+    return '';
   }
 }
 </script>

@@ -62,7 +62,7 @@ import HotGameItem from "~/components/HotGameItem.vue";
 import CompanyCopyWrit from "~/components/CompanyCopyWrit.vue";
 import WGrid from "~/components/WGrid.vue";
 import { device, downFile } from "~/assets/utils/comm.ts";
-import { getToken } from "~/assets/utils/auth.js"
+import { getToken, setToken } from "~/assets/utils/auth.js"
 @Component({
   head() {
     //使用 head 方法设置当前页面的头部标签。
@@ -118,11 +118,11 @@ export default class Home extends Vue {
     }
   ];
   private mounted() {
+    
     this.carouselList();
     this.hotVideoList();
     this.hotGameList();
     this.activList();
-   
     this.$nextTick(() => {
       // @ts-ignore
       let swiper1 = new Swiper(".swiper-container1", {
