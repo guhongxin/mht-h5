@@ -40,9 +40,9 @@ export default class Forum extends Vue {
   private goforumClick() {
     // 进入论坛详情页
     let _token = getToken()
-    let _herf = 'http://192.168.1.17:8080/index.html?'
+    let _herf = 'http://mrfm.18183g.com/mrxz/index'
     if (_token) {
-      _herf += `token=${_token}`
+      _herf += `?token=${_token}`
     } 
     window.location.href = _herf
   }
@@ -53,8 +53,10 @@ export default class Forum extends Vue {
     let _token = getToken()
     if (!_token) {
       let token = this.getQueryString('token')
-      setToken(token, { expires: 2 });
-      location.reload()
+      if (token && token !== 'null') {
+        setToken(token, { expires: 2 });
+        location.reload()
+      }
     }
    
   }
