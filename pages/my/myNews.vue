@@ -6,7 +6,7 @@
         <SystemNewsItem class="list-item"></SystemNewsItem>
         <SystemNewsItem class="list-item"></SystemNewsItem>
       </van-tab>
-      <van-tab title="消息" style="padding-top: 3px;">
+      <!-- <van-tab title="消息" style="padding-top: 3px;">
         <MyNewsItem class="list-item"></MyNewsItem>
         <MyNewsItem class="list-item"></MyNewsItem>
         <MyNewsItem class="list-item"></MyNewsItem>
@@ -14,7 +14,7 @@
         <MyNewsItem class="list-item"></MyNewsItem>
         <MyNewsItem class="list-item"></MyNewsItem>
         <MyNewsItem class="list-item"></MyNewsItem>
-      </van-tab>
+      </van-tab> -->
     </van-tabs>
   </div>
 </template>

@@ -14,7 +14,7 @@
               </div>
             </div>
             <div class="account">账号：{{user.username || "无"}}</div>
-            <div class="k-coin">K币：{{ user.kCoin }}</div>
+            <!-- <div class="k-coin">K币：{{ user.kCoin }}</div> -->
           </div>
           <div class="user-infor-right">
             <!-- <div class="div-btn" @click="signIn">签到</div> -->
@@ -46,7 +46,7 @@
               <img :src="item.src" />
             </div>
             <div class="grid-title">
-              {{ item.title }}
+              {{index === 1 ? item.title+ ':' +item.num : item.title }}
             </div>
           </div>
         </div>
@@ -82,6 +82,7 @@ interface Recharge {
   src: string;
   title: string;
   path?: string;
+  num?: Number;
 }
 @Component({
   components: {
@@ -97,7 +98,8 @@ export default class Service extends Vue {
     title: "充值"
   }, {
     src: "/img/balance.png",
-    title: "账户余额"
+    title: "K币",
+    num: 0
   }, {
     src: "/img/record.png",
     title: "充值记录"
@@ -187,6 +189,7 @@ export default class Service extends Vue {
           email: _user.email,
           kCoin: _user.kCoin
         }
+        this.recharge[1].num = _user.kCoin || 0
       }
     }).catch((err:any) => {
       console.log(err)

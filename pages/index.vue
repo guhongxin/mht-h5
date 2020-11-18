@@ -117,6 +117,7 @@ export default class Home extends Vue {
       text: "服务"
     }
   ];
+
   private mounted() {
     
     this.carouselList();

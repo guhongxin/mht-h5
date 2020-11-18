@@ -12,7 +12,8 @@
       <forum-item class="forum-list-item" 
         v-for="(item, index) in list" :key="index"
         @downClick="downClick"
-        @goforumClick="goforumClick"></forum-item>
+        @goforumClick="goforumClick"
+        @goGiftBagClick="goGiftBagClick"></forum-item>
     </div>
   </div>
 </template>
@@ -21,6 +22,7 @@ import { Vue, Component } from "vue-property-decorator"
 import Floor from "~/components/Floor.vue";
 import ForumItem from "~/components/ForumItem.vue";
 import { getToken, setToken } from "~/assets/utils/auth.js";
+import { device, downFile } from "~/assets/utils/comm";
 @Component({
   components: {
     Floor,
@@ -35,12 +37,19 @@ export default class Forum extends Vue {
   }];
   private list:Array<any> = new Array(1);
   private downClick() {
-    console.log("下载")
+    // 下载
+    if (device() === 0) {
+      // ios
+      document.location.href = 'https://apps.apple.com/cn/app/id1506142761';
+    } else {
+      downFile('http://down.tyu89.wang/mrxz/mrxz-mht.apk');
+    }
   }
   private goforumClick() {
     // 进入论坛详情页
     let _token = getToken()
-    let _herf = 'http://mrfm.18183g.com/mrxz/index'
+    // let _herf = 'http://mrfm.18183g.com/mrxz/index'
+    let _herf = 'http://192.168.1.16:18081/index'
     if (_token) {
       _herf += `?token=${_token}`
     } 
@@ -48,6 +57,9 @@ export default class Forum extends Vue {
   }
   private goGiftBagClick() {
     // 进入礼包页
+    this.$router.push({
+      path: "/grid/giftbag"
+    })
   }
   private mounted() {
     let _token = getToken()

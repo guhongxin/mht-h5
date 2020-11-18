@@ -40,17 +40,18 @@
           <van-icon name="arrow" class="arrow-cion" />
         </div>
       </div>
-      <div class="list-item"  @click="modifyClick({
+      <!-- <div class="list-item"  @click="modifyClick({
         title: '绑定手机',
         modifyTxt: user.phoneNumber,
         key: 'phoneNumber'
-      })">
+      })"> -->
+      <div class="list-item">
         <div class="list-item-left">
           <span>手机</span>
         </div>
         <div class="list-item-right">
-           <span>{{user.phoneNumber}}</span>
-           <van-icon name="arrow" class="arrow-cion" />
+           <span>{{$telencry(user.phoneNumber)}}</span>
+           <!-- <van-icon name="arrow" class="arrow-cion" /> -->
         </div>
       </div>
       <div class="list-item"  @click="modifyClick({

@@ -1,6 +1,6 @@
 import Vue from "vue";
 import 'vant/lib/index.css';
-import { customFormat } from "~/assets/utils/comm.ts"
+import { customFormat, telencry } from "~/assets/utils/comm.ts"
 import {
   Tabbar,
   TabbarItem,
@@ -54,6 +54,7 @@ Vue.use(Collapse);
 Vue.use(CollapseItem);
   
 Vue.prototype.$customFormat = customFormat
+Vue.prototype.$telencry = telencry
 Vue.prototype.$defaultUserImage = "/img/user.png"
 Vue.prototype.$defaultUserImage3 = "/img/user3.png"
 Vue.prototype.$upfileUrl = "http://t-upload.tyu89.wang"

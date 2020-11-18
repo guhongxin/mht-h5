@@ -15,16 +15,30 @@
       <van-button round block type="info" color="#7DB349" class="button-style" @click="submitBtn" :loading="btnLoading">
         登录
       </van-button>
+      <div class="forgetPassword">
+        <span @click="forgetPasswordClick">忘记密码?</span>
+      </div>
     </div>
     <div class="footer">
       <div @click="goHome">返回</div>
       <!-- <div>注册</div> -->
     </div>
+    <van-popup v-model="customerServiceShow" round>
+      <div class="customerService-box">
+        <div class="customerService-head">忘记密码</div>
+        <div class="customerService-content">
+          <p>很抱歉您没有绑定手机号，无法自助修改密码，你还可以通过人工客服审核重设密码</p>
+          <p style="margin-top: 10px;">联系QQ：800184997</p>
+          <p>时间：9:00-18:00</p>
+        </div>
+      </div>
+    </van-popup>
   </div>
 </template>
 <script lang="ts">
 import { Vue, Component } from "vue-property-decorator"
 import { setToken } from "~/assets/utils/auth.js"
+const md5 = require('blueimp-md5')
 interface From {
   username: string;
   password: string;
@@ -34,9 +48,11 @@ import { device } from "~/assets/utils/comm.ts"
   layout: 'login'
 })
 export default class Login extends Vue {
+  private sign:any = "69a54ac4afafa44ec1ff5bae05a9010c";
   private username:string = "";
   private password:string = "";
   private btnLoading:boolean = false;
+  private customerServiceShow:boolean = false
   private submitBtn() {
     // 提交
     if (!this.username) {
@@ -123,6 +139,42 @@ export default class Login extends Vue {
     }
     return '';
   }
+  private forgetPasswordClick() {
+    // 忘记密码
+    const _sdkUrl:string = process.env.SDK_URL || ''
+    if (!this.username) {
+      (this as any).$toast('请输入用户名');
+      return false
+    }
+    let obj1:any = {
+      style: 2,
+      condition: this.username
+    }
+    let _sign:string = this.createncryption(obj1, this.sign) || '';
+    (this as any).$axios({
+      method: "POST",
+      url: _sdkUrl + '/user-center/check/phone.do',
+      data:  {
+        style: 2,
+        condition: this.username,
+        sign: _sign
+      }
+    }).then((res:any) => {
+      let data = res.data
+      console.log('----', data)
+    }).catch(() => {
+      return false
+    })
+  }
+  private createncryption(param:any, param1:string) {
+    let objKey = Object.keys(param).sort();
+    let result = []
+    for (let i = 0; i < objKey.length; i++) {
+      result.push(objKey[i] + "=" + param[objKey[i]])
+    }
+    let _result = result.join("&").replace(/\+/g, ' ')
+    return md5(_result + md5(param1));
+  }
 }
 </script>
 <style lang="scss" scoped>
@@ -203,5 +255,29 @@ export default class Login extends Vue {
     align-items: center;
   }
 }
-
+.forgetPassword {
+  text-align: right;
+  font-size: 14px;
+  margin-top: 4px;
+}
+.customerService-box {
+  width: 80vw;
+  .customerService-head {
+    height: 40px;
+    background-color: #3BBD51;
+    text-align: center;
+    line-height: 40px;
+    font-size: 14px;
+    color: #ffffff;
+  }
+  .customerService-content{
+    height: 150px;
+    padding: 20px 10px;
+    p {
+      font-size: 14px;
+      text-align: center;
+      color: #c8c9cc;
+    }
+  }
+}
 </style>

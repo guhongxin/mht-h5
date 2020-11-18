@@ -57,3 +57,9 @@ export const downFile = function (url:string):void {
   a.download = "file"
   a.click()
 }
+
+// 电话中间四位加密
+export const telencry = function(tel:string):string {
+  let reulst =tel.substr(0,3) + "****" + tel.substr(7)
+  return reulst
+}

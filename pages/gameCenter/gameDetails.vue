@@ -72,6 +72,7 @@ import { Vue, Component, Watch } from "vue-property-decorator"
 import Floor from "~/components/Floor.vue";
 import CompanyCopyWrit from "~/components/CompanyCopyWrit.vue";
 import { device, downFile } from "~/assets/utils/comm.ts"
+import { getToken } from "~/assets/utils/auth.js";
 interface GameInfor {
   iconUrl: string;
   name: string;
@@ -195,9 +196,15 @@ export default class GameDetails extends Vue {
     })
   }
   private goForum(item:any) {
-    (this as any).$dialog.alert({
-      message: '该功能暂未开启'
-    })
+    // (this as any).$dialog.alert({
+    //   message: '该功能暂未开启'
+    // })
+    let _token = getToken()
+    let _herf = 'http://mrfm.18183g.com/mrxz/index'
+    if (_token) {
+      _herf += `?token=${_token}`
+    } 
+    window.location.href = _herf
   }
   private goOfficialWeb(item:any) {
     document.location.href = item.officialUrl;
