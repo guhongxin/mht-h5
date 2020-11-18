@@ -63,7 +63,7 @@
           </div>
         </div>
       </div>
-    </Floor>
+    </Floor> 
     <!-- <CompanyCopyWrit></CompanyCopyWrit> -->
   </div>
 </template>

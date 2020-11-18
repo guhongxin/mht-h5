@@ -48,7 +48,6 @@ import { device } from "~/assets/utils/comm.ts"
   layout: 'login'
 })
 export default class Login extends Vue {
-  private sign:any = "69a54ac4afafa44ec1ff5bae05a9010c";
   private username:string = "";
   private password:string = "";
   private btnLoading:boolean = false;
@@ -150,7 +149,9 @@ export default class Login extends Vue {
       style: 2,
       condition: this.username
     }
-    let _sign:string = this.createncryption(obj1, this.sign) || '';
+    let sign = process.env.sign || ''
+    console.log('sign', sign)
+    let _sign:string = this.createncryption(obj1, sign) || '';
     (this as any).$axios({
       method: "POST",
       url: _sdkUrl + '/user-center/check/phone.do',
