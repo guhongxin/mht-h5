@@ -60,6 +60,7 @@ export default class Forum extends Vue {
       path: "/grid/giftbag"
     })
   }
+  
   private mounted() {
     let _token = getToken()
     if (!_token) {

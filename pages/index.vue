@@ -119,7 +119,14 @@ export default class Home extends Vue {
   ];
 
   private mounted() {
-    
+    let _token = getToken()
+    if (!_token) {
+      let token = this.getQueryString('token')
+      if (token && token !== 'null') {
+        setToken(token, { expires: 2 });
+        location.reload()
+      }
+    }
     this.carouselList();
     this.hotVideoList();
     this.hotGameList();
@@ -284,6 +291,14 @@ export default class Home extends Vue {
     this.$router.push({
       path: "/activities/activities"
     });
+  }
+  private getQueryString(name:string):string {
+    var reg = new RegExp('(^|&)' + name + '=([^&]*)(&|$)', 'i');
+    var r = location.search.substr(1).match(reg);
+    if (r != null) {
+      return unescape(r[2]);
+    }
+    return '';
   }
 }
 </script>
