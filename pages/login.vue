@@ -39,6 +39,7 @@
 import { Vue, Component } from "vue-property-decorator"
 import { setToken } from "~/assets/utils/auth.js"
 const md5 = require('blueimp-md5')
+const axios = require('axios')
 interface From {
   username: string;
   password: string;
@@ -150,15 +151,17 @@ export default class Login extends Vue {
     // let sign = process.env.sign || ''
     // console.log('sign', sign)
     // let _sign:string = this.createncryption(obj1, sign) || '';
-    (this as any).$axios({
+    let BASE_URL = process.env.BASE_URL
+    axios({
       method: "POST",
-      url: '/usr/user/checkPhone',
+      url: BASE_URL + '/usr/user/checkPhone',
       data:  {
         username: this.username
       }
     }).then((res:any) => {
       let data:any = res.data
-      if (!data) {
+      console.log('data', data)
+      if (data.code === -1) {
         this.customerServiceShow = true
       } else {
         let phone:string = data.phone
