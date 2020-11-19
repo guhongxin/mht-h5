@@ -39,6 +39,7 @@
 <script lang="ts">
 import { Vue, Component } from "vue-property-decorator"
 import { device } from "~/assets/utils/comm.ts"
+const md5 = require('blueimp-md5')
 @Component({
   layout: 'login'
 })
@@ -49,9 +50,14 @@ export default class ModifyPassword extends Vue{
   private codeTime:number = 60 // 发送短信倒计时
   private codeDuration:boolean = false // 是否正在发送短信验证码期间
   private btnLoading:boolean = false
+  private username: string = '' // 用户名
   private mounted() {
     // @ts-ignore
     // var vConsole = new VConsole();
+    let _route = this.$route
+    console.log('_route', _route)
+    this.phone = _route.params.phone
+    this.username = _route.params.username
     const originHeight = document.documentElement.clientHeight || document.body.clientHeight;
     window.addEventListener('resize', () => {
       const resizeHeight = document.documentElement.clientHeight || document.body.clientHeight;
@@ -75,11 +81,33 @@ export default class ModifyPassword extends Vue{
   }
   private onSubmit() {
     // 提交
-    console.log('--提交---')        
+    console.log('--提交---')
+    let obj = {
+      username: this.username,
+      verifyCode: this.vcode,
+      password: md5(this.password)
+    }
+    console.log('----', obj)
     if (!this.vcode) {
       (this as any).$toast('请输入验证码！');
       return false
     }
+    this.btnLoading = true;
+    (this as any).$axios({
+      method: "POST",
+      url: '/usr/user/updatePassword',
+      data: obj
+    }).then((res:any) => {
+      let data:any = res.data
+      this.$router.push({
+        path: "/login"
+      })
+      this.btnLoading = false;
+      console.log('data', data)
+    }).catch(() => {
+      this.btnLoading = false;
+      return false
+    })
   }
   private goLogin() {
     // 返回到登录页面
@@ -89,7 +117,6 @@ export default class ModifyPassword extends Vue{
   }
   private sendCode() {
     // 发送短信
-
     if (this.codeDuration) {
       return false
     }
@@ -102,7 +129,19 @@ export default class ModifyPassword extends Vue{
         this.codeDuration = false
         clearInterval(timer)
       }
-    }, 1000)
+    }, 1000);
+    (this as any).$axios({
+      method: "POST",
+      url: '/usr/user/getSmsVerifyCodeByUsername',
+      data:  {
+        username: this.username
+      }
+    }).then((res:any) => {
+      let data:any = res.data
+      console.log('data', data)
+    }).catch(() => {
+      return false
+    })
   }
 }
 </script>

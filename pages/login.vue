@@ -90,7 +90,6 @@ export default class Login extends Vue {
       setToken(data.token, { expires: 2 });
       this.btnLoading = false;
       let to = this.getQueryString('redirect');
-      console.log(to)
       if (to) {
         window.location.href = `http://192.168.1.17:8080/index.html?token=${data.token}`
       } else {
@@ -145,24 +144,32 @@ export default class Login extends Vue {
       (this as any).$toast('请输入用户名');
       return false
     }
-    let obj1:any = {
-      style: 2,
-      condition: this.username
-    }
-    let sign = process.env.sign || ''
-    console.log('sign', sign)
-    let _sign:string = this.createncryption(obj1, sign) || '';
+    // let obj1:any = {
+    //   username: this.username
+    // }
+    // let sign = process.env.sign || ''
+    // console.log('sign', sign)
+    // let _sign:string = this.createncryption(obj1, sign) || '';
     (this as any).$axios({
       method: "POST",
-      url: _sdkUrl + '/user-center/check/phone.do',
+      url: '/usr/user/checkPhone',
       data:  {
-        style: 2,
-        condition: this.username,
-        sign: _sign
+        username: this.username
       }
     }).then((res:any) => {
-      let data = res.data
-      console.log('----', data)
+      let data:any = res.data
+      if (!data) {
+        this.customerServiceShow = true
+      } else {
+        let phone:string = data.phone
+        this.$router.push({
+          name: 'modifyPassword',
+          params: {
+            username: this.username,
+            phone: phone
+          }
+        })
+      }
     }).catch(() => {
       return false
     })
