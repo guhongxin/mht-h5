@@ -48,8 +48,7 @@ export default class Forum extends Vue {
   private goforumClick() {
     // 进入论坛详情页
     let _token = getToken()
-    // let _herf = 'http://mrfm.18183g.com/mrxz/index'
-    let _herf = 'http://192.168.1.16:18081/index'
+    let _herf = 'http://mrfm.18183g.com/mrxz/index'
     if (_token) {
       _herf += `?token=${_token}`
     } 
