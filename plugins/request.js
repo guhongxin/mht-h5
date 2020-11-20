@@ -49,6 +49,11 @@ export default function ({store, redirect, app: { $axios }})  {
 					removeToken()
 					sessionClear()
 					redirect("/login")
+				} else if (data.code === 1002) {
+					removeToken()
+					sessionClear()
+					Dialog({ message: data.msg });
+					reject(data)
 				} else {
 					Dialog({ message: data.msg });
 					reject(data)
