@@ -92,7 +92,8 @@ export default class Login extends Vue {
       this.btnLoading = false;
       let to = this.getQueryString('redirect');
       if (to) {
-        window.location.href = `http://192.168.1.17:8080/index.html?token=${data.token}`
+        // window.location.href = `http://192.168.1.17:8080/index.html?token=${data.token}`
+        window.location.href = `http://mrfm.18183g.com/mrxz/index?token=${data.token}`
       } else {
         (this as any).$router.push({ path: "/" });
       }
