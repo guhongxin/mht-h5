@@ -65,7 +65,6 @@ export default class gameNew extends Vue {
         this.total = data.page.total;
         let result = data.newsList
         this.news = [...this.news, ...result]
-        console.log("---", this.news)
         resolve({ code: 0})
       }).catch((err:any) => {
         reject(err)
@@ -87,7 +86,7 @@ export default class gameNew extends Vue {
   }
   private newContent(item:any) {
     this.$router.push({
-      path: "/grid/news/newDetail",
+      path: "/grid/news/newDetail/",
       query: {
         id: item.id
       }

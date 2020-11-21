@@ -208,6 +208,10 @@ export default class PersonalData extends Vue {
     key: string;
   }) {
     // 点击修改
+    (this as any).$dialog.alert({
+      message: "暂时不支持用户修改密码！"
+    });
+    return false
     this.$router.push({
       path: "/my/modifyPersonal",
       query: {

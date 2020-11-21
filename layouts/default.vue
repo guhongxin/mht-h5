@@ -137,6 +137,8 @@ export default class Default extends Vue {
   // 
   private onClickLeft() {
     // 点击navBar 左侧按钮 返回到上一页
+    console.log('--返回jj--', (this as any).to)
+    // this.to === undefined ? this.$router.go(-1) : this.$router.push({ path: this.to })
     this.$router.go(-1)
   }
   private onClickRight() {

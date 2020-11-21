@@ -1,11 +1,11 @@
 <template>
   <div class="modifyPassword">
-    <div class="page-title">修改密码</div>
+    <div class="page-title">找回密码</div>
     <van-form @submit="onSubmit">
       <van-field
         v-model="phone"
         name="手机号码"
-        placeholder="请输入手机号码"
+        placeholder=""
         readonly
         disabled
       />

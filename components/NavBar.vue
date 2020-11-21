@@ -46,6 +46,7 @@ export default class NavBar extends Vue{
   }
 
   private goBack() {
+    console.log('----', )
     this.$router.go(-1)
   }
   private userImageHand() {

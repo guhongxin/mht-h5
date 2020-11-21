@@ -161,11 +161,10 @@ export default class Login extends Vue {
       }
     }).then((res:any) => {
       let data:any = res.data
-      console.log('data', data)
       if (data.code === -1) {
         this.customerServiceShow = true
       } else {
-        let phone:string = data.phone
+        let phone:string = data.data.phone
         this.$router.push({
           name: 'modifyPassword',
           params: {
