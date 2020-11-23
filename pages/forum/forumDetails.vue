@@ -1,6 +1,6 @@
 <template>
   <div class="forum-details">
-    <div class="head" :style="{background: 'url(/img/1.png) no-repeat center', backgroundSize: 'cover'}">
+    <div class="head" :style="{background: 'url(/img/1.jpg) no-repeat center', backgroundSize: 'cover'}">
       <div class="title">
         <van-icon name="arrow-left" class="back-icon" />
         末日血战

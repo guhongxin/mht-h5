@@ -31,9 +31,9 @@ import { device, downFile } from "~/assets/utils/comm";
 })
 export default class Forum extends Vue {
   private  bannerList: Array<any> = [{
-    imageUrl: "/img/1.png"
+    imageUrl: "/img/1.jpg"
   }, {
-    imageUrl: "/img/2.png"
+    imageUrl: "/img/2.jpg"
   }];
   private list:Array<any> = new Array(1);
   private downClick() {
@@ -96,12 +96,10 @@ export default class Forum extends Vue {
     box-sizing: border-box;
     .my-swipe {
       border-radius: 4px;
+      height: 220px;
       width: 100%;
-      position: relative;
-      box-sizing: border-box;
-      padding-bottom: 50%;
       img {
-        width: 100%;
+        height: 220px;
         display: block;
         position: absolute;
         left: 0; 

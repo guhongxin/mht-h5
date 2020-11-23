@@ -1,7 +1,7 @@
 <template>
   <div class="forumItem">
     <div class="forum-item-content">
-      <img src="/img/1.png" />
+      <img src="/img/1.jpg" />
     </div>
     <div class="forum-item-footer">
       <div @click="downClick">下载</div>
@@ -29,7 +29,7 @@ export default class ForumItem extends Vue {
   .forum-item-content {
     position: relative;
     box-sizing: border-box;
-    padding-bottom: 50%;
+    padding-bottom: 60%;
     overflow: hidden;
     border-radius: 4px 4px 0px 0px;
     img {
